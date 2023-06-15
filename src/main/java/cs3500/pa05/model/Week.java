@@ -1,46 +1,62 @@
 package cs3500.pa05.model;
-
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Represents a week
+ */
 public class Week {
   List<Day> days;
   int eventMax;
   int taskMax;
   String name;
 
-  Week(List<Day> days) {
+  Week(List<Day> days, int eventMax, int taskMax, String name) {
     this.days = days;
+    this.eventMax = eventMax;
+    this.taskMax = taskMax;
+    this.name = name;
   }
 
   public List<Day> getDays() {
-    throw new UnsupportedOperationException();
+    return this.days;
   }
 
   public int getEventMax() {
-    throw new UnsupportedOperationException();
+    return this.eventMax;
   }
 
   public int getTaskMax() {
-    throw new UnsupportedOperationException();
+    return this.taskMax;
   }
 
   public String getName() {
-    throw new UnsupportedOperationException();
+    return this.name;
+  }
+
+  public void setTaskMax(int max) {
+    this.taskMax = max;
+  }
+
+  public void setEventMax(int max) {
+    this.eventMax = max;
   }
 
   public int totalFinishedTasks() {
-    throw new UnsupportedOperationException();
+    return this.days.stream().reduce(0, (num, day) -> day.numFinishedTasks(), Integer::sum);
   }
 
   public int totalTasks() {
-    throw new UnsupportedOperationException();
+    return this.days.stream().reduce(0, (num, day) -> day.numTasks(), Integer::sum);
   }
 
   public List<Task> getTasks() {
-    throw new UnsupportedOperationException();
+    return this.days.stream().flatMap((day) -> day.getTasks().stream())
+        .collect(Collectors.toList());
   }
 
   public List<Event> getEvent() {
-    throw new UnsupportedOperationException();
+    return this.days.stream().flatMap((day) -> day.getEvents().stream())
+        .collect(Collectors.toList());
   }
 }

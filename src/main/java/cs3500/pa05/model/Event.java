@@ -7,6 +7,12 @@ public class Event extends AbstractEventTask {
   LocalTime time;
   Duration duration;
 
+  public Event(String name, String desc, LocalTime time, Duration duration) {
+    super(name, desc);
+    this.time = time;
+    this.duration = duration;
+  }
+
   public LocalTime getTime() {
     return this.time;
   }
@@ -17,6 +23,6 @@ public class Event extends AbstractEventTask {
 
   @Override
   public boolean isFinished() {
-    throw new UnsupportedOperationException();
+    return this.time.plus(this.duration).isAfter(LocalTime.now());
   }
 }

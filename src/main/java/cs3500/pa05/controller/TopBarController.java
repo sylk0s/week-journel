@@ -4,6 +4,9 @@ import cs3500.pa05.model.Bujo;
 import cs3500.pa05.model.Week;
 import cs3500.pa05.view.TopBar;
 
+/**
+ * Controls the top bar
+ */
 public class TopBarController {
   Week week;
   Bujo bujo;
