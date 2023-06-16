@@ -3,7 +3,7 @@ package cs3500.pa05.model;
 /**
  * Represents a task
  */
-public class Task extends AbstractEventTask {
+public class Task extends JournalEntry {
   boolean completed;
 
   public Task(String name, String desc, boolean completed) {

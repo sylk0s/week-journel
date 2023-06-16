@@ -3,7 +3,7 @@ package cs3500.pa05.model;
 import java.time.Duration;
 import java.time.LocalTime;
 
-public class Event extends AbstractEventTask {
+public class Event extends JournalEntry {
   LocalTime time;
   Duration duration;
 

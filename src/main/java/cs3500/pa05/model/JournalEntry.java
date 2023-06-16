@@ -1,10 +1,10 @@
 package cs3500.pa05.model;
 
-public abstract class AbstractEventTask {
+public abstract class JournalEntry {
   String name;
   String description;
 
-  public AbstractEventTask(String name, String description) {
+  public JournalEntry(String name, String description) {
     this.name = name;
     this.description = description;
   }

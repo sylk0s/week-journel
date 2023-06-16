@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
  */
 public class Day {
   String name;
-  List<AbstractEventTask> items;
+  List<JournalEntry> items;
 
-  public Day(List<AbstractEventTask> items, String name) {
+  public Day(List<JournalEntry> items, String name) {
     this.items = items;
     this.name = name;
   }
