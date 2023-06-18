@@ -18,7 +18,7 @@ public class BujoSerializer {
    * @param bujo the object to turn into a string
    * @return the JSON string
    */
-  private String serialize(Bujo bujo) {
+  String serialize(Bujo bujo) {
     return new ObjectMapper().convertValue(bujo, JsonNode.class).asText();
   }
 
