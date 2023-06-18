@@ -1,5 +1,6 @@
 package cs3500.pa05.view;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -10,24 +11,28 @@ import javafx.scene.layout.VBox;
  * The view for a generic journal entry
  */
 public abstract class JournalEntryView extends VBox {
-  Label name;
-  Button remove;
-  HBox topBox;
-  TextArea desc;
+  private Label name;
+  private Button remove;
+  private HBox topBox;
+  private TextArea desc;
 
-  JournalEntryView(String name, String desc) {
+  public JournalEntryView(String name, String desc) {
     this.name = new Label(name);
-    this.remove = new Button("delete");
+    this.remove = new Button("Delete");
 
-    // box for the top which contains the name of the entry and some buttons to interact
     this.topBox = new HBox();
-    this.topBox.getChildren().add(this.name);
-    this.topBox.getChildren().add(this.remove);
+    this.topBox.getChildren().addAll(this.name, this.remove);
 
-    // description, which goes under the top box
-    this.desc.textProperty().set(desc);
+    this.desc = new TextArea();
+    this.desc.setText(desc);
+    this.desc.setWrapText(true);
 
-    this.getChildren().add(this.topBox);
-    this.getChildren().add(this.desc);
+    setSpacing(10);
+    setPadding(new Insets(10));
+    getChildren().addAll(topBox, this.desc);
+  }
+
+  public void setOnDeleteListener(Runnable onDeleteListener) {
+    remove.setOnAction(event -> onDeleteListener.run());
   }
 }

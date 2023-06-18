@@ -2,6 +2,7 @@ package cs3500.pa05.view;
 
 import cs3500.pa05.model.JournalEntry;
 import java.util.List;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -10,52 +11,59 @@ import javafx.scene.layout.VBox;
  * The view for one individual day
  */
 public class DayView extends VBox {
-  HBox topBox;
-  Label dayName;
-  VBox tasksAndEvents;
+  private final HBox topBox;
+  private final Label dayName;
+  private final VBox tasksAndEvents;
 
-  DayView(String name, List<JournalEntry> entries) {
+  /**
+   * Contructs a DayView object
+   *
+   * @param name of the day
+   * @param entries - list of all entries
+   */
+  public DayView(String name, List<JournalEntry> entries) {
     this.dayName = new Label(name);
 
     this.topBox = new HBox();
     this.topBox.getChildren().add(this.dayName);
 
-    // adds all the subitems
     this.tasksAndEvents = new VBox();
     for (JournalEntry entry : entries) {
       this.addEntry(entry);
     }
 
-    this.getChildren().add(topBox);
-    this.getChildren().add(tasksAndEvents);
+    setSpacing(10);
+    setPadding(new Insets(10));
+    getChildren().addAll(topBox, tasksAndEvents);
+  }
+
+  private JournalEntryView getEntryViewFrom(JournalEntry entry) {
+    return new ConcreteJournalEntryView(entry);
   }
 
   /**
-   * Creates an entry view from this entry
+   * Adds an entry
    *
-   * @param entry the given entry
-   * @return the resulting view
-   */
-  private JournalEntryView getEntryFrom(JournalEntry entry) {
-    // todo
-    throw new UnsupportedOperationException();
-  }
-
-  /**
-   * Adds an entry to this list of entries
-   *
-   * @param entry the entry to add
+   * @param entry a JournalEntry
    */
   public void addEntry(JournalEntry entry) {
-    this.tasksAndEvents.getChildren().add(this.getEntryFrom(entry));
+    JournalEntryView entryView = getEntryViewFrom(entry);
+    tasksAndEvents.getChildren().add(entryView);
+    entryView.setOnDeleteListener(() -> removeEntry(entryView));
   }
 
   /**
-   * Removes an entry to this list of entries
+   * Removes a specific entry
    *
-   * @param entry the entry to remove
+   * @param entry a JournalEntry
    */
   public void removeEntry(JournalEntryView entry) {
-    this.tasksAndEvents.getChildren().remove(entry);
+    tasksAndEvents.getChildren().remove(entry);
+  }
+
+  private static class ConcreteJournalEntryView extends JournalEntryView {
+    public ConcreteJournalEntryView(JournalEntry entry) {
+      super(entry.getName(), entry.getDescription());
+    }
   }
 }
