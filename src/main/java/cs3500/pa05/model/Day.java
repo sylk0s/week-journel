@@ -17,7 +17,7 @@ public class Day {
   /**
    * The name of the day
    */
-  String name;
+  DayType name;
 
   /**
    * The events and tasks in this day
@@ -31,7 +31,7 @@ public class Day {
    * @param name the name of the day
    */
   @JsonCreator
-  public Day(@JsonProperty("items") List<JournalEntry> items, @JsonProperty("name") String name) {
+  public Day(@JsonProperty("items") List<JournalEntry> items, @JsonProperty("name") DayType name) {
     this.items = items;
     this.name = name;
   }
@@ -41,7 +41,7 @@ public class Day {
    *
    * @param name The name of the day
    */
-  public Day(String name) {
+  public Day(DayType name) {
     this(new ArrayList<>(), name);
   }
 
@@ -86,7 +86,7 @@ public class Day {
    * @return The name of this day
    */
   @JsonGetter("name")
-  public String getName() {
+  public DayType getName() {
     return this.name;
   }
 

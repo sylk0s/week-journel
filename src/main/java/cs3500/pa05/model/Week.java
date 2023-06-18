@@ -2,6 +2,7 @@ package cs3500.pa05.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,24 @@ public class Week {
     this.eventMax = eventMax;
     this.taskMax = taskMax;
     this.name = name;
+  }
+
+  /**
+   * Constructor that automatically creates a new week with all the proper days
+   *
+   * @param eventMax the maximum number of events
+   * @param taskMax the maximum number of tasks
+   * @param name the name of this week
+   */
+  Week(int eventMax, int taskMax, String name) {
+    this.eventMax = eventMax;
+    this.taskMax = taskMax;
+    this.name = name;
+
+    this.days = new ArrayList<>();
+    for (DayType type: DayType.values()) {
+      this.days.add(new Day(type));
+    }
   }
 
   /**
