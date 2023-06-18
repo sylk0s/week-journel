@@ -16,13 +16,14 @@ import javafx.stage.Stage;
 /**
  * The initial view which prompts the user for a path
  */
-
 public class InitialView extends BorderPane {
+  private final TextField filePathField;
+  private final Button browseButton;
 
   public InitialView(Stage primaryStage) {
     Label filePathLabel = new Label("File Path:");
-    TextField filePathField = new TextField();
-    Button browseButton = new Button("Browse");
+    filePathField = new TextField();
+    browseButton = new Button("Browse");
     browseButton.setOnAction(e -> browseFile(primaryStage, filePathField));
 
     setTop(filePathLabel);
@@ -33,9 +34,18 @@ public class InitialView extends BorderPane {
     filePathField.setOnAction(e -> openBujoFile(filePathField.getText()));
   }
 
+  public Button getBrowseButton() {
+    return browseButton;
+  }
+
+  public TextField getFilePathField() {
+    return filePathField;
+  }
+
   private void browseFile(Stage primaryStage, TextField filePathField) {
     FileChooser fileChooser = new FileChooser();
-    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("BuJo Files", "*.bujo"));
+    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("BuJo Files",
+        "*.bujo"));
     File selectedFile = fileChooser.showOpenDialog(primaryStage);
     if (selectedFile != null) {
       filePathField.setText(selectedFile.getAbsolutePath());
@@ -52,12 +62,12 @@ public class InitialView extends BorderPane {
     }
   }
 
-  private void displayWeek(String fileContent) {
+  public void displayWeek(String fileContent) {
     System.out.println("File contents:");
     System.out.println(fileContent);
   }
 
-  private void displayError(String title, String message) {
+  public void displayError(String title, String message) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle(title);
     alert.setHeaderText(null);

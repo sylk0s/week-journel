@@ -7,7 +7,7 @@ import cs3500.pa05.view.WeekView;
 
 // calls all controllers and runs application
 public class JournalApp {
-  initialController init = new initialController();
+  //initialController init = new initialController();
   JournalViewController view = new JournalViewController();
   //SideBarController side = new SideBarController();
   //TopBarController top = new TopBarController();
