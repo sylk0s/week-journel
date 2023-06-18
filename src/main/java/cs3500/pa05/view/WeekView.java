@@ -1,6 +1,8 @@
 package cs3500.pa05.view;
 
 import cs3500.pa05.model.Day;
+import cs3500.pa05.model.DayType;
+import cs3500.pa05.model.JournalEntry;
 import java.util.List;
 import javafx.scene.layout.HBox;
 
@@ -28,10 +30,13 @@ public class WeekView extends HBox {
   /**
    * Creates a view representation of the model's day
    *
-   * @param day the day to create a view for
+   * @param dayType - the specific day
+   * @param entries - list of all entries
+   *
    * @return the view
    */
-  public static DayView getDayFrom(Day day) {
-    throw new UnsupportedOperationException();
+  public static DayView getDayFrom(DayType dayType, List<JournalEntry> entries) {
+    String dayName = dayType.name();
+    return new DayView(dayName, entries);
   }
 }

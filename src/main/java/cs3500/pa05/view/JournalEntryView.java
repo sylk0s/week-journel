@@ -11,11 +11,17 @@ import javafx.scene.layout.VBox;
  * The view for a generic journal entry
  */
 public abstract class JournalEntryView extends VBox {
-  private Label name;
-  private Button remove;
-  private HBox topBox;
-  private TextArea desc;
+  private final Label name;
+  private final Button remove;
+  private final HBox topBox;
+  private final TextArea desc;
 
+  /**
+   * Constructs a JournalEntryView object
+   *
+   * @param name - label of the name
+   * @param desc - description
+   */
   public JournalEntryView(String name, String desc) {
     this.name = new Label(name);
     this.remove = new Button("Delete");
