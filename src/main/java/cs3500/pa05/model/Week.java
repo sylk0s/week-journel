@@ -48,7 +48,7 @@ public class Week {
    * @param taskMax the maximum number of tasks
    * @param name the name of this week
    */
-  Week(int eventMax, int taskMax, String name) {
+  public Week(int eventMax, int taskMax, String name) {
     this.eventMax = eventMax;
     this.taskMax = taskMax;
     this.name = name;

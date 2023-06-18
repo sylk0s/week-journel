@@ -13,6 +13,11 @@ public class WeekView extends HBox {
    */
   List<DayView> days;
 
+  /**
+   * Constructs a week view with the following days
+   *
+   * @param days the day views in this week view
+   */
   public WeekView(List<DayView> days) {
     this.days = days;
     for (DayView day : days) {
@@ -20,6 +25,12 @@ public class WeekView extends HBox {
     }
   }
 
+  /**
+   * Creates a view representation of the model's day
+   *
+   * @param day the day to create a view for
+   * @return the view
+   */
   public static DayView getDayFrom(Day day) {
     throw new UnsupportedOperationException();
   }
