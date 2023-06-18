@@ -1,6 +1,12 @@
 package cs3500.pa05.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cs3500.pa05.model.Bujo;
+import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 
 /**
  * Handles serializing/deserializing and writing + reading the bujo file
@@ -13,7 +19,7 @@ public class BujoSerializer {
    * @return the JSON string
    */
   private String serialize(Bujo bujo) {
-    throw new UnsupportedOperationException();
+    return new ObjectMapper().convertValue(bujo, JsonNode.class).asText();
   }
 
   /**
@@ -22,8 +28,8 @@ public class BujoSerializer {
    * @param string the string to deserialize
    * @return the Bujo file
    */
-  private Bujo deserialize(String string) {
-    throw new UnsupportedOperationException();
+  private Bujo deserialize(String string) throws JsonProcessingException {
+    return new ObjectMapper().readValue(string, Bujo.class);
   }
 
   /**
@@ -32,8 +38,8 @@ public class BujoSerializer {
    * @param path the path of the file to write to
    * @param bujo the object to write to the file
    */
-  public void write(String path, Bujo bujo) {
-    throw new UnsupportedOperationException();
+  public void write(String path, Bujo bujo) throws IOException {
+    Files.write(FileSystems.getDefault().getPath(path), this.serialize(bujo).getBytes());
   }
 
   /**
@@ -42,7 +48,7 @@ public class BujoSerializer {
    * @param path the path to read from
    * @return a bujo file
    */
-  public Bujo read(String path) {
-    throw new UnsupportedOperationException();
+  public Bujo read(String path) throws IOException {
+    return this.deserialize(Files.readString(FileSystems.getDefault().getPath(path)));
   }
 }
