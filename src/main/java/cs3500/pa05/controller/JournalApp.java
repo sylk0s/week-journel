@@ -21,9 +21,6 @@ public class JournalApp extends Application {
   private TopBarController top;
   private WeekViewController week;
 
-  public static void main(String[] args) {
-    launch(args);
-  }
 
   @Override
   public void start(Stage primaryStage) {

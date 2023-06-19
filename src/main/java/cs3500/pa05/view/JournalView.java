@@ -101,6 +101,8 @@ public class JournalView extends BorderPane {
    *
    * @return
    */
+  // TODO: This is super complicated. Confused abotu how we're not extending the
+  //  JournalEntryView class?
   public List<JournalEntry> displayEntries() {
     List<JournalEntry> entries = week.getEntries();
     return entries;
