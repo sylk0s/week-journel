@@ -1,0 +1,20 @@
+.week-box {
+    -fx-fill: #FFCA28;
+    -fx-stroke: #F9A825;
+    -fx-stroke-width: 2;
+}
+
+.day-box {
+    -fx-fill: #F5F5F5;
+    -fx-stroke: #E0E0E0;
+    -fx-stroke-width: 1;
+}
+
+.week-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.day-label {
+    -fx-font-size: 12px;
+}

@@ -49,8 +49,9 @@ public class JournalApp extends Application {
 
   public void run() {
     // Run each of the controllers.
-    this.init.initViewEvents();
+
     this.journalView.run();
     this.side.updateView();
   }
+
 }
