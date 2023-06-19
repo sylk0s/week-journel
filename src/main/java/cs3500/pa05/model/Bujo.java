@@ -11,7 +11,7 @@ public class Bujo {
   Week week;
 
   @JsonCreator
-  Bujo(@JsonProperty("week") Week week) {
+  public Bujo(@JsonProperty("week") Week week) {
     this.week = week;
   }
 

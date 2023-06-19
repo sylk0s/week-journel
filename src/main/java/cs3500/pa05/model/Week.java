@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -168,4 +169,34 @@ public class Week {
   public void setNote(String note) {
     this.note = note;
   }
+
+    public void addEntry(JournalEntry entry, DayType dayType) {
+      Optional<Day> dayOptional = this.days.stream()
+          .filter(day -> day.getName().equals(dayType))
+          .findFirst();
+
+      if (dayOptional.isPresent()) {
+        Day day = dayOptional.get();
+        day.add(entry);
+      } else {
+        throw new IllegalArgumentException("DayType not found in the week.");
+      }
+    }
+
+
+  public List<JournalEntry> getEntries() {
+
+    List<Event> events = this.getEvent();
+    List<Task> tasks = this.getTasks();
+
+    List<JournalEntry> entries = new ArrayList<>();
+
+    entries.addAll(events);
+    entries.addAll(tasks);
+
+    return entries;
+
+  }
 }
+
+

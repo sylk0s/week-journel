@@ -1,20 +1,58 @@
 package cs3500.pa05.controller;
 
-import cs3500.pa05.model.JournalEntry;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import cs3500.pa05.model.Bujo;
 import cs3500.pa05.model.Week;
+import cs3500.pa05.view.InitialView;
 import cs3500.pa05.view.JournalView;
 import cs3500.pa05.view.WeekView;
+import cs3500.pa05.view.SideBar;
+import cs3500.pa05.view.TopBar;
 
-// calls all controllers and runs application
-public class JournalApp {
-  //initialController init = new initialController();
-  JournalViewController view = new JournalViewController();
-  //SideBarController side = new SideBarController();
-  //TopBarController top = new TopBarController();
-  //WeekViewController week = new WeekViewController();
+import java.util.stream.Collectors;
 
-  public void run(){
-    Week week = new Week(10, 10, "");
+// Calls all controllers and runs the application
+public class JournalApp extends Application {
 
-  };
+  private InitialController init;
+  private JournalViewController journalView;
+  private SideBarController side;
+  private TopBarController top;
+  private WeekViewController week;
+
+  public static void main(String[] args) {
+    launch(args);
+  }
+
+  @Override
+  public void start(Stage primaryStage) {
+    // Initialize the models
+    Week weekModel = new Week(10, 10, "");
+    Bujo bujo = new Bujo(weekModel);
+
+    // Initialize the views
+    InitialView initialView = new InitialView(primaryStage);
+    JournalView journalView = new JournalView(weekModel);
+    SideBar sideBar = journalView.getSideBar();
+    TopBar topBar = journalView.getTopBar();
+
+    // Initialize the serializers
+    BujoSerializer serializer = new BujoSerializer();
+
+    // Initialize the controllers with the models and views
+    this.init = new InitialController(initialView, serializer);
+    this.journalView = new JournalViewController(journalView, weekModel);
+    this.side = new SideBarController(weekModel, sideBar);
+    this.top = new TopBarController(weekModel, bujo, serializer, topBar);
+
+    // Run the application
+    this.run();
+  }
+
+  public void run() {
+    // Run each of the controllers.
+    this.init.initViewEvents();
+    this.journalView.run();
+  }
 }

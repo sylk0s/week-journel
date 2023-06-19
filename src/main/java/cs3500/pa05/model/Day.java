@@ -46,40 +46,23 @@ public class Day {
   }
 
   /**
-   * Adds an event to this day's items
+   * Adds an event or task to this day's items
    *
    * @param e the event to add
    */
-  public void add(Event e) {
+  public void add(JournalEntry e) {
     this.items.add(e);
   }
 
   /**
-   * Adds a task to this day's items
-   *
-   * @param t the task to add
-   */
-  public void add(Task t) {
-    this.items.add(t);
-  }
-
-  /**
-   * Removes an event from this day's items
+   * Removes an event or task from this day's items
    *
    * @param e the event to remove
    */
-  public void remove(Event e) {
+  public void remove(JournalEntry e) {
     this.items.remove(e);
   }
 
-  /**
-   * Removes a task from this day's titems
-   *
-   * @param t the task to remove
-   */
-  public void remove(Task t) {
-    this.items.remove(t);
-  }
 
   /**
    *
@@ -185,5 +168,20 @@ public class Day {
    */
   public boolean isOverEventMax(int max) {
     return max < this.getTasks().size();
+  }
+
+
+  public List<JournalEntry> getEntries() {
+
+    List<Event> events = this.getEvents();
+    List<Task> tasks = this.getTasks();
+
+    List<JournalEntry> entries = new ArrayList<>();
+
+    entries.addAll(events);
+    entries.addAll(tasks);
+
+    return entries;
+
   }
 }

@@ -8,18 +8,18 @@ import java.io.IOException;
 /**
  * Controls the initial view which asks the user for a path
  */
-public class initialController {
+public class InitialController {
   private BujoSerializer serializer;
   private Bujo bujo;
   private InitialView view;
 
-  public initialController(InitialView view, BujoSerializer serializer) {
+  public InitialController(InitialView view, BujoSerializer serializer) {
     this.view = view;
     this.serializer = serializer;
     this.initViewEvents();
   }
 
-  private void initViewEvents() {
+  void initViewEvents() {
     view.getBrowseButton().setOnAction(e -> {
       String path = view.getFilePathField().getText();
       loadBujo(path);

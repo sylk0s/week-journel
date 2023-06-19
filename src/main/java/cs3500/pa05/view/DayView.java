@@ -1,6 +1,11 @@
 package cs3500.pa05.view;
 
+import static cs3500.pa05.view.WeekView.getDayFrom;
+
+import cs3500.pa05.model.Day;
+import cs3500.pa05.model.DayType;
 import cs3500.pa05.model.JournalEntry;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -66,4 +71,9 @@ public class DayView extends VBox {
       super(entry.getName(), entry.getDescription());
     }
   }
+
+
+
+
+
 }

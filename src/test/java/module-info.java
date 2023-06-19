@@ -9,7 +9,6 @@ module cs3500.pa05 {
   requires org.junit.jupiter.api;
   requires org.mockito;
   requires junit;
-  requires cs3500.pa05;
 
   opens cs3500.pa05 to javafx.fxml, org.junit.jupiter.api, com.fasterxml.jackson.databind;
 

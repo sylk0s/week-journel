@@ -39,4 +39,5 @@ public class WeekView extends HBox {
     String dayName = dayType.name();
     return new DayView(dayName, entries);
   }
+
 }
