@@ -3,11 +3,20 @@ package cs3500.pa05.view;
 import cs3500.pa05.controller.KeyPressHandler;
 import cs3500.pa05.model.Day;
 import cs3500.pa05.model.DayType;
+import cs3500.pa05.model.Event;
 import cs3500.pa05.model.JournalEntry;
+import cs3500.pa05.model.Task;
 import cs3500.pa05.model.Week;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Insets;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 /**
  * The view for the main screen with the sidebar, top bar, week view
@@ -34,10 +43,24 @@ public class JournalView extends BorderPane {
     setLeft(sideBar);
     setTop(topBar);
     setCenter(weekView);
+
+    BackgroundFill backgroundFill =
+        new BackgroundFill(
+            Color.valueOf("#ffff00"),
+            new CornerRadii(0),
+            new Insets(0)
+        );
+
+    Background background =
+        new Background(backgroundFill);
+
+    this.setBackground(background);
   }
 
   private List<DayView> createWeekDays() {
     List<DayView> days = new ArrayList<>();
+    week.getDays().get(0).add(new Task("EX: Task", "desc", false));
+    week.getDays().get(1).add(new Event("EX: Event", "desc 2", LocalTime.NOON, Duration.ofHours(2)));
     // create and add DayView objects for each day of the week
     for(Day d: week.getDays()){
       // get Day object using getDay method of Week

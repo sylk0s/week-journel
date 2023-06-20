@@ -4,13 +4,19 @@ import static cs3500.pa05.view.WeekView.getDayFrom;
 
 import cs3500.pa05.model.Day;
 import cs3500.pa05.model.DayType;
+import cs3500.pa05.model.Event;
 import cs3500.pa05.model.JournalEntry;
+import cs3500.pa05.model.Task;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 /**
  * The view for one individual day
@@ -27,6 +33,17 @@ public class DayView extends VBox {
    * @param entries - list of all entries
    */
   public DayView(String name, List<JournalEntry> entries) {
+    BackgroundFill backgroundFill =
+        new BackgroundFill(
+                Color.valueOf("#ff00ff"),
+                new CornerRadii(0),
+                new Insets(0)
+                );
+
+    Background background =
+            new Background(backgroundFill);
+
+    this.setBackground(background);
     this.dayName = new Label(name);
 
     this.topBox = new HBox();
@@ -43,6 +60,12 @@ public class DayView extends VBox {
   }
 
   private JournalEntryView getEntryViewFrom(JournalEntry entry) {
+    if (entry instanceof Task) {
+      return new TaskView(entry.getName(), entry.getDescription());
+    } else if (entry instanceof Event) {
+      return new EventView(entry.getName(), entry.getDescription(),
+          ((Event) entry).getTime(), ((Event) entry).getDuration());
+    }
     return new ConcreteJournalEntryView(entry);
   }
 
