@@ -59,7 +59,7 @@ public class JournalView extends BorderPane {
     weekView = new WeekView(days);
 
     // temporarily removed to focus on week view
-    //setLeft(sideBar);
+    setLeft(sideBar);
     setTop(topBar);
     setCenter(weekView);
 
