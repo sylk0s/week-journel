@@ -32,6 +32,8 @@ public class JournalView extends BorderPane {
 
   /**
    * Constructs a JournalView object
+   *
+   * @param week the week that this view should be created from
    */
   public JournalView(Week week) { // week object passed in constructor
     this.week = week;
@@ -40,7 +42,8 @@ public class JournalView extends BorderPane {
     List<DayView> days = createWeekDays();
     weekView = new WeekView(days);
 
-    setLeft(sideBar);
+    // temporarily removed to focus on week view
+    //setLeft(sideBar);
     setTop(topBar);
     setCenter(weekView);
 

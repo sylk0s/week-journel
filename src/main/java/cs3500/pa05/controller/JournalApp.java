@@ -47,7 +47,7 @@ public class JournalApp extends Application {
 
     // Run the application
     this.run();
-    Scene scene = new Scene(journalView, 800, 800);
+    Scene scene = new Scene(journalView, 1600, 800);
     primaryStage.setScene(scene);
     primaryStage.show();
   }
