@@ -1,5 +1,7 @@
 package cs3500.pa05.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
@@ -11,6 +13,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * The bar on the top of the page
@@ -21,13 +25,28 @@ public class TopBar extends HBox {
   private final Button add;
   private final TextField maxEvents;
   private final TextField maxTasks;
+  private final Stage primaryStage;
 
   /**
    * Constructing a new TopBar object
    */
   public TopBar() {
+    primaryStage = new Stage();
     sideBarToggle = new Button("Toggle Sidebar");
     save = new Button("Save");
+    save.setOnAction(new EventHandler<ActionEvent>() {
+      @Override
+      public void handle(ActionEvent event) {
+        System.out.println("henry");
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save");
+        fileChooser.setInitialFileName("save file");
+        fileChooser.getExtensionFilters().addAll
+            (new FileChooser.ExtensionFilter("All Files", "*.*"));
+        fileChooser.showSaveDialog(primaryStage);
+      }
+    });
+
     add = new Button("Add");
     maxEvents = new TextField();
     maxTasks = new TextField();
