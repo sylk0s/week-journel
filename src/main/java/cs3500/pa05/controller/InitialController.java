@@ -1,12 +1,16 @@
 package cs3500.pa05.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import cs3500.pa05.model.Bujo;
+import cs3500.pa05.model.Week;
 import cs3500.pa05.view.InitialView;
 
 import cs3500.pa05.view.JournalView;
 import java.io.File;
 import java.io.IOException;
+import javafx.scene.Scene;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 /**
  * Controls the initial view which asks the user for a path
@@ -52,15 +56,16 @@ public class InitialController {
   private Bujo bujo;
   private InitialView view;
 
-  public InitialController(InitialView view, BujoSerializer serializer) {
+  public InitialController(InitialView view, BujoSerializer serializer, Stage stage) {
     this.view = view;
     this.serializer = serializer;
-    this.initViewEvents();
+    this.initViewEvents(stage);
   }
 
-  void initViewEvents() {
+  void initViewEvents(Stage stage) {
     view.getBrowseButton().setOnAction(e -> browseFile());
     view.getLoadButton().setOnAction(e -> loadBujo());
+    view.getNewButton().setOnAction(e -> createNewBujo(stage));
     view.getFilePathField().setOnAction(e -> loadBujo());
   }
 
@@ -88,5 +93,16 @@ public class InitialController {
     } else {
       view.displayError("Invalid file path", "Please enter a valid file path.");
     }
+  }
+
+  private void createNewBujo(Stage stage) {
+    // Create a new Bujo object with an empty Week
+    Week week = new Week(10, 10, "Untitled");
+
+    // Load the new JournalView
+    JournalView journal = new JournalView(week);
+    // Perform any necessary actions with the new JournalView
+    stage.setScene(new Scene(journal, 800, 800));
+    stage.show();
   }
 }

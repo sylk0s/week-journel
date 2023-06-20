@@ -39,7 +39,7 @@ public class JournalApp extends Application {
     BujoSerializer serializer = new BujoSerializer();
 
     // Initialize the controllers with the models and views
-    this.init = new InitialController(initialView, serializer);
+    this.init = new InitialController(initialView, serializer, primaryStage);
     this.journalView = new JournalViewController(journalView, weekModel);
     this.side = new SideBarController(weekModel, sideBar);
     this.top = new TopBarController(weekModel, bujo, serializer, topBar);

@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -89,16 +90,18 @@ public class InitialView extends BorderPane {
   private final TextField filePathField;
   private final Button browseButton;
   private final Button loadButton;
+  private final Button newButton;
 
   public InitialView(Stage primaryStage) {
     Label filePathLabel = new Label("Enter a File Path:");
     filePathField = new TextField();
     browseButton = new Button("Browse");
     loadButton = new Button("Load");
+    newButton = new Button("New");
 
     setTop(filePathLabel);
     setCenter(filePathField);
-    setRight(new HBox(browseButton, loadButton));
+    setRight(new VBox(browseButton, loadButton, newButton));
     setPadding(new Insets(10));
   }
 
@@ -108,6 +111,10 @@ public class InitialView extends BorderPane {
 
   public Button getLoadButton() {
     return loadButton;
+  }
+
+  public Button getNewButton() {
+    return newButton;
   }
 
   public TextField getFilePathField() {
