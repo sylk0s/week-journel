@@ -27,7 +27,6 @@ public class JournalApp extends Application {
   public void start(Stage primaryStage) {
     // Initialize the models
     Week weekModel = new Week(10, 10, "");
-    System.out.println(weekModel.toString());
     Bujo bujo = new Bujo(weekModel);
 
     // Initialize the views
@@ -45,16 +44,13 @@ public class JournalApp extends Application {
     this.side = new SideBarController(weekModel, sideBar);
     this.top = new TopBarController(weekModel, bujo, serializer, topBar);
 
-    // Run the application
-    this.run();
-    Scene scene = new Scene(journalView, 1600, 800);
-    primaryStage.setScene(scene);
+    Scene initialScene = new Scene(initialView, 800, 600);
+    primaryStage.setScene(initialScene);
     primaryStage.show();
   }
 
   public void run() {
-    // Run each of the controllers.
-
+    // Run each of the controllers
     this.journalView.run();
     this.side.updateView();
   }
