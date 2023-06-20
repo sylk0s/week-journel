@@ -39,13 +39,11 @@ public class JournalView extends BorderPane {
   private List<DayView> createWeekDays() {
     List<DayView> days = new ArrayList<>();
     // create and add DayView objects for each day of the week
-    for (DayType dayType : DayType.values()) {
-      for(Day d: week.getDays()){
-        // get Day object using getDay method of Week
-        List<JournalEntry> entries = d.getEntries();
-        DayView dayView = WeekView.getDayFrom(dayType, entries);
-        days.add(dayView);
-      }
+    for(Day d: week.getDays()){
+      // get Day object using getDay method of Week
+      List<JournalEntry> entries = d.getEntries();
+      DayView dayView = WeekView.getDayFrom(d.getName(), entries);
+      days.add(dayView);
     }
     return days;
   }

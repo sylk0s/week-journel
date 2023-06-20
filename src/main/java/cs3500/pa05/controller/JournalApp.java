@@ -27,6 +27,7 @@ public class JournalApp extends Application {
   public void start(Stage primaryStage) {
     // Initialize the models
     Week weekModel = new Week(10, 10, "");
+    System.out.println(weekModel.toString());
     Bujo bujo = new Bujo(weekModel);
 
     // Initialize the views

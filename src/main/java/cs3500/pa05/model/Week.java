@@ -197,6 +197,15 @@ public class Week {
     return entries;
 
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder("");
+    for (Day day : days) {
+      sb.append(day.getName()).append("\n");
+    }
+    return sb.toString();
+  }
 }
 
 
