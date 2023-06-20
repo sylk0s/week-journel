@@ -1,6 +1,7 @@
 package cs3500.pa05.controller;
 
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import cs3500.pa05.model.Bujo;
 import cs3500.pa05.model.Week;
@@ -45,6 +46,9 @@ public class JournalApp extends Application {
 
     // Run the application
     this.run();
+    Scene scene = new Scene(journalView, 800, 800);
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 
   public void run() {
@@ -53,5 +57,4 @@ public class JournalApp extends Application {
     this.journalView.run();
     this.side.updateView();
   }
-
 }
