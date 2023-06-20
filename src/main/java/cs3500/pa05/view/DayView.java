@@ -1,13 +1,8 @@
 package cs3500.pa05.view;
 
-import static cs3500.pa05.view.WeekView.getDayFrom;
-
-import cs3500.pa05.model.Day;
-import cs3500.pa05.model.DayType;
 import cs3500.pa05.model.Event;
 import cs3500.pa05.model.JournalEntry;
 import cs3500.pa05.model.Task;
-import java.util.ArrayList;
 import java.util.List;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -22,8 +17,17 @@ import javafx.scene.paint.Color;
  * The view for one individual day
  */
 public class DayView extends VBox {
+  /**
+   * Box for the top which contains the label and some buttons
+   */
   private final HBox topBox;
+  /**
+   * The name of this day
+   */
   private final Label dayName;
+  /**
+   * The tasks and events under this day
+   */
   private final VBox tasksAndEvents;
 
   /**
@@ -59,6 +63,12 @@ public class DayView extends VBox {
     getChildren().addAll(topBox, tasksAndEvents);
   }
 
+  /**
+   * Gets the view for a journal entry
+   *
+   * @param entry the entry to get a view for
+   * @return the view for the entry
+   */
   private JournalEntryView getEntryViewFrom(JournalEntry entry) {
     if (entry instanceof Task) {
       return new TaskView(entry.getName(), entry.getDescription());
@@ -94,9 +104,4 @@ public class DayView extends VBox {
       super(entry.getName(), entry.getDescription());
     }
   }
-
-
-
-
-
 }

@@ -12,7 +12,14 @@ import javafx.scene.paint.Color;
  * Expandable sidebar on the left of the screen
  */
 public class SideBar extends VBox {
+
+  /**
+   * The list of tasks on the sidebar
+   */
   private final VBox taskList;
+  /**
+   * The statistics for the week
+   */
   private final HBox stats;
 
   /**

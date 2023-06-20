@@ -8,6 +8,9 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
 public class TaskView extends JournalEntryView {
+  /**
+   * A checkbox indicating if a task is finished
+   */
   CheckBox finished;
   public TaskView(String name, String desc) {
     super(name, desc);
