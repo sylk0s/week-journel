@@ -2,6 +2,7 @@ package cs3500.pa05.view;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
@@ -90,5 +91,13 @@ public class TopBar extends HBox {
    */
   public TextField getMaxTasksTextField() {
     return maxTasks;
+  }
+
+  public void displayError(String title, String message) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle(title);
+    alert.setHeaderText(null);
+    alert.setContentText(message);
+    alert.showAndWait();
   }
 }
