@@ -3,6 +3,7 @@ package cs3500.pa05.controller;
 import cs3500.pa05.model.Bujo;
 import cs3500.pa05.view.InitialView;
 
+import cs3500.pa05.view.JournalView;
 import java.io.File;
 import java.io.IOException;
 import javafx.stage.FileChooser;
@@ -59,6 +60,7 @@ public class InitialController {
 
   void initViewEvents() {
     view.getBrowseButton().setOnAction(e -> browseFile());
+    view.getLoadButton().setOnAction(e -> loadBujo());
     view.getFilePathField().setOnAction(e -> loadBujo());
   }
 
@@ -74,12 +76,17 @@ public class InitialController {
 
   private void loadBujo() {
     String filePath = view.getFilePathField().getText();
-    try {
-      bujo = serializer.read(filePath);
-      //view.displayWeek(bujo.toString());
-    } catch (IOException e) {
-      view.displayError("Error opening file",
-          "An error occurred while opening the file.");
+    if (!filePath.isEmpty()) {
+      try {
+        bujo = serializer.read(filePath);
+        JournalView journal = new JournalView(bujo.getWeek());
+        // navigate to JournalView or perform other actions
+      } catch (IOException e) {
+        view.displayError("Error opening file",
+            "An error occurred while opening the file.");
+      }
+    } else {
+      view.displayError("Invalid file path", "Please enter a valid file path.");
     }
   }
 }
