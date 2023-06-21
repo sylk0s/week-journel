@@ -45,6 +45,5 @@ public abstract class JournalEntry {
     this.description = description;
   }
 
-  @JsonIgnore
   public abstract boolean isFinished();
 }

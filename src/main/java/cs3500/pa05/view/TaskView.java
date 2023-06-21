@@ -61,6 +61,7 @@ public class TaskView extends JournalEntryView {
       this.side.updateView();
       this.dayView.updateProgress();
     });
+    this.finished.setSelected(this.self.isFinished());
     tmp.getChildren().addAll(finished, this.name);
     box.getChildren().add(tmp);
   }
