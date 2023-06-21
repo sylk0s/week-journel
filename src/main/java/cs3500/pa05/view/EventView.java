@@ -41,11 +41,11 @@ public class EventView extends JournalEntryView {
     Label timeMLabel = new Label("Min:");
 
     this.timeH = new TextField(event.getTime().getHour() + "");
-    this.timeH.maxWidth(1);
+    this.timeH.setPrefSize(35, 10);
     this.timeH.setOnAction(e -> updateTime());
 
     this.timeM = new TextField(event.getTime().getMinute() + "");
-    this.timeM.maxWidth(1);
+    this.timeM.setPrefSize(35, 10);
     this.timeM.setOnAction(e -> updateTime());
 
     timeBox.getChildren().addAll(timeHLabel, timeH, timeMLabel, timeM);
@@ -57,11 +57,11 @@ public class EventView extends JournalEntryView {
     Label durMLabel = new Label("Min:");
 
     this.durH = new TextField(event.getDuration().toHoursPart() + "");
-    this.durH.maxWidth(1);
+    this.durH.setPrefSize(35, 10);
     this.durH.setOnAction(e -> updateDur());
 
     this.durM = new TextField(event.getDuration().toMinutesPart() + "");
-    this.durM.maxWidth(1);
+    this.durM.setPrefSize(35, 10);
     this.durM.setOnAction(e -> updateDur());
 
     durBox.getChildren().addAll(durHLabel, durH, durMLabel, durM);

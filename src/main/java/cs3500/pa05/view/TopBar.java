@@ -37,8 +37,8 @@ public class TopBar extends HBox {
     Label maxEventsLabel = new Label("Max Events:");
     Label maxTasksLabel = new Label("Max Tasks:");
 
-    this.maxEvents.setPrefWidth(80); // Set preferred width for the text field
-    this.maxTasks.setPrefWidth(80); // Set preferred width for the text field
+    this.maxEvents.setPrefWidth(40); // Set preferred width for the text field
+    this.maxTasks.setPrefWidth(40); // Set preferred width for the text field
 
     this.setSpacing(10);
     this.setPadding(new Insets(10));
