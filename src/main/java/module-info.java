@@ -6,6 +6,7 @@ module cs3500.pa05 {
   requires com.fasterxml.jackson.annotation;
   requires com.fasterxml.jackson.core;
   requires com.fasterxml.jackson.databind;
+  requires com.fasterxml.jackson.datatype.jsr310;
 
 
   opens cs3500.pa05 to javafx.fxml;

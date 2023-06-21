@@ -2,6 +2,7 @@ package cs3500.pa05.view;
 
 import cs3500.pa05.controller.BujoSerializer;
 import cs3500.pa05.model.Bujo;
+import cs3500.pa05.model.Event;
 import cs3500.pa05.model.Week;
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -42,10 +42,10 @@ public class TopBar extends HBox {
   /**
    * Constructing a new TopBar object
    */
-  public TopBar() {
-    primaryStage = new Stage();
-    sideBarToggle = new Button("Toggle Sidebar");
-    save = new Button("Save");
+  public TopBar(Week week) {
+    this.primaryStage = new Stage();
+    this.sideBarToggle = new Button("Toggle Sidebar");
+    this.save = new Button("Save");
     save.setOnAction(event -> {
       FileChooser fileChooser = new FileChooser();
       fileChooser.setTitle("Save");
@@ -60,7 +60,7 @@ public class TopBar extends HBox {
         try {
           // Perform save operation by writing bujo data to the selected file
           BujoSerializer serializer = new BujoSerializer();
-          Bujo bujo = new Bujo(new Week(10, 10, "")); // Replace with your bujo creation logic
+          Bujo bujo = new Bujo(week);
           serializer.write(selectedFile.getAbsolutePath(), bujo);
           System.out.println("Bujo file saved: " + selectedFile.getAbsolutePath());
         } catch (IOException e) {
@@ -70,27 +70,38 @@ public class TopBar extends HBox {
     });
 
 
-    add = new Button("Add");
+    this.add = new Button("Add");
     add.setOnAction(e -> {
       showAddDropdown();
     });
-    maxEvents = new TextField();
-    maxTasks = new TextField();
+    this.maxEvents = new TextField();
+    this.maxTasks = new TextField();
 
     Label maxEventsLabel = new Label("Max Events:");
     Label maxTasksLabel = new Label("Max Tasks:");
 
-    maxEvents.setPrefWidth(80); // Set preferred width for the text field
-    maxTasks.setPrefWidth(80); // Set preferred width for the text field
+    this.maxEvents.setPrefWidth(80); // Set preferred width for the text field
+    this.maxTasks.setPrefWidth(80); // Set preferred width for the text field
 
-    setSpacing(10);
-    setPadding(new Insets(10));
-    getChildren().addAll(sideBarToggle, save, add, maxEventsLabel, maxEvents, maxTasksLabel, maxTasks);
+    this.setSpacing(10);
+    this.setPadding(new Insets(10));
+    this.getChildren().addAll(this.sideBarToggle, this.save, this.add, maxEventsLabel,
+        this.maxEvents, maxTasksLabel, this.maxTasks);
 
     BackgroundFill backgroundFill = new BackgroundFill(Color.valueOf("#bde0ff"),
         new CornerRadii(0), new Insets(0));
     Background background = new Background(backgroundFill);
-    setBackground(background);
+    this.setBackground(background);
+  }
+
+  public void registerOnSave(EventHandler<ActionEvent> handler) {
+    System.out.println("registering handler for save...");
+    this.save.setOnAction(handler);
+  }
+
+  public void registerOnAdd(EventHandler<ActionEvent> handler) {
+    System.out.println("registering handler for add...");
+    this.add.setOnAction(handler);
   }
 
   /**
@@ -138,7 +149,7 @@ public class TopBar extends HBox {
     return maxTasks;
   }
 
-  private void showAddDropdown() {
+  public void showAddDropdown() {
     ObservableList<String>
         options = FXCollections.observableArrayList("Add a new event", "Add a new task");
     ChoiceBox<String> choiceBox = new ChoiceBox<>(options);
@@ -152,7 +163,7 @@ public class TopBar extends HBox {
     dropdown.setPadding(new Insets(10));
 
     Stage popupStage = new Stage();
-    popupStage.initOwner(primaryStage);
+    popupStage.initOwner(this.primaryStage);
     popupStage.initModality(Modality.WINDOW_MODAL);
     popupStage.setScene(new Scene(dropdown));
     popupStage.show();

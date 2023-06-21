@@ -3,6 +3,9 @@ package cs3500.pa05.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import cs3500.pa05.model.Bujo;
 import java.io.IOException;
 import java.nio.file.FileSystems;
@@ -12,6 +15,12 @@ import java.nio.file.Files;
  * Handles serializing/deserializing and writing + reading the bujo file
  */
 public class BujoSerializer {
+
+  ObjectMapper mapper = new ObjectMapper();
+
+  public BujoSerializer() {
+    mapper.findAndRegisterModules();
+  }
   /**
    * Turns the BUJO object into a JSON string
    *
@@ -19,7 +28,10 @@ public class BujoSerializer {
    * @return the JSON string
    */
   public String serialize(Bujo bujo) {
-    return new ObjectMapper().convertValue(bujo, JsonNode.class).asText();
+    System.out.println("serializing to:");
+    JsonNode result = this.mapper.convertValue(bujo, JsonNode.class);
+    System.out.println(result);
+    return result.toPrettyString();
   }
 
   /**
@@ -29,7 +41,9 @@ public class BujoSerializer {
    * @return the Bujo file
    */
   private Bujo deserialize(String string) throws JsonProcessingException {
-    return new ObjectMapper().readValue(string, Bujo.class);
+    System.out.println("deserializing");
+    System.out.println(string);
+    return this.mapper.readValue(string, Bujo.class);
   }
 
   /**

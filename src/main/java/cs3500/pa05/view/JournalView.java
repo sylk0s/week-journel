@@ -54,7 +54,7 @@ public class JournalView extends BorderPane {
   public JournalView(Week week) { // week object passed in constructor
     this.week = week;
     sideBar = new SideBar();
-    topBar = new TopBar();
+    topBar = new TopBar(week);
     List<DayView> days = createWeekDays();
     weekView = new WeekView(days);
 

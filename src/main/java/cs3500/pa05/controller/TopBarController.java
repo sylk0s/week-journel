@@ -26,14 +26,49 @@ import javafx.stage.Stage;
 public class TopBarController {
   private Week week;
   private Bujo bujo;
-  private BujoSerializer serializer;
   private TopBar view;
 
-  public TopBarController(Week week, Bujo bujo, BujoSerializer serializer, TopBar view) {
+  public TopBarController(Week week, Bujo bujo, TopBar view, Stage stage) {
+    System.out.println("constructing controller...");
     this.week = week;
     this.bujo = bujo;
-    this.serializer = serializer;
     this.view = view;
+    this.initHandlers(stage);
+  }
+
+  public void initHandlers(Stage primaryStage) {
+    System.out.println("initializing handlers...");
+
+//    this.view.registerOnSave(e -> {
+//      System.out.println("save click");
+//      FileChooser fileChooser = new FileChooser();
+//      fileChooser.setTitle("Save");
+//      fileChooser.setInitialFileName("savefile.bujo");
+//      fileChooser.getExtensionFilters().addAll(
+//          new FileChooser.ExtensionFilter("Bujo Files", "*.bujo"),
+//          new FileChooser.ExtensionFilter("All Files", "*.*")
+//      );
+//
+//      File selectedFile = fileChooser.showSaveDialog(primaryStage);
+//      if (selectedFile != null) {
+//        try {
+//          // Perform save operation by writing bujo data to the selected file
+//          BujoSerializer serializer = new BujoSerializer();
+//          Bujo bujo = new Bujo(this.week); // Replace with your bujo creation logic
+//          serializer.write(selectedFile.getAbsolutePath(), bujo);
+//          System.out.println("Bujo file saved: " + selectedFile.getAbsolutePath());
+//        } catch (IOException aaa) {
+//          System.out.println("Error saving bujo file: " + aaa.getMessage());
+//        }
+//      }
+//    });
+//
+//    this.view.registerOnAdd(e -> {
+//      System.out.println("add button");
+//      this.view.showAddDropdown();
+//    });
+
+    System.out.println("all registered...");
   }
 }
 

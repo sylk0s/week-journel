@@ -42,11 +42,12 @@ public class JournalApp extends Application {
     this.init = new InitialController(initialView, serializer, primaryStage);
     this.journalView = new JournalViewController(journalView, weekModel);
     this.side = new SideBarController(weekModel, sideBar);
-    this.top = new TopBarController(weekModel, bujo, serializer, topBar);
+    this.top = new TopBarController(weekModel, bujo, topBar, primaryStage);
 
-    Scene initialScene = new Scene(initialView, 800, 600);
+    Scene initialScene = new Scene(initialView, 400, 300);
     primaryStage.setScene(initialScene);
     primaryStage.show();
+    this.run();
   }
 
   public void run() {
