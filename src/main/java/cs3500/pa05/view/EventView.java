@@ -1,10 +1,12 @@
 package cs3500.pa05.view;
 
 import cs3500.pa05.controller.SideBarController;
+import cs3500.pa05.model.Event;
 import java.time.Duration;
 import java.time.LocalTime;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -14,19 +16,17 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 /**
  * A view for some event
  */
 public class EventView extends JournalEntryView {
-  /**
-   * The starting time of this event
-   */
-  Label time;
-  /**
-   * The length of this event
-   */
-  Label length;
+  TextField timeH;
+  TextField timeM;
+  TextField durH;
+  TextField durM;
+  Event event;
 
   /**
    *
@@ -35,15 +35,30 @@ public class EventView extends JournalEntryView {
    * @param time the time of this event
    * @param duration the length of this event
    */
-  EventView(String name, String desc, LocalTime time, Duration duration, SideBarController side) {
-    super(name, desc, side);
-    this.time = new Label(time.toString());
-    this.length = new Label("   " + duration.toString());
+  EventView(Event event, SideBarController side) {
+    super(event.getName(), event.getDescription(), side);
 
     HBox timeBox = new HBox();
-    timeBox.getChildren().add(this.time);
-    timeBox.getChildren().add(this.length);
-    this.getChildren().add(timeBox);
+    Label tLabel = new Label("Time:");
+    Label timeHLabel = new Label("Hour:");
+    Label timeMLabel = new Label("Min:");
+    this.timeH = new TextField(event.getTime().getHour() + "");
+    this.timeH.maxWidth(1);
+    this.timeM = new TextField(event.getTime().getMinute() + "");
+    this.timeM.maxWidth(1);
+    timeBox.getChildren().addAll(timeHLabel, timeH, timeMLabel, timeM);
+    this.getChildren().addAll(tLabel, timeBox);
+
+    HBox durBox = new HBox();
+    Label dLabel = new Label("Duration:");
+    Label durHLabel = new Label("Hour:");
+    Label durMLabel = new Label("Min:");
+    this.durH = new TextField(event.getDuration().toHoursPart() + "");
+    this.durH.maxWidth(1);
+    this.durM = new TextField(event.getDuration().toMinutesPart() + "");
+    this.durM.maxWidth(1);
+    durBox.getChildren().addAll(durHLabel, durH, durMLabel, durM);
+    this.getChildren().addAll(dLabel, durBox);
 
     BorderStroke borderStroke = new BorderStroke(
         Color.BLACK,                       // Border color

@@ -3,8 +3,8 @@ package cs3500.pa05.view;
 import cs3500.pa05.controller.SideBarController;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -26,6 +26,7 @@ public abstract class JournalEntryView extends VBox {
   private final TextArea desc;
 
   protected final SideBarController side;
+  protected TextField name;
 
   /**
    * Constructs a JournalEntryView object
@@ -45,7 +46,7 @@ public abstract class JournalEntryView extends VBox {
     this.desc.setText(desc);
     this.desc.setWrapText(true);
     // todo tweak
-    this.desc.setMaxWidth(100);
+    this.setMaxWidth(200);
     this.desc.setWrapText(true);
 
     setSpacing(10);
@@ -62,6 +63,6 @@ public abstract class JournalEntryView extends VBox {
   }
 
   protected void createNameLabel(HBox box, String name) {
-    box.getChildren().add(new Label(name));
+    box.getChildren().add(new TextField(name));
   }
 }

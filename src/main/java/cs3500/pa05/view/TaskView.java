@@ -4,6 +4,7 @@ import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.Task;
 import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -50,13 +51,17 @@ public class TaskView extends JournalEntryView {
 
   @Override
   protected void createNameLabel(HBox box, String name) {
-    this.finished = new CheckBox(name);
+    HBox tmp = new HBox();
+    this.finished = new CheckBox();
+    this.name = new TextField(name);
+
     this.finished.setOnAction(e -> {
       System.out.println("push finished");
       this.entry.setFinished(!this.entry.isFinished());
       this.side.updateView();
       this.dayView.updateProgress();
     });
-    box.getChildren().add(finished);
+    tmp.getChildren().addAll(finished, this.name);
+    box.getChildren().add(tmp);
   }
 }

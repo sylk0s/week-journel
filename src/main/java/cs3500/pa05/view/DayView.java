@@ -99,8 +99,7 @@ public class DayView extends VBox {
     if (entry instanceof Task) {
       return new TaskView((Task) entry, this.controller, this);
     } else if (entry instanceof Event) {
-      return new EventView(entry.getName(), entry.getDescription(),
-          ((Event) entry).getTime(), ((Event) entry).getDuration(), this.controller);
+      return new EventView((Event) entry, this.controller);
     }
     throw new IllegalStateException("invalid journal entry type");
   }
