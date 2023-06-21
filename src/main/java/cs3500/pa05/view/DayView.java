@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -35,6 +36,7 @@ public class DayView extends VBox {
   private final VBox tasksAndEvents;
   private final SideBarController controller;
   private DayController parent;
+  private final ProgressBar prog;
 
   private final Map<JournalEntry, JournalEntryView> entryMap = new HashMap<>();
 
@@ -70,9 +72,21 @@ public class DayView extends VBox {
       this.addEntry(entry);
     }
 
+    this.prog = new ProgressBar();
+    this.updateProgress();
+
     this.setSpacing(10);
     this.setPadding(new Insets(10));
-    this.getChildren().addAll(topBox, tasksAndEvents);
+    this.getChildren().addAll(topBox, tasksAndEvents, this.prog);
+  }
+
+  public void updateProgress() {
+    System.out.println("updating pogress");
+    int total = this.parent.getDay().numTasks();
+    this.prog.setProgress(
+        total > 0 ? this.parent.getDay().numFinishedTasks()/(float) total
+            : 0
+    );
   }
 
   /**
@@ -83,7 +97,7 @@ public class DayView extends VBox {
    */
   private JournalEntryView getEntryViewFrom(JournalEntry entry) {
     if (entry instanceof Task) {
-      return new TaskView((Task) entry, this.controller);
+      return new TaskView((Task) entry, this.controller, this);
     } else if (entry instanceof Event) {
       return new EventView(entry.getName(), entry.getDescription(),
           ((Event) entry).getTime(), ((Event) entry).getDuration(), this.controller);
@@ -101,6 +115,7 @@ public class DayView extends VBox {
     tasksAndEvents.getChildren().add(entryView);
     entryView.setOnDeleteListener(() -> this.parent.removeEntry(entry));
     this.entryMap.put(entry, entryView);
+    this.updateProgress();
   }
 
   /**
@@ -110,6 +125,7 @@ public class DayView extends VBox {
    */
   public void removeEntry(JournalEntry entry) {
     tasksAndEvents.getChildren().remove(this.entryMap.get(entry));
+    this.updateProgress();
   }
 
   public JournalEntryView getEntryView(JournalEntry entry) {

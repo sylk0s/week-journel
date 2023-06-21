@@ -20,9 +20,11 @@ public class TaskView extends JournalEntryView {
    * A checkbox indicating if a task is finished
    */
   CheckBox finished;
-  public TaskView(Task entry, SideBarController side) {
+  DayView dayView;
+  public TaskView(Task entry, SideBarController side, DayView dayView) {
     super(entry.getName(), entry.getDescription(), side);
     this.entry = entry;
+    this.dayView = dayView;
 
     BorderStroke borderStroke = new BorderStroke(
         Color.BLACK,                       // Border color
@@ -53,6 +55,7 @@ public class TaskView extends JournalEntryView {
       System.out.println("push finished");
       this.entry.setFinished(!this.entry.isFinished());
       this.side.updateView();
+      this.dayView.updateProgress();
     });
     box.getChildren().add(finished);
   }

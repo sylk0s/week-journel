@@ -12,9 +12,9 @@ public class DayController {
   SideBarController side;
 
   public DayController(Day day, SideBarController side) {
+    this.day = day;
     this.side = side;
     this.view = this.fromModel(day);
-    this.day = day;
   }
 
   /**
