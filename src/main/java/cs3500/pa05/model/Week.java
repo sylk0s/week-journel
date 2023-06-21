@@ -32,21 +32,15 @@ public class Week {
    */
   String name;
 
-  /**
-   * The note or quote for this week
-   */
-  String note;
   @JsonCreator
   Week(@JsonProperty("days") List<Day> days,
        @JsonProperty("eventMax") int eventMax,
        @JsonProperty("taskMax") int taskMax,
-       @JsonProperty("name") String name,
-       @JsonProperty("note") String note) {
+       @JsonProperty("name") String name) {
     this.days = days;
     this.eventMax = eventMax;
     this.taskMax = taskMax;
     this.name = name;
-    this.note = note;
   }
 
   /**
@@ -155,22 +149,6 @@ public class Week {
   public List<Event> getEvent() {
     return this.days.stream().flatMap((day) -> day.getEvents().stream())
         .collect(Collectors.toList());
-  }
-
-  /**
-   * @return The note of this week
-   */
-  @JsonGetter("note")
-  public String getNote() {
-    return this.note;
-  }
-
-  /**
-   * Sets the note of this week
-   * @param note the new note
-   */
-  public void setNote(String note) {
-    this.note = note;
   }
 
     public void addEntry(JournalEntry entry, DayType dayType) {

@@ -17,8 +17,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    String note = "Test Note";
-    Week week = new Week(days, eventMax, taskMax, name, note);
+    Week week = new Week(days, eventMax, taskMax, name);
 
     List<Day> actualDays = week.getDays();
 
@@ -38,12 +37,13 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    String note = "Test Note";
-    Week week = new Week(days, eventMax, taskMax, name, note);
+    Week week = new Week(days, eventMax, taskMax, name);
 
     int totalFinishedTasks = week.totalFinishedTasks();
+    int totalTasks = week.totalTasks();
 
     assertEquals(2, totalFinishedTasks);
+    assertEquals(3, totalTasks);
   }
 
   @Test
@@ -59,8 +59,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    String note = "Test Note";
-    Week week = new Week(days, eventMax, taskMax, name, note);
+    Week week = new Week(days, eventMax, taskMax, name);
 
     List<JournalEntry> entries = week.getEntries();
 
@@ -80,8 +79,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    String note = "Test Note";
-    Week week = new Week(days, eventMax, taskMax, name, note);
+    Week week = new Week(days, eventMax, taskMax, name);
 
     String weekString = week.toString();
 
@@ -99,8 +97,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    String note = "Test Note";
-    Week week = new Week(days, eventMax, taskMax, name, note);
+    Week week = new Week(days, eventMax, taskMax, name);
 
     Day resultDay = week.getDay(DayType.TUESDAY);
 
