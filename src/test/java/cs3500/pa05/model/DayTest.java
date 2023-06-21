@@ -54,7 +54,8 @@ public class DayTest {
     day.add(task1);
     day.add(task2);
 
-    assertTrue(day.isOverTaskMax(1), "Day should be over task max after adding two tasks and comparing with a max of 1");
+    assertTrue(day.isOverTaskMax(1),
+        "Day should be over task max after adding two tasks and comparing with a max of 1");
   }
 
   @Test
@@ -84,42 +85,4 @@ public class DayTest {
     assertTrue(entries.contains(event1));
     assertTrue(entries.contains(event2));
   }
-
-//  @Test
-//  public void testIsOverEventMax() {
-//    // Assuming Event class has a no-arg constructor
-//    Event event1 = new Event("aaa", "bbb", LocalTime.now(), Duration.ofHours(1));
-//    Event event2 = new Event("ccc", "ddd", LocalTime.now(), Duration.ofHours(1));
-//
-//    day.add(event1);
-//    day.add(event2);
-//
-//    assertTrue(day.isOverEventMax(1), "Day should be over event max after adding two events and comparing with a max of 1");
-//  }
 }
-
-//class DayTest {
-//  @Test
-//  void testSerialization() {
-//
-//    try {
-//      String result = new ObjectMapper().writeValueAsString(new Day("name"));
-//
-//      String expected = """
-//          {
-//            "name":"name",
-//            "items": [],
-//          }""";
-//
-//      assertEquals(result, expected);
-//    } catch (JsonProcessingException e) {
-//      fail();
-//    }
-//
-//  }
-//
-//  @Test
-//  void testDeserialization() {
-//
-//  }
-//

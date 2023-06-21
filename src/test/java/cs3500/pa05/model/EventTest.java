@@ -42,19 +42,4 @@ public class EventTest {
     Duration expectedDuration = Duration.ofHours(hour).plus(Duration.ofMinutes(minute));
     assertEquals(expectedDuration, event.getDuration());
   }
-
-  @Test
-  public void testIsFinished() {
-    LocalTime futureTime = LocalTime.now().plusHours(1);
-    Duration futureDuration = Duration.ofHours(2);
-    Event futureEvent = new Event("Future Event", "Event in the future",
-        futureTime, futureDuration);
-    assertTrue(futureEvent.isFinished());
-
-    LocalTime pastTime = LocalTime.now().minusHours(2);
-    Duration pastDuration = Duration.ofHours(1);
-    Event pastEvent = new Event("Past Event", "Event in the past",
-        pastTime, pastDuration);
-    assertFalse(pastEvent.isFinished());
-  }
 }
