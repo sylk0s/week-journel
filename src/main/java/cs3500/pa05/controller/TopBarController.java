@@ -39,34 +39,34 @@ public class TopBarController {
   public void initHandlers(Stage primaryStage) {
     System.out.println("initializing handlers...");
 
-//    this.view.registerOnSave(e -> {
-//      System.out.println("save click");
-//      FileChooser fileChooser = new FileChooser();
-//      fileChooser.setTitle("Save");
-//      fileChooser.setInitialFileName("savefile.bujo");
-//      fileChooser.getExtensionFilters().addAll(
-//          new FileChooser.ExtensionFilter("Bujo Files", "*.bujo"),
-//          new FileChooser.ExtensionFilter("All Files", "*.*")
-//      );
-//
-//      File selectedFile = fileChooser.showSaveDialog(primaryStage);
-//      if (selectedFile != null) {
-//        try {
-//          // Perform save operation by writing bujo data to the selected file
-//          BujoSerializer serializer = new BujoSerializer();
-//          Bujo bujo = new Bujo(this.week); // Replace with your bujo creation logic
-//          serializer.write(selectedFile.getAbsolutePath(), bujo);
-//          System.out.println("Bujo file saved: " + selectedFile.getAbsolutePath());
-//        } catch (IOException aaa) {
-//          System.out.println("Error saving bujo file: " + aaa.getMessage());
-//        }
-//      }
-//    });
-//
-//    this.view.registerOnAdd(e -> {
-//      System.out.println("add button");
-//      this.view.showAddDropdown();
-//    });
+    this.view.registerOnSave(e -> {
+      System.out.println("save click");
+      FileChooser fileChooser = new FileChooser();
+      fileChooser.setTitle("Save");
+      fileChooser.setInitialFileName("savefile.bujo");
+      fileChooser.getExtensionFilters().addAll(
+          new FileChooser.ExtensionFilter("Bujo Files", "*.bujo"),
+          new FileChooser.ExtensionFilter("All Files", "*.*")
+      );
+
+      File selectedFile = fileChooser.showSaveDialog(primaryStage);
+      if (selectedFile != null) {
+        try {
+          // Perform save operation by writing bujo data to the selected file
+          BujoSerializer serializer = new BujoSerializer();
+          Bujo bujo = new Bujo(this.week); // Replace with your bujo creation logic
+          serializer.write(selectedFile.getAbsolutePath(), bujo);
+          System.out.println("Bujo file saved: " + selectedFile.getAbsolutePath());
+        } catch (IOException aaa) {
+          System.out.println("Error saving bujo file: " + aaa.getMessage());
+        }
+      }
+    });
+
+    this.view.registerOnAdd(e -> {
+      System.out.println("add button");
+      this.view.showAddDropdown();
+    });
 
     System.out.println("all registered...");
   }

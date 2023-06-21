@@ -46,29 +46,6 @@ public class TopBar extends HBox {
     this.primaryStage = new Stage();
     this.sideBarToggle = new Button("Toggle Sidebar");
     this.save = new Button("Save");
-    save.setOnAction(event -> {
-      FileChooser fileChooser = new FileChooser();
-      fileChooser.setTitle("Save");
-      fileChooser.setInitialFileName("savefile.bujo");
-      fileChooser.getExtensionFilters().addAll(
-          new FileChooser.ExtensionFilter("Bujo Files", "*.bujo"),
-          new FileChooser.ExtensionFilter("All Files", "*.*")
-      );
-
-      File selectedFile = fileChooser.showSaveDialog(primaryStage);
-      if (selectedFile != null) {
-        try {
-          // Perform save operation by writing bujo data to the selected file
-          BujoSerializer serializer = new BujoSerializer();
-          Bujo bujo = new Bujo(week);
-          serializer.write(selectedFile.getAbsolutePath(), bujo);
-          System.out.println("Bujo file saved: " + selectedFile.getAbsolutePath());
-        } catch (IOException e) {
-          System.out.println("Error saving bujo file: " + e.getMessage());
-        }
-      }
-    });
-
 
     this.add = new Button("Add");
     add.setOnAction(e -> {
@@ -76,10 +53,6 @@ public class TopBar extends HBox {
     });
     this.maxEvents = new TextField();
     this.maxTasks = new TextField();
-
-    this.sideBarToggle.setOnAction(e -> {
-      side.toggleVis();
-    });
 
     Label maxEventsLabel = new Label("Max Events:");
     Label maxTasksLabel = new Label("Max Tasks:");
@@ -153,6 +126,7 @@ public class TopBar extends HBox {
     return maxTasks;
   }
 
+  // todo attempt to move this to controller as well?
   public void showAddDropdown() {
     ObservableList<String>
         options = FXCollections.observableArrayList("Add a new event", "Add a new task");

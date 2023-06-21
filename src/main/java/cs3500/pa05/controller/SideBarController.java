@@ -3,6 +3,7 @@ package cs3500.pa05.controller;
 import cs3500.pa05.model.Task;
 import cs3500.pa05.model.Week;
 import cs3500.pa05.view.SideBar;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.text.Text;
 
@@ -37,7 +38,7 @@ public class SideBarController {
     view.getTaskList().getChildren().clear();
     for (Task task : week.getTasks()) {
       // Just display the task's toString() result, replace this with however you want to display tasks
-      Text taskText = new Text(task.toString());
+      CheckBox taskText = new CheckBox(task.getName());
       view.getTaskList().getChildren().add(taskText);
     }
 
@@ -50,6 +51,12 @@ public class SideBarController {
   public void toggleVis() {
     System.out.println("toggled sidebar");
     this.view.setVisible(this.visable);
+    if (this.visable) {
+      // todo this doesnt actually work now
+      this.view.setMaxWidth(0);
+    } else {
+      this.view.setMaxWidth(100);
+    }
     this.visable = !this.visable;
   }
 }
