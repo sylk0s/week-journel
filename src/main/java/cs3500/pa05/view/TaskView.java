@@ -1,5 +1,7 @@
 package cs3500.pa05.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Background;
@@ -9,6 +11,7 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class TaskView extends JournalEntryView {
@@ -18,8 +21,6 @@ public class TaskView extends JournalEntryView {
   CheckBox finished;
   public TaskView(String name, String desc) {
     super(name, desc);
-    this.finished = new CheckBox("isFinished");
-    this.getChildren().add(this.finished);
 
     BorderStroke borderStroke = new BorderStroke(
         Color.BLACK,                       // Border color
@@ -41,5 +42,15 @@ public class TaskView extends JournalEntryView {
         new Background(backgroundFill);
 
     this.setBackground(background);
+  }
+
+  public void registerOnCheck(EventHandler<ActionEvent> handler) {
+    this.finished.setOnAction(handler);
+  }
+
+  @Override
+  protected void createNameLabel(HBox box, String name) {
+    this.finished = new CheckBox(name);
+    box.getChildren().add(finished);
   }
 }

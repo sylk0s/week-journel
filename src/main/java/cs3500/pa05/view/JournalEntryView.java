@@ -14,10 +14,6 @@ import javafx.scene.layout.VBox;
  */
 public abstract class JournalEntryView extends VBox {
   /**
-   * The name of the jounral entry
-   */
-  private final Label name;
-  /**
    * the button to remove this journal entry from it's parent
    */
   private final Button remove;
@@ -37,11 +33,11 @@ public abstract class JournalEntryView extends VBox {
    * @param desc - description
    */
   public JournalEntryView(String name, String desc) {
-    this.name = new Label(name);
     this.remove = new Button("Delete");
 
     this.topBox = new HBox();
-    this.topBox.getChildren().addAll(this.name, this.remove);
+    this.createNameLabel(topBox, name);
+    this.topBox.getChildren().add(this.remove);
 
     this.desc = new TextArea();
     this.desc.setText(desc);
@@ -61,5 +57,9 @@ public abstract class JournalEntryView extends VBox {
    */
   public void setOnDeleteListener(Runnable onDeleteListener) {
     remove.setOnAction(event -> onDeleteListener.run());
+  }
+
+  protected void createNameLabel(HBox box, String name) {
+    box.getChildren().add(new Label(name));
   }
 }
