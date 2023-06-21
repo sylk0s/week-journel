@@ -28,9 +28,7 @@ public class BujoSerializer {
    * @return the JSON string
    */
   public String serialize(Bujo bujo) {
-    System.out.println("serializing to:");
     JsonNode result = this.mapper.convertValue(bujo, JsonNode.class);
-    System.out.println(result);
     return result.toPrettyString();
   }
 
@@ -41,8 +39,6 @@ public class BujoSerializer {
    * @return the Bujo file
    */
   private Bujo deserialize(String string) throws JsonProcessingException {
-    System.out.println("deserializing");
-    System.out.println(string);
     return this.mapper.readValue(string, Bujo.class);
   }
 

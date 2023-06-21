@@ -55,11 +55,14 @@ public class InitialController {
   private BujoSerializer serializer;
   private Bujo bujo;
   private InitialView view;
+  private final JournalView nextView;
 
-  public InitialController(InitialView view, BujoSerializer serializer, Stage stage) {
+  public InitialController(InitialView view, BujoSerializer serializer, Stage stage,
+                           JournalView nextView) {
     this.view = view;
     this.serializer = serializer;
     this.initViewEvents(stage);
+    this.nextView = nextView;
   }
 
   void initViewEvents(Stage stage) {
@@ -84,11 +87,12 @@ public class InitialController {
     if (!filePath.isEmpty()) {
       try {
         bujo = serializer.read(filePath);
-        JournalView journal = new JournalView(bujo.getWeek());
+        JournalView journal = nextView;
         // navigate to JournalView or perform other actions
       } catch (IOException e) {
         view.displayError("Error opening file",
             "An error occurred while opening the file.");
+        e.printStackTrace();
       }
     } else {
       view.displayError("Invalid file path", "Please enter a valid file path.");
@@ -99,10 +103,8 @@ public class InitialController {
     // Create a new Bujo object with an empty Week
     Week week = new Week(10, 10, "Untitled");
 
-    // Load the new JournalView
-    JournalView journal = new JournalView(week);
     // Perform any necessary actions with the new JournalView
-    stage.setScene(new Scene(journal, 800, 800));
+    stage.setScene(new Scene(nextView, 800, 800));
     stage.show();
   }
 }

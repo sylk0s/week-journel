@@ -51,12 +51,12 @@ public class JournalView extends BorderPane {
    *
    * @param week the week that this view should be created from
    */
-  public JournalView(Week week) { // week object passed in constructor
+  public JournalView(Week week, SideBar sideBar, TopBar topBar) { // week object passed in constructor
     this.week = week;
-    sideBar = new SideBar();
-    topBar = new TopBar(week);
+    this.sideBar = sideBar;
+    this.topBar = topBar;
     List<DayView> days = createWeekDays();
-    weekView = new WeekView(days);
+    this.weekView = new WeekView(days);
 
     // temporarily removed to focus on week view
     setLeft(sideBar);

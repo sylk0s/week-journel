@@ -1,8 +1,8 @@
 package cs3500.pa05.view;
 
 import cs3500.pa05.controller.BujoSerializer;
+import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.Bujo;
-import cs3500.pa05.model.Event;
 import cs3500.pa05.model.Week;
 import java.io.File;
 import java.io.IOException;
@@ -42,7 +42,7 @@ public class TopBar extends HBox {
   /**
    * Constructing a new TopBar object
    */
-  public TopBar(Week week) {
+  public TopBar(Week week, SideBarController side) {
     this.primaryStage = new Stage();
     this.sideBarToggle = new Button("Toggle Sidebar");
     this.save = new Button("Save");
@@ -76,6 +76,10 @@ public class TopBar extends HBox {
     });
     this.maxEvents = new TextField();
     this.maxTasks = new TextField();
+
+    this.sideBarToggle.setOnAction(e -> {
+      side.toggleVis();
+    });
 
     Label maxEventsLabel = new Label("Max Events:");
     Label maxTasksLabel = new Label("Max Tasks:");

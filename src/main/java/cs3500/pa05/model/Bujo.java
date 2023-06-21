@@ -19,7 +19,7 @@ public class Bujo {
    *
    * @return The current state of the week
    */
-  @JsonGetter
+  @JsonGetter("week")
   public Week getWeek() {
     return this.week;
   }

@@ -28,7 +28,7 @@ public class TopBarController {
   private Bujo bujo;
   private TopBar view;
 
-  public TopBarController(Week week, Bujo bujo, TopBar view, Stage stage) {
+  public TopBarController(Week week, Bujo bujo, TopBar view, Stage stage, SideBarController side) {
     System.out.println("constructing controller...");
     this.week = week;
     this.bujo = bujo;

@@ -54,18 +54,18 @@ public class JournalApp extends Application {
 
     // Initialize the views
     InitialView initialView = new InitialView(primaryStage);
-    JournalView journalView = new JournalView(weekModel);
-    SideBar sideBar = journalView.getSideBar();
-    TopBar topBar = journalView.getTopBar();
+    SideBar sideBar = new SideBar();
+    this.side = new SideBarController(weekModel, sideBar);
+    TopBar topBar = new TopBar(weekModel, this.side);
+    JournalView journalView = new JournalView(weekModel, sideBar, topBar);
 
     // Initialize the serializers
     BujoSerializer serializer = new BujoSerializer();
 
     // Initialize the controllers with the models and views
-    this.init = new InitialController(initialView, serializer, primaryStage);
+    this.init = new InitialController(initialView, serializer, primaryStage, journalView);
     this.journalView = new JournalViewController(journalView, weekModel);
-    this.side = new SideBarController(weekModel, sideBar);
-    this.top = new TopBarController(weekModel, bujo, topBar, primaryStage);
+    this.top = new TopBarController(weekModel, bujo, topBar, primaryStage, side);
 
     Scene initialScene = new Scene(initialView, 800, 600);
     primaryStage.setScene(initialScene);

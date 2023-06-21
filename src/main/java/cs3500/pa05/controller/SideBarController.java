@@ -15,6 +15,8 @@ public class SideBarController {
   private final Week week;
   private final SideBar view;
 
+  private boolean visable;
+
   /**
    * Constructor for SideBarController
    *
@@ -43,5 +45,11 @@ public class SideBarController {
     view.getStats().getChildren().clear();
     Label statsLabel = new Label("Total Tasks: " + week.totalTasks());
     view.getStats().getChildren().add(statsLabel);
+  }
+
+  public void toggleVis() {
+    System.out.println("toggled sidebar");
+    this.view.setVisible(this.visable);
+    this.visable = !this.visable;
   }
 }
