@@ -2,12 +2,24 @@ package cs3500.pa05.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Event.class, name = "Event"),
+
+    @JsonSubTypes.Type(value = Task.class, name = "Task") }
+)
 public abstract class JournalEntry {
-  String name;
-  String description;
+  protected String name;
+  protected String description;
 
   @JsonCreator
   public JournalEntry(@JsonProperty("name") String name,
@@ -26,5 +38,6 @@ public abstract class JournalEntry {
     return this.description;
   }
 
+  @JsonIgnore
   public abstract boolean isFinished();
 }

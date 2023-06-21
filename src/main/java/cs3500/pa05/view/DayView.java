@@ -69,11 +69,11 @@ public class DayView extends VBox {
     this.topBox.getChildren().add(this.dayName);
 
     this.tasksAndEvents = new VBox();
+
+    this.prog = new ProgressBar();
     for (JournalEntry entry : entries) {
       this.addEntry(entry);
     }
-
-    this.prog = new ProgressBar();
     this.updateProgress();
 
     this.setSpacing(10);

@@ -46,6 +46,10 @@ public class JournalViewController {
    // TODO: implement this
   }
 
+  public JournalView getView() {
+    return this.view;
+  }
+
   public void run() {
     // Call methods in here based on your app's logic.
   }

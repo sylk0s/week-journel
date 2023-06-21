@@ -36,7 +36,6 @@ public class JournalApp extends Application {
     fadeOutTransition.setOnFinished(event -> {
       primaryStage.setScene(createInitialScene(primaryStage));
       primaryStage.show();
-      run();
     });
     fadeOutTransition.play();
 
@@ -46,31 +45,33 @@ public class JournalApp extends Application {
   }
 
   private Scene createInitialScene(Stage primaryStage) {
+    InitialView initialView = new InitialView(primaryStage);
+    // Initialize the serializers
+    BujoSerializer serializer = new BujoSerializer();
+    this.init = new InitialController(initialView, serializer, primaryStage, this);
+    Scene initialScene = new Scene(initialView, 800, 600);
+    primaryStage.setScene(initialScene);
+    primaryStage.show();
+    return initialScene;
+  }
+
+  public JournalView getJournalView(Stage primaryStage, Week weekModel) {
     // Initialize the models
-    Week weekModel = new Week(10, 10, "");
     Bujo bujo = new Bujo(weekModel);
 
     // Initialize the views
-    InitialView initialView = new InitialView(primaryStage);
     SideBar sideBar = new SideBar();
     this.side = new SideBarController(weekModel, sideBar);
     TopBar topBar = new TopBar();
     WeekViewController weekController = new WeekViewController(weekModel, primaryStage, this.side);
     JournalView journalView = new JournalView(sideBar, topBar, weekController.getWeekView());
 
-    // Initialize the serializers
-    BujoSerializer serializer = new BujoSerializer();
 
     // Initialize the controllers with the models and views
-    this.init = new InitialController(initialView, serializer, primaryStage, journalView);
     this.journalView = new JournalViewController(journalView, weekModel);
     this.top = new TopBarController(weekController, bujo, topBar, primaryStage, side);
-
-    Scene initialScene = new Scene(initialView, 800, 600);
-    primaryStage.setScene(initialScene);
-    primaryStage.show();
     this.run();
-    return initialScene;
+    return this.journalView.getView();
   }
 
   public void run() {

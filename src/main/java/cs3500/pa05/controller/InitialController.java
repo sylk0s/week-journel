@@ -18,40 +18,41 @@ public class InitialController {
   private BujoSerializer serializer;
   private Bujo bujo;
   private InitialView view;
-  private final JournalView nextView;
+  private final JournalApp app;
 
   public InitialController(InitialView view, BujoSerializer serializer, Stage stage,
-                           JournalView nextView) {
+                           JournalApp app) {
     this.view = view;
     this.serializer = serializer;
     this.initViewEvents(stage);
-    this.nextView = nextView;
+    this.app = app;
   }
 
   void initViewEvents(Stage stage) {
-    view.getBrowseButton().setOnAction(e -> browseFile());
-    view.getLoadButton().setOnAction(e -> loadBujo());
+    view.getBrowseButton().setOnAction(e -> browseFile(stage));
+    view.getLoadButton().setOnAction(e -> loadBujo(stage));
     view.getNewButton().setOnAction(e -> createNewBujo(stage));
-    view.getFilePathField().setOnAction(e -> loadBujo());
+    view.getFilePathField().setOnAction(e -> loadBujo(stage));
   }
 
-  private void browseFile() {
+  private void browseFile(Stage stage) {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open Resource File");
     File selectedFile = fileChooser.showOpenDialog(view.getScene().getWindow());
     if (selectedFile != null) {
       view.getFilePathField().setText(selectedFile.getAbsolutePath());
-      loadBujo();
+      loadBujo(stage);
     }
   }
 
-  private void loadBujo() {
+  private void loadBujo(Stage stage) {
     String filePath = view.getFilePathField().getText();
     if (!filePath.isEmpty()) {
       try {
         bujo = serializer.read(filePath);
-        JournalView journal = nextView;
         // navigate to JournalView or perform other actions
+        stage.setScene(new Scene(app.getJournalView(stage, bujo.getWeek()), 800, 800));
+        stage.show();
       } catch (IOException e) {
         view.displayError("Error opening file",
             "An error occurred while opening the file.");
@@ -64,10 +65,9 @@ public class InitialController {
 
   private void createNewBujo(Stage stage) {
     // Create a new Bujo object with an empty Week
-    Week week = new Week(10, 10, "Untitled");
-
     // Perform any necessary actions with the new JournalView
-    stage.setScene(new Scene(nextView, 800, 800));
+    stage.setScene(new Scene(app.getJournalView(stage,
+        new Week(5, 5, "New week")), 800, 800));
     stage.show();
   }
 }
