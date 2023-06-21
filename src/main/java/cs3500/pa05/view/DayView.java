@@ -1,5 +1,6 @@
 package cs3500.pa05.view;
 
+import cs3500.pa05.controller.DayController;
 import cs3500.pa05.model.Event;
 import cs3500.pa05.model.JournalEntry;
 import cs3500.pa05.model.Task;
@@ -31,6 +32,7 @@ public class DayView extends VBox {
    * The tasks and events under this day
    */
   private final VBox tasksAndEvents;
+  private DayController controller;
 
   private final Map<JournalEntry, JournalEntryView> entryMap = new HashMap<>();
 
@@ -40,7 +42,7 @@ public class DayView extends VBox {
    * @param name of the day
    * @param entries - list of all entries
    */
-  public DayView(String name, List<JournalEntry> entries) {
+  public DayView(String name, List<JournalEntry> entries, DayController controller) {
     BackgroundFill backgroundFill =
         new BackgroundFill(
                 Color.valueOf("#f5fffa"),
@@ -50,6 +52,8 @@ public class DayView extends VBox {
 
     Background background =
             new Background(backgroundFill);
+
+    this.controller = controller;
 
     this.setBackground(background);
     this.dayName = new Label(name);
@@ -75,7 +79,7 @@ public class DayView extends VBox {
    */
   private JournalEntryView getEntryViewFrom(JournalEntry entry) {
     if (entry instanceof Task) {
-      return new TaskView(entry.getName(), entry.getDescription());
+      return new TaskView((Task) entry, this.controller);
     } else if (entry instanceof Event) {
       return new EventView(entry.getName(), entry.getDescription(),
           ((Event) entry).getTime(), ((Event) entry).getDuration());

@@ -1,7 +1,8 @@
 package cs3500.pa05.view;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import cs3500.pa05.controller.DayController;
+import cs3500.pa05.model.JournalEntry;
+import cs3500.pa05.model.Task;
 import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Background;
@@ -15,12 +16,16 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class TaskView extends JournalEntryView {
+  DayController dayController;
+  Task entry;
   /**
    * A checkbox indicating if a task is finished
    */
   CheckBox finished;
-  public TaskView(String name, String desc) {
-    super(name, desc);
+  public TaskView(Task entry, DayController dayController) {
+    super(entry.getName(), entry.getDescription());
+    this.dayController = dayController;
+    this.entry = entry;
 
     BorderStroke borderStroke = new BorderStroke(
         Color.BLACK,                       // Border color
@@ -44,13 +49,12 @@ public class TaskView extends JournalEntryView {
     this.setBackground(background);
   }
 
-  public void registerOnCheck(EventHandler<ActionEvent> handler) {
-    this.finished.setOnAction(handler);
-  }
-
   @Override
   protected void createNameLabel(HBox box, String name) {
     this.finished = new CheckBox(name);
+    this.finished.setOnAction(e -> {
+      this.dayController.toggleTaskFinish(this.entry);
+    });
     box.getChildren().add(finished);
   }
 }

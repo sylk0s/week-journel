@@ -2,6 +2,7 @@ package cs3500.pa05.controller;
 
 import cs3500.pa05.model.Day;
 import cs3500.pa05.model.JournalEntry;
+import cs3500.pa05.model.Task;
 import cs3500.pa05.view.DayView;
 
 public class DayController {
@@ -22,7 +23,7 @@ public class DayController {
    */
   private DayView fromModel(Day day) {
     String name = day.getName().name();
-    return new DayView(name, day.getEntries());
+    return new DayView(name, day.getEntries(), this);
   }
 
   /**
@@ -44,5 +45,10 @@ public class DayController {
   }
   public Day getDay() {
     return this.day;
+  }
+
+  // todo marks task as finished, does any other stuff as needed?
+  public void toggleTaskFinish(Task task) {
+
   }
 }
