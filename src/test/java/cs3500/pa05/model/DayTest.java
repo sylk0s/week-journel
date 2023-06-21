@@ -1,6 +1,7 @@
 package cs3500.pa05.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.time.Duration;
 import java.time.LocalTime;
@@ -53,6 +54,18 @@ public class DayTest {
     day.add(task2);
 
     assertTrue(day.isOverTaskMax(1),
+        "Day should be over task max after adding two tasks and comparing with a max of 1");
+  }
+
+  @Test
+  public void testNotOverTaskMax() {
+    Task task1 = new Task("aaa", "bbb", false);
+    Task task2 = new Task("ccc", "ddd", false);
+
+    day.add(task1);
+    day.add(task2);
+
+    assertFalse(day.isOverTaskMax(3),
         "Day should be over task max after adding two tasks and comparing with a max of 1");
   }
 
