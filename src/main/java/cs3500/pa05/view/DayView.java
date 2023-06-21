@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.Background;
@@ -129,5 +130,14 @@ public class DayView extends VBox {
 
   public JournalEntryView getEntryView(JournalEntry entry) {
     return this.entryMap.get(entry);
+  }
+
+  public void dispOverError(String type) {
+    Alert alert = new Alert(Alert.AlertType.WARNING);
+    alert.setTitle("Over " + type + " maximum value!");
+    alert.setHeaderText(null);
+    alert.setContentText(type + " will be added, to make this error go away next time,"
+            + " set a higher " + type + " max or remove " + type);
+    alert.showAndWait();
   }
 }

@@ -65,6 +65,13 @@ public class TopBar extends HBox {
     this.sideBarToggle.setOnAction(handler);
   }
 
+  public void registerMaxEvents(EventHandler<ActionEvent> handler) {
+    this.maxEvents.setOnAction(handler);
+  }
+
+  public void registerMaxTasks(EventHandler<ActionEvent> handler) {
+    this.maxTasks.setOnAction(handler);
+  }
   /**
    * Getter method for side bar toggle
    *

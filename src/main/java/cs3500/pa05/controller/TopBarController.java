@@ -15,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -77,6 +78,34 @@ public class TopBarController {
     this.view.registerOnToggleBar(e -> {
       System.out.println("toggled bar");
       this.side.toggleVis();
+    });
+
+    this.view.registerMaxEvents(e -> {
+      try {
+        this.week.getWeek()
+            .setEventMax(Integer.parseInt(this.view.getMaxEventsTextField().getText()));
+        // todo update to confirm current amount isn't over max?
+      } catch (NumberFormatException err) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Not a number!");
+        alert.setHeaderText(null);
+        alert.setContentText("Some invalid input found in the event max field");
+        alert.showAndWait();
+      }
+    });
+
+    this.view.registerMaxTasks(e -> {
+      try {
+        this.week.getWeek()
+            .setTaskMax(Integer.parseInt(this.view.getMaxTasksTextField().getText()));
+        // todo update to confirm current amount isn't over max?
+      } catch (NumberFormatException err) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Not a number!");
+        alert.setHeaderText(null);
+        alert.setContentText("Some invalid input found in the task max field");
+        alert.showAndWait();
+      }
     });
 
     System.out.println("all registered...");

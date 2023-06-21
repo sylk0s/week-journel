@@ -26,7 +26,7 @@ public class WeekViewController {
     this.view = new WeekView();
     System.out.println("side is: " + (side == null ? "null" : side));
     this.days = week.getDays().stream()
-        .map(d -> new DayController(d, side)).collect(Collectors.toList());
+        .map(d -> new DayController(d, side, this)).collect(Collectors.toList());
     for (DayController d : days) {
       this.addDayToView(d);
     }
