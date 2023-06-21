@@ -35,7 +35,7 @@ public class SideBar extends VBox {
 
     BackgroundFill backgroundFill =
         new BackgroundFill(
-            Color.valueOf("#0000ff"),
+            Color.valueOf("#FAA4BD"),
             new CornerRadii(0),
             new Insets(0)
         );

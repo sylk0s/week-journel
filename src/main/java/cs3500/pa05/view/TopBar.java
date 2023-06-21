@@ -1,5 +1,10 @@
 package cs3500.pa05.view;
 
+import cs3500.pa05.controller.BujoSerializer;
+import cs3500.pa05.model.Bujo;
+import cs3500.pa05.model.Week;
+import java.io.File;
+import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,18 +46,29 @@ public class TopBar extends HBox {
     primaryStage = new Stage();
     sideBarToggle = new Button("Toggle Sidebar");
     save = new Button("Save");
-    save.setOnAction(new EventHandler<ActionEvent>() {
-      @Override
-      public void handle(ActionEvent event) {
-        System.out.println("henry");
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save");
-        fileChooser.setInitialFileName("save file");
-        fileChooser.getExtensionFilters().addAll
-            (new FileChooser.ExtensionFilter("All Files", "*.*"));
-        fileChooser.showSaveDialog(primaryStage);
+    save.setOnAction(event -> {
+      FileChooser fileChooser = new FileChooser();
+      fileChooser.setTitle("Save");
+      fileChooser.setInitialFileName("savefile.bujo");
+      fileChooser.getExtensionFilters().addAll(
+          new FileChooser.ExtensionFilter("Bujo Files", "*.bujo"),
+          new FileChooser.ExtensionFilter("All Files", "*.*")
+      );
+
+      File selectedFile = fileChooser.showSaveDialog(primaryStage);
+      if (selectedFile != null) {
+        try {
+          // Perform save operation by writing bujo data to the selected file
+          BujoSerializer serializer = new BujoSerializer();
+          Bujo bujo = new Bujo(new Week(10, 10, "")); // Replace with your bujo creation logic
+          serializer.write(selectedFile.getAbsolutePath(), bujo);
+          System.out.println("Bujo file saved: " + selectedFile.getAbsolutePath());
+        } catch (IOException e) {
+          System.out.println("Error saving bujo file: " + e.getMessage());
+        }
       }
     });
+
 
     add = new Button("Add");
     add.setOnAction(e -> {
@@ -71,7 +87,7 @@ public class TopBar extends HBox {
     setPadding(new Insets(10));
     getChildren().addAll(sideBarToggle, save, add, maxEventsLabel, maxEvents, maxTasksLabel, maxTasks);
 
-    BackgroundFill backgroundFill = new BackgroundFill(Color.valueOf("#00ffff"),
+    BackgroundFill backgroundFill = new BackgroundFill(Color.valueOf("#bde0ff"),
         new CornerRadii(0), new Insets(0));
     Background background = new Background(backgroundFill);
     setBackground(background);

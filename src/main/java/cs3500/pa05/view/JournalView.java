@@ -65,7 +65,7 @@ public class JournalView extends BorderPane {
 
     BackgroundFill backgroundFill =
         new BackgroundFill(
-            Color.valueOf("#ffff00"),
+            Color.valueOf("#FAA4BD"),
             new CornerRadii(0),
             new Insets(0)
         );

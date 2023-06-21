@@ -32,7 +32,6 @@ public class EventView extends JournalEntryView {
    */
   EventView(String name, String desc, LocalTime time, Duration duration) {
     super(name, desc);
-    System.out.println("new event");
     this.time = new Label(time.toString());
     this.length = new Label("   " + duration.toString());
 
@@ -43,7 +42,7 @@ public class EventView extends JournalEntryView {
 
     BackgroundFill backgroundFill =
         new BackgroundFill(
-            Color.valueOf("#ff0000"),
+            Color.valueOf("#D9F0FF"),
             new CornerRadii(0),
             new Insets(0)
         );

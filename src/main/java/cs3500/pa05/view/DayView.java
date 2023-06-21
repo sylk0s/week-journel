@@ -39,7 +39,7 @@ public class DayView extends VBox {
   public DayView(String name, List<JournalEntry> entries) {
     BackgroundFill backgroundFill =
         new BackgroundFill(
-                Color.valueOf("#ff00ff"),
+                Color.valueOf("#f5fffa"),
                 new CornerRadii(0),
                 new Insets(0)
                 );

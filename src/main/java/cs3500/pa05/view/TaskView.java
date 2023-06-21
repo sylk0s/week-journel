@@ -19,7 +19,7 @@ public class TaskView extends JournalEntryView {
 
     BackgroundFill backgroundFill =
         new BackgroundFill(
-            Color.valueOf("#00ff00"),
+            Color.valueOf("#c7d3fc"),
             new CornerRadii(0),
             new Insets(0)
         );
