@@ -32,7 +32,6 @@ public class DayTest {
 
   @Test
   public void testAddAndRemoveEvent() {
-    // Assuming Event class has a no-arg constructor
     Event event = new Event("aaa", "bbb", LocalTime.now(), Duration.ofHours(1));
     day.add(event);
 
@@ -47,7 +46,6 @@ public class DayTest {
 
   @Test
   public void testIsOverTaskMax() {
-    // Assuming Task class has a no-arg constructor
     Task task1 = new Task("aaa", "bbb", false);
     Task task2 = new Task("ccc", "ddd", false);
 
@@ -60,29 +58,40 @@ public class DayTest {
 
   @Test
   public void testGetEntries() {
-    // Create a Day instance
     DayType dayType = DayType.MONDAY;
     Day day = new Day(dayType);
-
-    // Create some tasks and events
     Task task1 = new Task("Task 1", "test1", true);
     Task task2 = new Task("Task 2", "test2", true);
     Event event1 = new Event("Event 1", "Event Description 1", null, null);
     Event event2 = new Event("Event 2", "Event Description 2", null, null);
 
-    // Add the tasks and events to the Day
     day.add(task1);
     day.add(task2);
     day.add(event1);
     day.add(event2);
-
-    // Get the entries from the Day
     List<JournalEntry> entries = day.getEntries();
 
-    // Assert that the entries contain all the tasks and events
     assertTrue(entries.contains(task1));
     assertTrue(entries.contains(task2));
     assertTrue(entries.contains(event1));
     assertTrue(entries.contains(event2));
+  }
+
+  @Test
+  public void testNumFinishedTasks() {
+    Task task1 = new Task("Task 1", "Description 1", true);
+    task1.setFinished(true);
+    day.add(task1);
+
+    Task task2 = new Task("Task 2", "Description 2", false);
+    day.add(task2);
+
+    Event event1 = new Event("Event 1", "Description 1", LocalTime.of(10,
+        0), Duration.ofHours(1));
+    day.add(event1);
+
+    int expectedFinishedTasks = 1;
+    int actualFinishedTasks = day.numFinishedTasks();
+    assertEquals(expectedFinishedTasks, actualFinishedTasks);
   }
 }

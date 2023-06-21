@@ -1,7 +1,9 @@
 package cs3500.pa05.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +107,23 @@ public class WeekTest {
   }
 
   @Test
+  public void testGetDayError() {
+    int eventMax = 5;
+    int taskMax = 3;
+    String name = "Test Week";
+    List<Day> days = new ArrayList<>();
+    Week week = new Week(days, eventMax, taskMax, name);
+    DayType nonExistentDay = null;
+
+    try {
+      week.getDay(nonExistentDay);
+      fail("Expected IllegalStateException to be thrown");
+    } catch (IllegalStateException e) {
+      assertEquals("Could not find day", e.getMessage());
+    }
+  }
+
+  @Test
   public void testAddEntry() {
     List<Day> days = new ArrayList<>();
     Day day1 = new Day(DayType.MONDAY);
@@ -125,6 +144,18 @@ public class WeekTest {
   }
 
   @Test
+  public void testAddEntryError() {
+    int eventMax = 5;
+    int taskMax = 3;
+    String name = "Test Week";
+    Week week = new Week(eventMax, taskMax, name);
+    JournalEntry entry = new Task("New Task", "task1", false);
+    DayType nonExistentDay = null;
+
+    assertThrows(IllegalArgumentException.class, () -> week.addEntry(entry, nonExistentDay));
+  }
+
+  @Test
   public void testWeekConstructor() {
     int eventMax = 5;
     int taskMax = 10;
@@ -142,5 +173,4 @@ public class WeekTest {
     assertEquals(taskMax, week.getTaskMax());
     assertEquals(name, week.getName());
   }
-
 }
