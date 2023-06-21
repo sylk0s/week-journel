@@ -2,15 +2,12 @@ package cs3500.pa05.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.Duration;
+import java.time.LocalTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class DayTest {
-/**
   private Day day;
 
   @BeforeEach
@@ -22,7 +19,7 @@ public class DayTest {
   @Test
   public void testAddAndRemoveTask() {
     // Assuming Task class has a no-arg constructor
-    Task task = new Task();
+    Task task = new Task("aaa", "bbb", false);
     day.add(task);
 
     assertEquals(1, day.numItems(), "Day should have one item after adding a task");
@@ -37,7 +34,7 @@ public class DayTest {
   @Test
   public void testAddAndRemoveEvent() {
     // Assuming Event class has a no-arg constructor
-    Event event = new Event();
+    Event event = new Event("aaa", "bbb", LocalTime.now(), Duration.ofHours(1));
     day.add(event);
 
     assertEquals(1, day.numItems(), "Day should have one item after adding an event");
@@ -52,8 +49,8 @@ public class DayTest {
   @Test
   public void testIsOverTaskMax() {
     // Assuming Task class has a no-arg constructor
-    Task task1 = new Task();
-    Task task2 = new Task();
+    Task task1 = new Task("aaa", "bbb", false);
+    Task task2 = new Task("ccc", "ddd", false);
 
     day.add(task1);
     day.add(task2);
@@ -64,8 +61,8 @@ public class DayTest {
   @Test
   public void testIsOverEventMax() {
     // Assuming Event class has a no-arg constructor
-    Event event1 = new Event();
-    Event event2 = new Event();
+    Event event1 = new Event("aaa", "bbb", LocalTime.now(), Duration.ofHours(1));
+    Event event2 = new Event("ccc", "ddd", LocalTime.now(), Duration.ofHours(1));
 
     day.add(event1);
     day.add(event2);
@@ -99,5 +96,3 @@ public class DayTest {
 //
 //  }
 //
-  */
-}
