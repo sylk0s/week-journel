@@ -1,6 +1,9 @@
 package cs3500.pa05.view;
 
 import cs3500.pa05.controller.SideBarController;
+import cs3500.pa05.model.JournalEntry;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -27,6 +30,7 @@ public abstract class JournalEntryView extends VBox {
 
   protected final SideBarController side;
   protected TextField name;
+  JournalEntry self;
 
   /**
    * Constructs a JournalEntryView object
@@ -34,24 +38,34 @@ public abstract class JournalEntryView extends VBox {
    * @param name - label of the name
    * @param desc - description
    */
-  public JournalEntryView(String name, String desc, SideBarController side) {
+  public JournalEntryView(String name, String desc, SideBarController side, JournalEntry self) {
     this.remove = new Button("Delete");
+    this.self = self;
     this.side = side;
 
     this.topBox = new HBox();
     this.createNameLabel(topBox, name);
     this.topBox.getChildren().add(this.remove);
+    this.name.setOnAction(e -> {
+      this.self.setName(this.name.getText());
+    });
 
     this.desc = new TextArea();
     this.desc.setText(desc);
     this.desc.setWrapText(true);
-    // todo tweak
+    // todo update description
+
+    Button descUpdate = new Button("Update");
+    descUpdate.setOnAction(e -> {
+      this.self.setDescription(this.desc.getText());
+    });
+
     this.setMaxWidth(200);
     this.desc.setWrapText(true);
 
     setSpacing(10);
     setPadding(new Insets(10));
-    getChildren().addAll(topBox, this.desc);
+    getChildren().addAll(topBox, this.desc, descUpdate);
   }
 
   /**
@@ -63,6 +77,7 @@ public abstract class JournalEntryView extends VBox {
   }
 
   protected void createNameLabel(HBox box, String name) {
-    box.getChildren().add(new TextField(name));
+    this.name = new TextField(name);
+    box.getChildren().add(this.name);
   }
 }

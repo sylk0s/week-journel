@@ -65,6 +65,6 @@ public class DayController {
 
   // todo marks task as finished, does any other stuff as needed?
   public void toggleTaskFinish(Task task) {
-
+    task.setFinished(!task.isFinished());
   }
 }

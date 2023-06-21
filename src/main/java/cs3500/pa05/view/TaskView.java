@@ -23,7 +23,7 @@ public class TaskView extends JournalEntryView {
   CheckBox finished;
   DayView dayView;
   public TaskView(Task entry, SideBarController side, DayView dayView) {
-    super(entry.getName(), entry.getDescription(), side);
+    super(entry.getName(), entry.getDescription(), side, entry);
     this.entry = entry;
     this.dayView = dayView;
 

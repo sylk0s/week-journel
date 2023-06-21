@@ -32,7 +32,7 @@ public class EventView extends JournalEntryView {
    * @param side the controller for the sidebar, which contains the task queue with this event view
    */
   EventView(Event event, SideBarController side) {
-    super(event.getName(), event.getDescription(), side);
+    super(event.getName(), event.getDescription(), side, event);
     this.event = event;
 
     HBox timeBox = new HBox();

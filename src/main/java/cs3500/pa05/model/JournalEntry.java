@@ -38,6 +38,14 @@ public abstract class JournalEntry {
     return this.description;
   }
 
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
   @JsonIgnore
   public abstract boolean isFinished();
 }
