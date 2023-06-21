@@ -1,5 +1,6 @@
 package cs3500.pa05.view;
 
+import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.JournalEntry;
 import java.util.List;
 import javafx.geometry.Insets;
@@ -26,14 +27,17 @@ public abstract class JournalEntryView extends VBox {
    */
   private final TextArea desc;
 
+  protected final SideBarController side;
+
   /**
    * Constructs a JournalEntryView object
    *
    * @param name - label of the name
    * @param desc - description
    */
-  public JournalEntryView(String name, String desc) {
+  public JournalEntryView(String name, String desc, SideBarController side) {
     this.remove = new Button("Delete");
+    this.side = side;
 
     this.topBox = new HBox();
     this.createNameLabel(topBox, name);

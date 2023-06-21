@@ -9,8 +9,10 @@ public class DayController {
 
   DayView view;
   Day day;
+  SideBarController side;
 
-  public DayController(Day day) {
+  public DayController(Day day, SideBarController side) {
+    this.side = side;
     this.view = this.fromModel(day);
     this.day = day;
   }
@@ -23,7 +25,7 @@ public class DayController {
    */
   private DayView fromModel(Day day) {
     String name = day.getName().name();
-    return new DayView(name, day.getEntries(), this);
+    return new DayView(name, day.getEntries(), this.side, this);
   }
 
   /**
@@ -34,10 +36,13 @@ public class DayController {
   public void addEntry(JournalEntry entry) {
     this.view.addEntry(entry);
     this.day.add(entry);
+    this.side.updateView();
   }
 
   public void removeEntry(JournalEntry entry) {
-    this.view.removeEntry(this.view.getEntryView(entry));
+    this.view.removeEntry(entry);
+    this.day.remove(entry);
+    this.side.updateView();
   }
 
   public DayView getView() {

@@ -1,6 +1,7 @@
 package cs3500.pa05.view;
 
 import cs3500.pa05.controller.DayController;
+import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.Event;
 import cs3500.pa05.model.JournalEntry;
 import cs3500.pa05.model.Task;
@@ -32,7 +33,8 @@ public class DayView extends VBox {
    * The tasks and events under this day
    */
   private final VBox tasksAndEvents;
-  private DayController controller;
+  private final SideBarController controller;
+  private DayController parent;
 
   private final Map<JournalEntry, JournalEntryView> entryMap = new HashMap<>();
 
@@ -42,7 +44,9 @@ public class DayView extends VBox {
    * @param name of the day
    * @param entries - list of all entries
    */
-  public DayView(String name, List<JournalEntry> entries, DayController controller) {
+  public DayView(String name, List<JournalEntry> entries,
+                 SideBarController controller, DayController parent) {
+    this.parent = parent;
     BackgroundFill backgroundFill =
         new BackgroundFill(
                 Color.valueOf("#f5fffa"),
@@ -66,9 +70,9 @@ public class DayView extends VBox {
       this.addEntry(entry);
     }
 
-    setSpacing(10);
-    setPadding(new Insets(10));
-    getChildren().addAll(topBox, tasksAndEvents);
+    this.setSpacing(10);
+    this.setPadding(new Insets(10));
+    this.getChildren().addAll(topBox, tasksAndEvents);
   }
 
   /**
@@ -82,9 +86,9 @@ public class DayView extends VBox {
       return new TaskView((Task) entry, this.controller);
     } else if (entry instanceof Event) {
       return new EventView(entry.getName(), entry.getDescription(),
-          ((Event) entry).getTime(), ((Event) entry).getDuration());
+          ((Event) entry).getTime(), ((Event) entry).getDuration(), this.controller);
     }
-    return new ConcreteJournalEntryView(entry);
+    throw new IllegalStateException("invalid journal entry type");
   }
 
   /**
@@ -95,7 +99,7 @@ public class DayView extends VBox {
   public void addEntry(JournalEntry entry) {
     JournalEntryView entryView = getEntryViewFrom(entry);
     tasksAndEvents.getChildren().add(entryView);
-    entryView.setOnDeleteListener(() -> removeEntry(entryView));
+    entryView.setOnDeleteListener(() -> this.parent.removeEntry(entry));
     this.entryMap.put(entry, entryView);
   }
 
@@ -104,17 +108,11 @@ public class DayView extends VBox {
    *
    * @param entry a JournalEntry
    */
-  public void removeEntry(JournalEntryView entry) {
-    tasksAndEvents.getChildren().remove(entry);
+  public void removeEntry(JournalEntry entry) {
+    tasksAndEvents.getChildren().remove(this.entryMap.get(entry));
   }
 
   public JournalEntryView getEntryView(JournalEntry entry) {
     return this.entryMap.get(entry);
-  }
-
-  private static class ConcreteJournalEntryView extends JournalEntryView {
-    public ConcreteJournalEntryView(JournalEntry entry) {
-      super(entry.getName(), entry.getDescription());
-    }
   }
 }

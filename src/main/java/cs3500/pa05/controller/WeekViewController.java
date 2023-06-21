@@ -18,12 +18,15 @@ public class WeekViewController {
   private WeekView view;
   private Stage stage;  // Added the stage object to be able to display the week
   private List<DayController> days;
+  SideBarController side;
 
-  WeekViewController(Week week, Stage stage) { // Stage passed to the constructor
+  WeekViewController(Week week, Stage stage, SideBarController side) { // Stage passed to the constructor
     this.week = week;
     this.stage = stage;
     this.view = new WeekView();
-    this.days = week.getDays().stream().map(DayController::new).collect(Collectors.toList());
+    System.out.println("side is: " + (side == null ? "null" : side));
+    this.days = week.getDays().stream()
+        .map(e -> new DayController(e, side)).collect(Collectors.toList());
     for (DayController d : days) {
       this.addDayToView(d);
     }

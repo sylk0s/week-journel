@@ -24,7 +24,7 @@ public class Task extends JournalEntry {
     return this.completed;
   }
 
-  public void setFinished() {
-    this.completed = true;
+  public void setFinished(boolean finished) {
+    this.completed = finished;
   }
 }

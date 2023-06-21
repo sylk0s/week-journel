@@ -1,5 +1,6 @@
 package cs3500.pa05.view;
 
+import cs3500.pa05.controller.SideBarController;
 import java.time.Duration;
 import java.time.LocalTime;
 import javafx.geometry.Insets;
@@ -34,8 +35,8 @@ public class EventView extends JournalEntryView {
    * @param time the time of this event
    * @param duration the length of this event
    */
-  EventView(String name, String desc, LocalTime time, Duration duration) {
-    super(name, desc);
+  EventView(String name, String desc, LocalTime time, Duration duration, SideBarController side) {
+    super(name, desc, side);
     this.time = new Label(time.toString());
     this.length = new Label("   " + duration.toString());
 

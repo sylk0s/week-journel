@@ -55,7 +55,7 @@ public class JournalApp extends Application {
     SideBar sideBar = new SideBar();
     this.side = new SideBarController(weekModel, sideBar);
     TopBar topBar = new TopBar();
-    WeekViewController weekController = new WeekViewController(weekModel, primaryStage);
+    WeekViewController weekController = new WeekViewController(weekModel, primaryStage, this.side);
     JournalView journalView = new JournalView(sideBar, topBar, weekController.getWeekView());
 
     // Initialize the serializers
