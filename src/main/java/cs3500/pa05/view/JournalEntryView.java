@@ -1,8 +1,6 @@
 package cs3500.pa05.view;
 
 import cs3500.pa05.controller.SideBarController;
-import cs3500.pa05.model.JournalEntry;
-import java.util.List;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;

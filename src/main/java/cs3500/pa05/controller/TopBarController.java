@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 
 import cs3500.pa05.model.Bujo;
-import cs3500.pa05.model.Week;
 import cs3500.pa05.view.TopBar;
 import java.time.Duration;
 import java.time.LocalTime;

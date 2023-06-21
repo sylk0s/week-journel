@@ -5,9 +5,6 @@ import cs3500.pa05.model.Week;
 import cs3500.pa05.view.SideBar;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
-
-import java.util.stream.Collectors;
 
 /**
  * Controls the sidebar

@@ -1,7 +1,5 @@
 package cs3500.pa05.view;
 
-import cs3500.pa05.controller.SideBarController;
-import cs3500.pa05.model.Week;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -14,7 +12,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 /**
  * The bar on the top of the page

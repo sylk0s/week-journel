@@ -1,12 +1,8 @@
 package cs3500.pa05.view;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import cs3500.pa05.model.Theme;
 import cs3500.pa05.model.ThemeModel;
-import java.util.List;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

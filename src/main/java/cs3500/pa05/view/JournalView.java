@@ -1,16 +1,6 @@
 package cs3500.pa05.view;
 
 import cs3500.pa05.controller.KeyPressHandler;
-import cs3500.pa05.model.Day;
-import cs3500.pa05.model.DayType;
-import cs3500.pa05.model.Event;
-import cs3500.pa05.model.JournalEntry;
-import cs3500.pa05.model.Task;
-import cs3500.pa05.model.Week;
-import java.time.Duration;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -86,7 +76,7 @@ public class JournalView extends BorderPane {
   /**
    * Gets the key press handler
    *
-   * @return keyPressHnadler
+   * @return keyPressHandler
    */
   public KeyPressHandler getKeyPressHandler() {
     return keyPressHandler;

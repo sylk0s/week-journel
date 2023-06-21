@@ -4,7 +4,6 @@ import cs3500.pa05.model.DayType;
 import cs3500.pa05.model.JournalEntry;
 import cs3500.pa05.model.Week;
 import cs3500.pa05.view.JournalView;
-import java.util.List;
 
 /**
  * Controls the journal view (which is the whole view)
