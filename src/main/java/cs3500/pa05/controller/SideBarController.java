@@ -58,9 +58,9 @@ public class SideBarController {
     this.view.setVisible(this.visable);
     if (this.visable) {
       // todo this doesnt actually work now
-      this.view.setMaxWidth(0);
+      this.view.setMaxWidth(150);
     } else {
-      this.view.setMaxWidth(100);
+      this.view.setMaxWidth(0);
     }
     this.visable = !this.visable;
   }

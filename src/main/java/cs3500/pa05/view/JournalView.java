@@ -33,30 +33,19 @@ public class JournalView extends BorderPane {
   /**
    * The week view which contains all of the days
    */
-  private final WeekView weekView;
+  //private final WeekView weekView;
   /**
    * A handler for keybinds and such
    */
   private KeyPressHandler keyPressHandler;
 
   /**
-   * the week
-   * TODO remove this because the view shouldn't have direct access to this data
-   */
-  private Week week;
-
-
-  /**
    * Constructs a JournalView object
-   *
-   * @param week the week that this view should be created from
    */
-  public JournalView(Week week, SideBar sideBar, TopBar topBar) { // week object passed in constructor
-    this.week = week;
+  public JournalView(SideBar sideBar, TopBar topBar, WeekView weekView) {
     this.sideBar = sideBar;
     this.topBar = topBar;
-    List<DayView> days = createWeekDays();
-    this.weekView = new WeekView(days);
+    //List<DayView> days = createWeekDays();
 
     // temporarily removed to focus on week view
     setLeft(sideBar);
@@ -74,25 +63,6 @@ public class JournalView extends BorderPane {
         new Background(backgroundFill);
 
     this.setBackground(background);
-  }
-
-  /**
-   * Creates the day views from the things in the week
-   *
-   * @return a list of the views for the days
-   */
-  private List<DayView> createWeekDays() {
-    List<DayView> days = new ArrayList<>();
-    week.getDays().get(0).add(new Task("EX: Task", "desc", false));
-    week.getDays().get(1).add(new Event("EX: Event", "desc 2", LocalTime.NOON, Duration.ofHours(2)));
-    // create and add DayView objects for each day of the week
-    for(Day d: week.getDays()){
-      // get Day object using getDay method of Week
-      List<JournalEntry> entries = d.getEntries();
-      DayView dayView = WeekView.getDayFrom(d.getName(), entries);
-      days.add(dayView);
-    }
-    return days;
   }
 
   /**
@@ -114,15 +84,6 @@ public class JournalView extends BorderPane {
   }
 
   /**
-   * Gets the week view
-   *
-   * @return weekView
-   */
-  public WeekView getWeekView() {
-    return weekView;
-  }
-
-  /**
    * Gets the key press handler
    *
    * @return keyPressHnadler
@@ -138,18 +99,5 @@ public class JournalView extends BorderPane {
    */
   public void setKeyPressHandler(KeyPressHandler keyPressHandler) {
     this.keyPressHandler = keyPressHandler;
-  }
-
-
-  /**
-   * returns the given list of journal entries.
-   *
-   * @return the list of journal entries in this week
-   */
-  // TODO: This is super complicated. Confused about how we're not extending the
-  //  JournalEntryView class?
-  public List<JournalEntry> displayEntries() {
-    List<JournalEntry> entries = week.getEntries();
-    return entries;
   }
 }

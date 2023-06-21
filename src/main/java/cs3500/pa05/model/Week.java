@@ -201,6 +201,15 @@ public class Week {
 
   }
 
+  public Day getDay(DayType type) {
+    Optional<Day> result = this.days.stream().filter(d -> d.name.equals(type)).findFirst();
+    if (result.isPresent()) {
+      return result.get();
+    } else {
+      throw new IllegalStateException("Could not find day");
+    }
+  }
+
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder("");

@@ -3,9 +3,14 @@ package cs3500.pa05.view;
 import cs3500.pa05.controller.BujoSerializer;
 import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.Bujo;
+import cs3500.pa05.model.DayType;
+import cs3500.pa05.model.Event;
+import cs3500.pa05.model.Task;
 import cs3500.pa05.model.Week;
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.LocalTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,19 +43,19 @@ public class TopBar extends HBox {
   private final TextField maxEvents;
   private final TextField maxTasks;
   private final Stage primaryStage;
+  private final Week week;
 
   /**
    * Constructing a new TopBar object
    */
   public TopBar(Week week, SideBarController side) {
+    this.week = week;
+
     this.primaryStage = new Stage();
     this.sideBarToggle = new Button("Toggle Sidebar");
     this.save = new Button("Save");
 
     this.add = new Button("Add");
-    add.setOnAction(e -> {
-      showAddDropdown();
-    });
     this.maxEvents = new TextField();
     this.maxTasks = new TextField();
 
@@ -79,6 +84,10 @@ public class TopBar extends HBox {
   public void registerOnAdd(EventHandler<ActionEvent> handler) {
     System.out.println("registering handler for add...");
     this.add.setOnAction(handler);
+  }
+
+  public void registerOnToggleBar(EventHandler<ActionEvent> handler) {
+    this.sideBarToggle.setOnAction(handler);
   }
 
   /**
@@ -133,12 +142,20 @@ public class TopBar extends HBox {
     ChoiceBox<String> choiceBox = new ChoiceBox<>(options);
     choiceBox.getSelectionModel().selectFirst();
 
-    Button addButton = new Button("Add");
+    ObservableList<DayType> days = FXCollections.observableArrayList(DayType.values());
+    ChoiceBox<DayType> daySelection = new ChoiceBox<>(days);
+    daySelection.getSelectionModel().selectFirst();
+
 
     VBox dropdown = new VBox(10);
-    dropdown.getChildren().addAll(new Label("Select an option:"), choiceBox, addButton);
+    dropdown.getChildren().addAll(new Label("Select an option:"), choiceBox);
     dropdown.setAlignment(Pos.CENTER);
     dropdown.setPadding(new Insets(10));
+
+    dropdown.getChildren().addAll(new Label("Select a day"), daySelection);
+
+    Button addButton = new Button("Add");
+    dropdown.getChildren().addAll(addButton);
 
     Stage popupStage = new Stage();
     popupStage.initOwner(this.primaryStage);
@@ -154,9 +171,11 @@ public class TopBar extends HBox {
       if (selectedOption.equals("Add a new event")) {
         // Perform actions for adding a new event
         System.out.println("Adding a new event...");
+        this.week.getDay(daySelection.getValue()).add(new Event("testing", "description", LocalTime.now(), Duration.ofHours(1)));
       } else if (selectedOption.equals("Add a new task")) {
         // Perform actions for adding a new task
         System.out.println("Adding a new task...");
+        this.week.getDay(daySelection.getValue()).add(new Task("testing", "description", false));
       }
     });
   }

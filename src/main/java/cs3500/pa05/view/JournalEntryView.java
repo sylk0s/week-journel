@@ -62,20 +62,4 @@ public abstract class JournalEntryView extends VBox {
   public void setOnDeleteListener(Runnable onDeleteListener) {
     remove.setOnAction(event -> onDeleteListener.run());
   }
-
-  /**
-   *
-   * @param jv the journal view
-   */
-  public void displayEntries(JournalView jv) {
-    // Clear the previous entries
-    desc.clear();
-
-    List<JournalEntry> entries = jv.displayEntries();
-    // Display the new entries
-    for (JournalEntry entry : entries) {
-      String entryText = entry.getName() + ": " + entry.getDescription() + "\n";
-      desc.appendText(entryText);
-    }
-  }
 }

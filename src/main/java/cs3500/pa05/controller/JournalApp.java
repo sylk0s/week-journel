@@ -9,11 +9,9 @@ import cs3500.pa05.model.Bujo;
 import cs3500.pa05.model.Week;
 import cs3500.pa05.view.InitialView;
 import cs3500.pa05.view.JournalView;
-import cs3500.pa05.view.WeekView;
 import cs3500.pa05.view.SideBar;
 import cs3500.pa05.view.TopBar;
 
-import java.util.stream.Collectors;
 import javafx.util.Duration;
 
 // Calls all controllers and runs the application
@@ -57,7 +55,8 @@ public class JournalApp extends Application {
     SideBar sideBar = new SideBar();
     this.side = new SideBarController(weekModel, sideBar);
     TopBar topBar = new TopBar(weekModel, this.side);
-    JournalView journalView = new JournalView(weekModel, sideBar, topBar);
+    WeekViewController weekController = new WeekViewController(weekModel, primaryStage);
+    JournalView journalView = new JournalView(sideBar, topBar, weekController.getWeekView());
 
     // Initialize the serializers
     BujoSerializer serializer = new BujoSerializer();

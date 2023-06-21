@@ -47,13 +47,6 @@ public class JournalViewController {
    // TODO: implement this
   }
 
-  /**
-   * Displays all journal entries.
-   */
-  public void displayEntries() {
-    this.view.displayEntries();
-  }
-
   public void run() {
     // Call methods in here based on your app's logic.
   }

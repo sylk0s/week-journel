@@ -3,7 +3,9 @@ package cs3500.pa05.view;
 import cs3500.pa05.model.Event;
 import cs3500.pa05.model.JournalEntry;
 import cs3500.pa05.model.Task;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
@@ -29,6 +31,8 @@ public class DayView extends VBox {
    * The tasks and events under this day
    */
   private final VBox tasksAndEvents;
+
+  private final Map<JournalEntry, JournalEntryView> entryMap = new HashMap<>();
 
   /**
    * Contructs a DayView object
@@ -88,6 +92,7 @@ public class DayView extends VBox {
     JournalEntryView entryView = getEntryViewFrom(entry);
     tasksAndEvents.getChildren().add(entryView);
     entryView.setOnDeleteListener(() -> removeEntry(entryView));
+    this.entryMap.put(entry, entryView);
   }
 
   /**
@@ -97,6 +102,10 @@ public class DayView extends VBox {
    */
   public void removeEntry(JournalEntryView entry) {
     tasksAndEvents.getChildren().remove(entry);
+  }
+
+  public JournalEntryView getEntryView(JournalEntry entry) {
+    return this.entryMap.get(entry);
   }
 
   private static class ConcreteJournalEntryView extends JournalEntryView {
