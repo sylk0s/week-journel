@@ -4,6 +4,7 @@ import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.Event;
 import java.text.ParseException;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
@@ -96,8 +97,11 @@ public class EventView extends JournalEntryView {
       int min = Integer.parseInt(m);
       this.event.setTime(hour, min);
     } catch (NumberFormatException err) {
-      err.printStackTrace();
-      // todo show error popup
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Not a number!");
+      alert.setHeaderText(null);
+      alert.setContentText("Some invalid input found in the time field");
+      alert.showAndWait();
     }
   }
 
@@ -109,8 +113,11 @@ public class EventView extends JournalEntryView {
       int min = Integer.parseInt(m);
       this.event.setDur(hour, min);
     } catch (NumberFormatException err) {
-      err.printStackTrace();
-      // todo show error popup
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Not a number!");
+      alert.setHeaderText(null);
+      alert.setContentText("Some invalid input found in the duration field");
+      alert.showAndWait();
     }
   }
 }
