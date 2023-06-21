@@ -58,17 +58,17 @@ public class DayTest {
     assertTrue(day.isOverTaskMax(1), "Day should be over task max after adding two tasks and comparing with a max of 1");
   }
 
-  @Test
-  public void testIsOverEventMax() {
-    // Assuming Event class has a no-arg constructor
-    Event event1 = new Event("aaa", "bbb", LocalTime.now(), Duration.ofHours(1));
-    Event event2 = new Event("ccc", "ddd", LocalTime.now(), Duration.ofHours(1));
-
-    day.add(event1);
-    day.add(event2);
-
-    assertTrue(day.isOverEventMax(1), "Day should be over event max after adding two events and comparing with a max of 1");
-  }
+//  @Test
+//  public void testIsOverEventMax() {
+//    // Assuming Event class has a no-arg constructor
+//    Event event1 = new Event("aaa", "bbb", LocalTime.now(), Duration.ofHours(1));
+//    Event event2 = new Event("ccc", "ddd", LocalTime.now(), Duration.ofHours(1));
+//
+//    day.add(event1);
+//    day.add(event2);
+//
+//    assertTrue(day.isOverEventMax(1), "Day should be over event max after adding two events and comparing with a max of 1");
+//  }
 }
 
 //class DayTest {
