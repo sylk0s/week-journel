@@ -111,7 +111,6 @@ public class TopBarController {
     System.out.println("all registered...");
   }
 
-  // todo attempt to move this to controller as well?
   public void showAddDropdown() {
     ObservableList<String>
         options = FXCollections.observableArrayList("Add a new event", "Add a new task");
@@ -158,20 +157,3 @@ public class TopBarController {
     });
   }
 }
-
-//    // max events and tasks handlers
-//    view.getMaxEventsTextField().setOnAction(new EventHandler<ActionEvent>() {
-//      @Override
-//      public void handle(ActionEvent actionEvent) {
-//        String maxEvents = view.getMaxEventsTextField().getText();
-//        week.setEventMax(Integer.parseInt(maxEvents));
-//      }
-//    });
-//
-//    view.getMaxTasksTextField().setOnAction(new EventHandler<ActionEvent>() {
-//      @Override
-//      public void handle(ActionEvent actionEvent) {
-//        String maxTasks = view.getMaxTasksTextField().getText();
-//        week.setTaskMax(Integer.parseInt(maxTasks));
-//      }
-//    });
