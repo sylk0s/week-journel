@@ -18,7 +18,7 @@ public class Splash extends StackPane {
 
   private void initializeSplash() {
     // Set splash screen styling
-    splash.setFont(Font.font("Arial", 40));
+    splash.setFont(Font.font("Times New Roman", 40));
     splash.setTextFill(Color.BLACK);
 
     // Create a fade-in transition for the splash screen

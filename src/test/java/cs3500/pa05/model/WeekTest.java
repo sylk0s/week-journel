@@ -82,8 +82,8 @@ public class WeekTest {
     Week week = new Week(days, eventMax, taskMax, name);
 
     String weekString = week.toString();
-
     String expectedString = "MONDAY\nTUESDAY\n";
+
     assertEquals(expectedString, weekString);
   }
 
@@ -103,4 +103,44 @@ public class WeekTest {
 
     assertEquals(day2, resultDay);
   }
+
+  @Test
+  public void testAddEntry() {
+    List<Day> days = new ArrayList<>();
+    Day day1 = new Day(DayType.MONDAY);
+    Day day2 = new Day(DayType.TUESDAY);
+    days.add(day1);
+    days.add(day2);
+    int eventMax = 5;
+    int taskMax = 10;
+    String name = "Test Week";
+    Week week = new Week(days, eventMax, taskMax, name);
+
+    Task task = new Task("Test Task", "test1", true);
+    JournalEntry entry = task;
+    week.addEntry(entry, DayType.MONDAY);
+    Day updatedDay = week.getDay(DayType.MONDAY);
+
+    assertTrue(updatedDay.getItems().contains(entry));
+  }
+
+  @Test
+  public void testWeekConstructor() {
+    int eventMax = 5;
+    int taskMax = 10;
+    String name = "Test Week";
+    Week week = new Week(eventMax, taskMax, name);
+    List<Day> days = week.getDays();
+    assertEquals(DayType.values().length, days.size());
+
+    for (Day day : days) {
+      assertEquals(day.getName(), DayType.valueOf(day.getName().toString()));
+      assertTrue(day.getItems().isEmpty());
+    }
+
+    assertEquals(eventMax, week.getEventMax());
+    assertEquals(taskMax, week.getTaskMax());
+    assertEquals(name, week.getName());
+  }
+
 }
