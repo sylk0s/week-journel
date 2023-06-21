@@ -44,8 +44,13 @@ public class SideBarController {
 
     // Update stats
     view.getStats().getChildren().clear();
-    Label statsLabel = new Label("Total Tasks: " + week.totalTasks());
-    view.getStats().getChildren().add(statsLabel);
+    Label statsLabel1 = new Label("Total Tasks: " + week.totalTasks());
+    Label statsLabel2 = new Label("Total Events: " + week.getEvent().size());
+    Label statsLabel3 = new Label("Percent finished: "
+        + (week.totalTasks() > 0 ? week.totalFinishedTasks()/week.totalTasks() : 0) * 100 + "%");
+    view.getStats().getChildren().add(statsLabel1);
+    view.getStats().getChildren().add(statsLabel2);
+    view.getStats().getChildren().add(statsLabel3);
   }
 
   public void toggleVis() {

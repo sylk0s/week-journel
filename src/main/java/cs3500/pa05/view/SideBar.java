@@ -1,6 +1,7 @@
 package cs3500.pa05.view;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -20,14 +21,16 @@ public class SideBar extends VBox {
   /**
    * The statistics for the week
    */
-  private final HBox stats;
+  private final VBox stats;
 
   /**
    * Constructs a SideBar object
    */
   public SideBar() {
     taskList = new VBox();
-    stats = new HBox();
+    stats = new VBox();
+    // why doesnt this work pls help
+    stats.setAlignment(Pos.BOTTOM_LEFT);
 
     setSpacing(10);
     setPadding(new Insets(10));
@@ -60,7 +63,7 @@ public class SideBar extends VBox {
    *
    * @return HBox stats
    */
-  public HBox getStats() {
+  public VBox getStats() {
     return stats;
   }
 }
