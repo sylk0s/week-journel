@@ -5,6 +5,7 @@ import cs3500.pa05.model.Week;
 import cs3500.pa05.view.SideBar;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 
 /**
  * Controls the sidebar
@@ -41,14 +42,19 @@ public class SideBarController {
     }
 
     // Update stats
+    double prog = (week.totalTasks() > 0 ?
+        ((double) week.totalFinishedTasks())/week.totalTasks() : 0);
     view.getStats().getChildren().clear();
     Label statsLabel1 = new Label("Total Tasks: " + week.totalTasks());
     Label statsLabel2 = new Label("Total Events: " + week.getEvent().size());
     Label statsLabel3 = new Label("Percent finished: "
-        + (week.totalTasks() > 0 ? week.totalFinishedTasks()/week.totalTasks() : 0) * 100 + "%");
+        + prog * 100 + "%");
+    ProgressBar progress = new ProgressBar();
+    progress.setProgress(prog);
     view.getStats().getChildren().add(statsLabel1);
     view.getStats().getChildren().add(statsLabel2);
     view.getStats().getChildren().add(statsLabel3);
+    view.getStats().getChildren().add(progress);
   }
 
   public void toggleVis() {
