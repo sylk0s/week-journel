@@ -6,6 +6,10 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -39,6 +43,15 @@ public class EventView extends JournalEntryView {
     timeBox.getChildren().add(this.time);
     timeBox.getChildren().add(this.length);
     this.getChildren().add(timeBox);
+
+    BorderStroke borderStroke = new BorderStroke(
+        Color.BLACK,                       // Border color
+        BorderStrokeStyle.SOLID,           // Border style
+        new CornerRadii(0),                 // Corner radii
+        new BorderWidths(1)                 // Border widths
+    );
+
+    this.setBorder(new Border(borderStroke));
 
     BackgroundFill backgroundFill =
         new BackgroundFill(

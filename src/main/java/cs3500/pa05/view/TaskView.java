@@ -4,6 +4,10 @@ import javafx.geometry.Insets;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
@@ -16,6 +20,15 @@ public class TaskView extends JournalEntryView {
     super(name, desc);
     this.finished = new CheckBox("isFinished");
     this.getChildren().add(this.finished);
+
+    BorderStroke borderStroke = new BorderStroke(
+        Color.BLACK,                       // Border color
+        BorderStrokeStyle.SOLID,           // Border style
+        new CornerRadii(0),                 // Corner radii
+        new BorderWidths(1)                 // Border widths
+    );
+
+    this.setBorder(new Border(borderStroke));
 
     BackgroundFill backgroundFill =
         new BackgroundFill(
