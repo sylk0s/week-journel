@@ -2,6 +2,7 @@ package cs3500.pa05.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -79,6 +80,7 @@ public class Day {
    *
    * @return The list of all tasks for this day
    */
+  @JsonIgnore
   public List<Task> getTasks() {
     return this.items.stream()
         .filter((x) -> x instanceof Task)
@@ -90,6 +92,7 @@ public class Day {
    *
    * @return The list of all events for this day
    */
+  @JsonIgnore
   public List<Event> getEvents() {
     return this.items.stream()
         .filter((x) -> x instanceof Event)
@@ -170,7 +173,7 @@ public class Day {
     return max < this.getTasks().size();
   }
 
-
+  @JsonIgnore
   public List<JournalEntry> getEntries() {
 
     List<Event> events = this.getEvents();

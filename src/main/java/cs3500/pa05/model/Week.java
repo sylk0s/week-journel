@@ -1,6 +1,7 @@
 package cs3500.pa05.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
@@ -140,6 +141,7 @@ public class Week {
    *
    * @return A list of all the tasks in this week
    */
+  @JsonIgnore
   public List<Task> getTasks() {
     return this.days.stream().flatMap((day) -> day.getTasks().stream())
         .collect(Collectors.toList());
@@ -149,6 +151,7 @@ public class Week {
    *
    * @return A list of all the events in this week
    */
+  @JsonIgnore
   public List<Event> getEvent() {
     return this.days.stream().flatMap((day) -> day.getEvents().stream())
         .collect(Collectors.toList());
@@ -183,7 +186,7 @@ public class Week {
       }
     }
 
-
+  @JsonIgnore
   public List<JournalEntry> getEntries() {
 
     List<Event> events = this.getEvent();
