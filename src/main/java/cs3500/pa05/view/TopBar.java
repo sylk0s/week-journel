@@ -1,19 +1,26 @@
 package cs3500.pa05.view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -48,6 +55,9 @@ public class TopBar extends HBox {
     });
 
     add = new Button("Add");
+    add.setOnAction(e -> {
+      showAddDropdown();
+    });
     maxEvents = new TextField();
     maxTasks = new TextField();
 
@@ -110,6 +120,40 @@ public class TopBar extends HBox {
    */
   public TextField getMaxTasksTextField() {
     return maxTasks;
+  }
+
+  private void showAddDropdown() {
+    ObservableList<String>
+        options = FXCollections.observableArrayList("Add a new event", "Add a new task");
+    ChoiceBox<String> choiceBox = new ChoiceBox<>(options);
+    choiceBox.getSelectionModel().selectFirst();
+
+    Button addButton = new Button("Add");
+
+    VBox dropdown = new VBox(10);
+    dropdown.getChildren().addAll(new Label("Select an option:"), choiceBox, addButton);
+    dropdown.setAlignment(Pos.CENTER);
+    dropdown.setPadding(new Insets(10));
+
+    Stage popupStage = new Stage();
+    popupStage.initOwner(primaryStage);
+    popupStage.initModality(Modality.WINDOW_MODAL);
+    popupStage.setScene(new Scene(dropdown));
+    popupStage.show();
+
+    addButton.setOnAction(event -> {
+      String selectedOption = choiceBox.getValue();
+      popupStage.close();
+
+      // Handle the selected option
+      if (selectedOption.equals("Add a new event")) {
+        // Perform actions for adding a new event
+        System.out.println("Adding a new event...");
+      } else if (selectedOption.equals("Add a new task")) {
+        // Perform actions for adding a new task
+        System.out.println("Adding a new task...");
+      }
+    });
   }
 
   public void displayError(String title, String message) {

@@ -35,6 +35,7 @@ public class TopBarController {
     this.serializer = serializer;
     this.view = view;
   }
+}
 
 //  public void initHandlers(Stage primaryStage) {
 //    System.out.println("hey");
@@ -77,7 +78,7 @@ public class TopBarController {
 //      });
 //    });
 //  }
-}
+
 
 //    // add button handler
 //    view.getAddButton().setOnAction(new EventHandler<ActionEvent>() {
