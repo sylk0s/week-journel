@@ -39,6 +39,7 @@ public class SideBarController {
     for (Task task : week.getTasks()) {
       // Just display the task's toString() result, replace this with however you want to display tasks
       CheckBox taskText = new CheckBox(task.getName());
+      taskText.setSelected(task.isFinished());
       view.getTaskList().getChildren().add(taskText);
     }
 

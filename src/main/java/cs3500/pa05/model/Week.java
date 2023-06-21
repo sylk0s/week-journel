@@ -126,7 +126,7 @@ public class Week {
    * @return The total number of tasks that have been finished
    */
   public int totalFinishedTasks() {
-    return this.days.stream().reduce(0, (num, day) -> day.numFinishedTasks(), Integer::sum);
+    return this.days.stream().reduce(0, (num, day) -> num + day.numFinishedTasks(), Integer::sum);
   }
 
   /**
@@ -134,7 +134,7 @@ public class Week {
    * @return The total number of tasks
    */
   public int totalTasks() {
-    return this.days.stream().reduce(0, (num, day) -> day.numTasks(), Integer::sum);
+    return this.days.stream().reduce(0, (num, day) -> num + day.numTasks(), Integer::sum);
   }
 
   /**
