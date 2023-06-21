@@ -2,8 +2,7 @@ package cs3500.pa05.view;
 
 import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.Event;
-import java.time.Duration;
-import java.time.LocalTime;
+import java.text.ParseException;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -16,7 +15,6 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
 /**
  * A view for some event
@@ -29,23 +27,26 @@ public class EventView extends JournalEntryView {
   Event event;
 
   /**
-   *
-   * @param name The name of this event
-   * @param desc The description for this event
-   * @param time the time of this event
-   * @param duration the length of this event
+   * @param event the event that this view is displaying
+   * @param side the controller for the sidebar, which contains the task queue with this event view
    */
   EventView(Event event, SideBarController side) {
     super(event.getName(), event.getDescription(), side);
+    this.event = event;
 
     HBox timeBox = new HBox();
     Label tLabel = new Label("Time:");
     Label timeHLabel = new Label("Hour:");
     Label timeMLabel = new Label("Min:");
+
     this.timeH = new TextField(event.getTime().getHour() + "");
     this.timeH.maxWidth(1);
+    this.timeH.setOnAction(e -> updateTime());
+
     this.timeM = new TextField(event.getTime().getMinute() + "");
     this.timeM.maxWidth(1);
+    this.timeM.setOnAction(e -> updateTime());
+
     timeBox.getChildren().addAll(timeHLabel, timeH, timeMLabel, timeM);
     this.getChildren().addAll(tLabel, timeBox);
 
@@ -53,10 +54,15 @@ public class EventView extends JournalEntryView {
     Label dLabel = new Label("Duration:");
     Label durHLabel = new Label("Hour:");
     Label durMLabel = new Label("Min:");
+
     this.durH = new TextField(event.getDuration().toHoursPart() + "");
     this.durH.maxWidth(1);
+    this.durH.setOnAction(e -> updateDur());
+
     this.durM = new TextField(event.getDuration().toMinutesPart() + "");
     this.durM.maxWidth(1);
+    this.durM.setOnAction(e -> updateDur());
+
     durBox.getChildren().addAll(durHLabel, durH, durMLabel, durM);
     this.getChildren().addAll(dLabel, durBox);
 
@@ -80,5 +86,31 @@ public class EventView extends JournalEntryView {
         new Background(backgroundFill);
 
     this.setBackground(background);
+  }
+
+  public void updateTime() {
+    String h = this.timeH.getText();
+    String m = this.timeM.getText();
+    try {
+      int hour = Integer.parseInt(h);
+      int min = Integer.parseInt(m);
+      this.event.setTime(hour, min);
+    } catch (NumberFormatException err) {
+      err.printStackTrace();
+      // todo show error popup
+    }
+  }
+
+  public void updateDur() {
+    String h = this.durH.getText();
+    String m = this.durM.getText();
+    try {
+      int hour = Integer.parseInt(h);
+      int min = Integer.parseInt(m);
+      this.event.setDur(hour, min);
+    } catch (NumberFormatException err) {
+      err.printStackTrace();
+      // todo show error popup
+    }
   }
 }

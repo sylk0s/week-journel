@@ -30,6 +30,14 @@ public class Event extends JournalEntry {
     return this.duration;
   }
 
+  public void setTime(int hour, int min) {
+    this.time = LocalTime.MIDNIGHT.plus(Duration.ofHours(hour)).plus(Duration.ofMinutes(min));
+  }
+
+  public void setDur(int hour, int min) {
+    this.duration = Duration.ofHours(hour).plus(Duration.ofMinutes(min));
+  }
+
   @Override
   public boolean isFinished() {
     return this.time.plus(this.duration).isAfter(LocalTime.now());
