@@ -1,8 +1,11 @@
 package cs3500.pa05.controller;
 
+import cs3500.pa05.model.DayType;
+import cs3500.pa05.model.JournalEntry;
 import cs3500.pa05.model.Week;
 import cs3500.pa05.view.WeekView;
 import java.util.List;
+import java.util.Optional;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.stream.Collectors;
@@ -36,7 +39,25 @@ public class WeekViewController {
     this.view.getChildren().add(d.getView());
   }
 
+  public void addEntryTo(DayType type, JournalEntry entry) {
+    this.getDay(type).addEntry(entry);
+  }
+
+  public DayController getDay(DayType type) {
+    Optional<DayController> result = this.days.stream()
+        .filter(d -> d.getDay().getName().equals(type)).findFirst();
+    if (result.isPresent()) {
+      return result.get();
+    } else {
+      throw new IllegalStateException("Could not find day");
+    }
+  }
+
   public WeekView getWeekView() {
     return this.view;
+  }
+
+  public Week getWeek() {
+    return this.week;
   }
 }

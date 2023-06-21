@@ -54,7 +54,7 @@ public class JournalApp extends Application {
     InitialView initialView = new InitialView(primaryStage);
     SideBar sideBar = new SideBar();
     this.side = new SideBarController(weekModel, sideBar);
-    TopBar topBar = new TopBar(weekModel, this.side);
+    TopBar topBar = new TopBar();
     WeekViewController weekController = new WeekViewController(weekModel, primaryStage);
     JournalView journalView = new JournalView(sideBar, topBar, weekController.getWeekView());
 
@@ -64,7 +64,7 @@ public class JournalApp extends Application {
     // Initialize the controllers with the models and views
     this.init = new InitialController(initialView, serializer, primaryStage, journalView);
     this.journalView = new JournalViewController(journalView, weekModel);
-    this.top = new TopBarController(weekModel, bujo, topBar, primaryStage, side);
+    this.top = new TopBarController(weekController, bujo, topBar, primaryStage, side);
 
     Scene initialScene = new Scene(initialView, 800, 600);
     primaryStage.setScene(initialScene);

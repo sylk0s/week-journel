@@ -7,9 +7,11 @@ import cs3500.pa05.view.DayView;
 public class DayController {
 
   DayView view;
+  Day day;
 
   public DayController(Day day) {
     this.view = this.fromModel(day);
+    this.day = day;
   }
 
   /**
@@ -30,6 +32,7 @@ public class DayController {
    */
   public void addEntry(JournalEntry entry) {
     this.view.addEntry(entry);
+    this.day.add(entry);
   }
 
   public void removeEntry(JournalEntry entry) {
@@ -38,5 +41,8 @@ public class DayController {
 
   public DayView getView() {
     return this.view;
+  }
+  public Day getDay() {
+    return this.day;
   }
 }
