@@ -2,8 +2,6 @@ package cs3500.pa05.view;
 
 import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.JournalEntry;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -48,6 +46,7 @@ public abstract class JournalEntryView extends VBox {
     this.topBox.getChildren().add(this.remove);
     this.name.setOnAction(e -> {
       this.self.setName(this.name.getText());
+      this.side.updateView();
     });
 
     this.desc = new TextArea();
@@ -58,6 +57,7 @@ public abstract class JournalEntryView extends VBox {
     Button descUpdate = new Button("Update");
     descUpdate.setOnAction(e -> {
       this.self.setDescription(this.desc.getText());
+      this.side.updateView();
     });
 
     this.setMaxWidth(200);

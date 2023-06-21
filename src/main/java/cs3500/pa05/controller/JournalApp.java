@@ -64,8 +64,8 @@ public class JournalApp extends Application {
     // Initialize the views
     SideBar sideBar = new SideBar();
     this.side = new SideBarController(weekModel, sideBar);
-    TopBar topBar = new TopBar();
     WeekViewController weekController = new WeekViewController(weekModel, primaryStage, this.side);
+    TopBar topBar = new TopBar(weekController);
     JournalView journalView = new JournalView(sideBar, topBar, weekController.getWeekView());
 
 

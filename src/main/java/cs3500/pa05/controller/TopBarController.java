@@ -86,7 +86,7 @@ public class TopBarController {
 
     this.view.registerOnNewWeek(e -> {
       System.out.println("new week button");
-      JournalView journalView = new JournalView(new SideBar(), new TopBar(),
+      JournalView journalView = new JournalView(new SideBar(), new TopBar(week),
           new WeekView());
       Scene scene = new Scene(journalView);
     });
@@ -158,12 +158,14 @@ public class TopBarController {
         // Perform actions for adding a new event
         System.out.println("Adding a new event...");
         this.week.addEntryTo(daySelection.getValue(),
-            new Event("testing", "description", LocalTime.now(), Duration.ofHours(1)));
+            new Event("", "", LocalTime.now(), Duration.ofHours(1)));
+        this.side.updateView();
       } else if (selectedOption.equals("Add a new task")) {
         // Perform actions for adding a new task
         System.out.println("Adding a new task...");
         this.week.addEntryTo(daySelection.getValue(),
-            new Task("testing", "description", false));
+            new Task("", "", false));
+        this.side.updateView();
       }
     });
   }

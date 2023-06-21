@@ -1,5 +1,6 @@
 package cs3500.pa05.view;
 
+import cs3500.pa05.controller.WeekViewController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -27,13 +28,13 @@ public class TopBar extends HBox {
   /**
    * Constructing a new TopBar object
    */
-  public TopBar() {
+  public TopBar(WeekViewController week) {
     this.sideBarToggle = new Button("Toggle Sidebar");
     this.save = new Button("Save");
     this.add = new Button("Add");
     this.newWeek = new Button("New Week");
-    this.maxEvents = new TextField();
-    this.maxTasks = new TextField();
+    this.maxEvents = new TextField(week.getWeek().getEventMax() + "");
+    this.maxTasks = new TextField(week.getWeek().getTaskMax() + "");
 
     Label maxEventsLabel = new Label("Max Events:");
     Label maxTasksLabel = new Label("Max Tasks:");
