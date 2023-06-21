@@ -4,6 +4,7 @@ import cs3500.pa05.view.Splash;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import cs3500.pa05.model.Bujo;
 import cs3500.pa05.model.Week;
@@ -22,6 +23,7 @@ public class JournalApp extends Application {
   private SideBarController side;
   private TopBarController top;
   private WeekViewController week;
+  private KeyPressHandler keyPressHandler;
 
   @Override
   public void start(Stage primaryStage) {
@@ -70,6 +72,10 @@ public class JournalApp extends Application {
     // Initialize the controllers with the models and views
     this.journalView = new JournalViewController(journalView, weekModel);
     this.top = new TopBarController(weekController, bujo, topBar, primaryStage, side);
+    this.keyPressHandler = new KeyPressHandler(top);
+    primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+      keyPressHandler.handle(event);
+    });
     this.run();
     return this.journalView.getView();
   }

@@ -1,5 +1,6 @@
 package cs3500.pa05.controller;
 
+import cs3500.pa05.view.WeekView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -39,14 +40,12 @@ public class KeyPressHandler {
     } else if (saveCombination.match(event)) {
       topBarController.initHandlers(primaryStage);
       System.out.println("Save command triggered.");
-//    } else if (openCombination.match(event)) {
-//      System.out.println("Open command triggered.");
-//      // Call the corresponding method or perform the necessary action
-//    } else if (newWeekCombination.match(event)) {
-//      // New Week command
-//      System.out.println("New Week command triggered.");
-//      // Call the corresponding method or perform the necessary action
-//    }
+    } else if (openCombination.match(event)) {
+      System.out.println("Open command triggered.");
+      // Call the corresponding method or perform the necessary action
+    } else if (newWeekCombination.match(event)) {
+      System.out.println("New Week command triggered.");
+
     }
   }
 }

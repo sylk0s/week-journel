@@ -3,6 +3,10 @@ package cs3500.pa05.controller;
 import cs3500.pa05.model.DayType;
 import cs3500.pa05.model.Event;
 import cs3500.pa05.model.Task;
+import cs3500.pa05.model.Week;
+import cs3500.pa05.view.JournalView;
+import cs3500.pa05.view.SideBar;
+import cs3500.pa05.view.WeekView;
 import java.io.File;
 import java.io.IOException;
 
@@ -78,6 +82,13 @@ public class TopBarController {
     this.view.registerOnToggleBar(e -> {
       System.out.println("toggled bar");
       this.side.toggleVis();
+    });
+
+    this.view.registerOnNewWeek(e -> {
+      System.out.println("new week button");
+      JournalView journalView = new JournalView(new SideBar(), new TopBar(),
+          new WeekView());
+      Scene scene = new Scene(journalView);
     });
 
     this.view.registerMaxEvents(e -> {
