@@ -8,6 +8,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -72,12 +73,12 @@ public class TopBar extends HBox {
     this.sideBarToggle.setOnAction(handler);
   }
 
-  public void registerMaxEvents(EventHandler<ActionEvent> handler) {
-    this.maxEvents.setOnAction(handler);
+  public void registerMaxEvents(EventHandler<KeyEvent> handler) {
+    this.maxEvents.setOnKeyTyped(handler);
   }
 
-  public void registerMaxTasks(EventHandler<ActionEvent> handler) {
-    this.maxTasks.setOnAction(handler);
+  public void registerMaxTasks(EventHandler<KeyEvent> handler) {
+    this.maxTasks.setOnKeyTyped(handler);
   }
   /**
    * Getter method for side bar toggle

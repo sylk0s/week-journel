@@ -44,7 +44,7 @@ public abstract class JournalEntryView extends VBox {
     this.topBox = new HBox();
     this.createNameLabel(topBox, name);
     this.topBox.getChildren().add(this.remove);
-    this.name.setOnAction(e -> {
+    this.name.setOnKeyTyped(k -> {
       this.self.setName(this.name.getText());
       this.side.updateView();
     });
@@ -53,19 +53,23 @@ public abstract class JournalEntryView extends VBox {
     this.desc.setText(desc);
     this.desc.setWrapText(true);
     // todo update description
-
-    Button descUpdate = new Button("Update");
-    descUpdate.setOnAction(e -> {
+    this.desc.setOnKeyTyped(k -> {
       this.self.setDescription(this.desc.getText());
       this.side.updateView();
     });
+
+//    Button descUpdate = new Button("Update");
+//    descUpdate.setOnAction(e -> {
+//      this.self.setDescription(this.desc.getText());
+//      this.side.updateView();
+//    });
 
     this.setMaxWidth(200);
     this.desc.setWrapText(true);
 
     setSpacing(10);
     setPadding(new Insets(10));
-    getChildren().addAll(topBox, this.desc, descUpdate);
+    getChildren().addAll(topBox, this.desc);
   }
 
   /**

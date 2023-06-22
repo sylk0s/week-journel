@@ -42,11 +42,11 @@ public class EventView extends JournalEntryView {
 
     this.timeH = new TextField(event.getTime().getHour() + "");
     this.timeH.setPrefSize(35, 10);
-    this.timeH.setOnAction(e -> updateTime());
+    this.timeH.setOnKeyTyped(e -> updateTime());
 
     this.timeM = new TextField(event.getTime().getMinute() + "");
     this.timeM.setPrefSize(35, 10);
-    this.timeM.setOnAction(e -> updateTime());
+    this.timeM.setOnKeyTyped(e -> updateTime());
 
     timeBox.getChildren().addAll(timeHLabel, timeH, timeMLabel, timeM);
     this.getChildren().addAll(tLabel, timeBox);
@@ -58,11 +58,11 @@ public class EventView extends JournalEntryView {
 
     this.durH = new TextField(event.getDuration().toHoursPart() + "");
     this.durH.setPrefSize(35, 10);
-    this.durH.setOnAction(e -> updateDur());
+    this.durH.setOnKeyTyped(e -> updateDur());
 
     this.durM = new TextField(event.getDuration().toMinutesPart() + "");
     this.durM.setPrefSize(35, 10);
-    this.durM.setOnAction(e -> updateDur());
+    this.durM.setOnKeyTyped(e -> updateDur());
 
     durBox.getChildren().addAll(durHLabel, durH, durMLabel, durM);
     this.getChildren().addAll(dLabel, durBox);
@@ -93,8 +93,20 @@ public class EventView extends JournalEntryView {
     String h = this.timeH.getText();
     String m = this.timeM.getText();
     try {
-      int hour = Integer.parseInt(h);
-      int min = Integer.parseInt(m);
+      int hour;
+      int min;
+
+      if (h.equals("")) {
+        hour = 0;
+      } else {
+        hour = Integer.parseInt(h);
+      }
+
+      if (m.equals("")) {
+        min = 0;
+      } else {
+        min = Integer.parseInt(m);
+      }
       this.event.setTime(hour, min);
     } catch (NumberFormatException err) {
       Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -109,8 +121,20 @@ public class EventView extends JournalEntryView {
     String h = this.durH.getText();
     String m = this.durM.getText();
     try {
-      int hour = Integer.parseInt(h);
-      int min = Integer.parseInt(m);
+      int hour;
+      int min;
+
+      if (h.equals("")) {
+        hour = 0;
+      } else {
+        hour = Integer.parseInt(h);
+      }
+
+      if (m.equals("")) {
+        min = 0;
+      } else {
+        min = Integer.parseInt(m);
+      }
       this.event.setDur(hour, min);
     } catch (NumberFormatException err) {
       Alert alert = new Alert(Alert.AlertType.ERROR);

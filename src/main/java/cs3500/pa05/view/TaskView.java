@@ -56,7 +56,6 @@ public class TaskView extends JournalEntryView {
     this.name = new TextField(name);
 
     this.finished.setOnAction(e -> {
-      System.out.println("push finished");
       this.entry.setFinished(!this.entry.isFinished());
       this.side.updateView();
       this.dayView.updateProgress();

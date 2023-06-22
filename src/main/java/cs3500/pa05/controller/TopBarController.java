@@ -92,8 +92,13 @@ public class TopBarController {
 
     this.view.registerMaxEvents(e -> {
       try {
-        this.week.getWeek()
-            .setEventMax(Integer.parseInt(this.view.getMaxEventsTextField().getText()));
+        String text = this.view.getMaxEventsTextField().getText();
+        if (text.equals("")) {
+          this.week.getWeek().setEventMax(0);
+        } else {
+          this.week.getWeek()
+              .setEventMax(Integer.parseInt(text));
+        }
         // todo update to confirm current amount isn't over max?
       } catch (NumberFormatException err) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -106,8 +111,13 @@ public class TopBarController {
 
     this.view.registerMaxTasks(e -> {
       try {
-        this.week.getWeek()
-            .setTaskMax(Integer.parseInt(this.view.getMaxTasksTextField().getText()));
+        String text = this.view.getMaxTasksTextField().getText();
+        if (text.equals("")) {
+          this.week.getWeek().setTaskMax(0);
+        } else {
+          this.week.getWeek()
+              .setTaskMax(Integer.parseInt(text));
+        }
         // todo update to confirm current amount isn't over max?
       } catch (NumberFormatException err) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
