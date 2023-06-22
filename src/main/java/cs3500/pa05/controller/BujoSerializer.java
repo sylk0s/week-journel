@@ -16,7 +16,7 @@ public class BujoSerializer {
   /**
    * Object that maps the json to string and reverse
    */
-  ObjectMapper mapper = new ObjectMapper();
+  private final ObjectMapper mapper = new ObjectMapper();
 
   /**
    * constructor

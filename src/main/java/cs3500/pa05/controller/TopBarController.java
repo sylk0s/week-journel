@@ -199,6 +199,11 @@ public class TopBarController {
     });
   }
 
+  /**
+   * Handler for saving
+   *
+   * @param primaryStage the stage for this app
+   */
   public void handleSave(Stage primaryStage) {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Save");
@@ -220,6 +225,11 @@ public class TopBarController {
     }
   }
 
+  /**
+   * handler for creating a new week
+   *
+   * @param primaryStage the stage for this app
+   */
   public void handleNewWeek(Stage primaryStage) {
     JournalView journalView = new JournalView(new SideBar(), new TopBar(week), new WeekView());
     Scene scene = new Scene(journalView);

@@ -13,10 +13,6 @@ public class JournalViewController {
    * The journal view
    */
   private final JournalView view;
-  /**
-   * The week model
-   */
-  private final Week week;
 
   /**
    * The constructor
@@ -24,9 +20,8 @@ public class JournalViewController {
    * @param view the journal view
    * @param week the week model
    */
-  public JournalViewController(JournalView view, Week week) {
+  public JournalViewController(JournalView view) {
     this.view = view;
-    this.week = week;
   }
 
   /**

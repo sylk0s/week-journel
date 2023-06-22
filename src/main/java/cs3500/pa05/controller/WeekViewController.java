@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.stream.Collectors;
 
@@ -16,40 +15,67 @@ import java.util.stream.Collectors;
  * Controls the week view
  */
 public class WeekViewController {
-  private Week week;
-  private WeekView view;
-  private Stage stage;  // Added the stage object to be able to display the week
-  private List<DayController> days;
-  SideBarController side;
 
+  /**
+   * The model for this week
+   */
+  private final Week week;
+
+  /**
+   * The view for this week
+   */
+  private final WeekView view;
+
+  /**
+   * The stage for this week
+   */
+  private final Stage stage;  // Added the stage object to be able to display the week
+
+  /**
+   * The day controllers in this week
+   */
+  private final List<DayController> days;
+
+  /**
+   * Constructor
+   *
+   * @param week the week model
+   * @param stage the app stage
+   * @param side the sidebar controller
+   */
   WeekViewController(Week week, Stage stage, SideBarController side) { // Stage passed to the constructor
     this.week = week;
     this.stage = stage;
     this.view = new WeekView();
-    System.out.println("side is: " + (side == null ? "null" : side));
     this.days = week.getDays().stream()
         .map(d -> new DayController(d, side, this)).collect(Collectors.toList());
     for (DayController d : days) {
       this.addDayToView(d);
     }
     //error
-    //this.setWeekStartDay(this.week.getStartDay());
-  }
-
-  public void run() {
-    Scene scene = new Scene(view); // Creating a new Scene using the view
-    stage.setScene(scene); // Setting the stage's scene
-    stage.show(); // Showing the stage
+    this.setWeekStartDay(this.week.getStartDay());
   }
 
   private void addDayToView(DayController d) {
     this.view.getChildren().add(d.getView());
   }
 
+  /**
+   * Add an entry to a specific day
+   *
+   * @param type the day to add to
+   * @param entry the entry to add
+   */
   public void addEntryTo(DayType type, JournalEntry entry) {
     this.getDay(type).addEntry(entry);
   }
 
+  /**
+   * Get a day model
+   *
+   * @param type the day to get
+   * @return the day model
+   */
   public DayController getDay(DayType type) {
     Optional<DayController> result = this.days.stream()
         .filter(d -> d.getDay().getName().equals(type)).findFirst();
@@ -60,6 +86,11 @@ public class WeekViewController {
     }
   }
 
+  /**
+   * Sets the start day for the week
+   *
+   * @param startDay the desired start day
+   */
   public void setWeekStartDay(DayType startDay) {
     List<DayType> dayTypes = new ArrayList<>(Arrays.asList(DayType.values()));
     int startIndex = dayTypes.indexOf(startDay);
@@ -74,10 +105,20 @@ public class WeekViewController {
     }
   }
 
+  /**
+   * Gets the week view
+   *
+   * @return the week view
+   */
   public WeekView getWeekView() {
     return this.view;
   }
 
+  /**
+   * Gets the week model
+   *
+   * @return week model
+   */
   public Week getWeek() {
     return this.week;
   }

@@ -18,17 +18,12 @@ public class InitialController {
   /**
    * The serializer for BUJO files
    */
-  private BujoSerializer serializer;
-
-  /**
-   * The bujo file
-   */
-  private Bujo bujo;
+  private final BujoSerializer serializer;
 
   /**
    * The initial view object
    */
-  private InitialView view;
+  private final InitialView view;
 
   /**
    * The journal app object that runs this controller
@@ -87,7 +82,10 @@ public class InitialController {
     String filePath = view.getFilePathField().getText();
     if (!filePath.isEmpty()) {
       try {
-        bujo = serializer.read(filePath);
+        /**
+         * The bujo file
+         */
+        Bujo bujo = serializer.read(filePath);
         // navigate to JournalView or perform other actions
         stage.setScene(new Scene(app.getJournalView(stage, bujo.getWeek()), 800, 800));
         stage.show();
@@ -107,7 +105,6 @@ public class InitialController {
    * @param stage the stage for the app
    */
   private void createNewBujo(Stage stage) {
-    // Create a new Bujo object with an empty Week
     // Perform any necessary actions with the new JournalView
     stage.setScene(new Scene(app.getJournalView(stage,
         new Week(5, 5, "New week")), 800, 800));

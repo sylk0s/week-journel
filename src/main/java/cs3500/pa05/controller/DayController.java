@@ -14,22 +14,22 @@ public class DayController {
   /**
    * This day's view
    */
-  DayView view;
+  private final DayView view;
 
   /**
    * The day;s model
    */
-  Day day;
+  private final Day day;
 
   /**
    * The controller for the sidebar
    */
-  SideBarController side;
+  private final SideBarController side;
 
   /**
    * The controller for the week view
    */
-  WeekViewController week;
+  private final WeekViewController week;
 
   /**
    * consturctor

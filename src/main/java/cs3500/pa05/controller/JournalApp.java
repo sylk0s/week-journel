@@ -39,7 +39,7 @@ public class JournalApp extends Application {
   /**
    * The controller for the week
    */
-  private WeekViewController week;
+  private WeekViewController weekController;
   /**
    * Handler object for keypresses
    */
@@ -104,13 +104,13 @@ public class JournalApp extends Application {
     // Initialize the views
     SideBar sideBar = new SideBar();
     this.side = new SideBarController(weekModel, sideBar);
-    WeekViewController weekController = new WeekViewController(weekModel, primaryStage, this.side);
+    this.weekController = new WeekViewController(weekModel, primaryStage, this.side);
     TopBar topBar = new TopBar(weekController);
     JournalView journalView = new JournalView(sideBar, topBar, weekController.getWeekView());
 
 
     // Initialize the controllers with the models and views
-    this.journalView = new JournalViewController(journalView, weekModel);
+    this.journalView = new JournalViewController(journalView);
     this.top = new TopBarController(weekController, topBar, primaryStage, side);
     this.keyPressHandler = new KeyPressHandler(top);
     primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
