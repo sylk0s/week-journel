@@ -46,7 +46,7 @@ public abstract class JournalEntryView extends VBox {
    * @param self - this entry model
    */
   public JournalEntryView(String name, String desc, SideBarController side, JournalEntry self) {
-    this.remove = new Button("Delete");
+    this.remove = new Button("X");
     this.self = self;
     this.side = side;
 

@@ -37,10 +37,13 @@ public class BujoSerializer {
   }
 
   /**
-   * Turns a JSON string into a BUJO file
+   * Turns a JSON string into a bujo file
    *
    * @param string the string to deserialize
-   * @return the Bujo file
+   *
+   * @return the bujo file
+   *
+   * @throws JsonProcessingException - cannot deserialize
    */
   public Bujo deserialize(String string) throws JsonProcessingException {
     System.out.println("Deserialize got " + string);
@@ -52,6 +55,8 @@ public class BujoSerializer {
    *
    * @param path the path of the file to write to
    * @param bujo the object to write to the file
+   *
+   * @throws IOException - cannot write
    */
   public void write(String path, Bujo bujo) throws IOException {
     Files.write(FileSystems.getDefault().getPath(path), this.serialize(bujo).getBytes());
@@ -61,7 +66,10 @@ public class BujoSerializer {
    * Reads and deserialized a .bujo into an object
    *
    * @param path the path to read from
+   *
    * @return a bujo file
+   *
+   * @throws IOException - cannot read
    */
   public Bujo read(String path) throws IOException {
     return this.deserialize(Files.readString(FileSystems.getDefault().getPath(path)));

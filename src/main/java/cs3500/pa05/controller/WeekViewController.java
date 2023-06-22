@@ -40,9 +40,6 @@ public class WeekViewController {
    */
   WeekViewController(Week week, Stage stage, SideBarController side) {
     this.week = week;
-    /**
-     * The stage for this week
-     */
     // Added the stage object to be able to display the week
     this.view = new WeekView();
     this.days = week.getDays().stream()

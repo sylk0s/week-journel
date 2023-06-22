@@ -95,7 +95,6 @@ public class TopBarController {
           this.week.getWeek()
               .setEventMax(Integer.parseInt(text));
         }
-        // todo update to confirm current amount isn't over max?
       } catch (NumberFormatException err) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Not a number!");
@@ -114,7 +113,6 @@ public class TopBarController {
           this.week.getWeek()
               .setTaskMax(Integer.parseInt(text));
         }
-        // todo update to confirm current amount isn't over max?
       } catch (NumberFormatException err) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Not a number!");

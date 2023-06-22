@@ -31,9 +31,9 @@ public class JournalApp extends Application {
    * Starts the application
    *
    * @param primaryStage the primary stage for this application, onto which
-   * the application scene can be set.
-   * Applications may create other stages, if needed, but they will not be
-   * primary stages.
+   *                     the application scene can be set.
+   *                     Applications may create other stages, if needed, but they will not be
+   *                     primary stages.
    */
   @Override
   public void start(Stage primaryStage) {

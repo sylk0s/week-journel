@@ -1,8 +1,5 @@
 package cs3500.pa05.controller;
 
-import cs3500.pa05.model.DayType;
-import cs3500.pa05.model.JournalEntry;
-import cs3500.pa05.model.Week;
 import cs3500.pa05.view.JournalView;
 
 /**
@@ -23,8 +20,11 @@ public class JournalViewController {
     this.view = view;
   }
 
+
   /**
-   * Gets the view for the journal
+   * Get view from the journal
+   *
+   * @return the view
    */
   public JournalView getView() {
     return this.view;
