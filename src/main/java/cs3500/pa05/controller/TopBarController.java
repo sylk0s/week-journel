@@ -71,26 +71,7 @@ public class TopBarController {
    */
   public void initHandlers(Stage primaryStage) {
 
-    this.view.registerOnSave(e -> {
-      FileChooser fileChooser = new FileChooser();
-      fileChooser.setTitle("Save");
-      fileChooser.setInitialFileName("savefile.bujo");
-      fileChooser.getExtensionFilters().addAll(
-          new FileChooser.ExtensionFilter("Bujo Files", "*.bujo"),
-          new FileChooser.ExtensionFilter("All Files", "*.*")
-      );
-
-      File selectedFile = fileChooser.showSaveDialog(primaryStage);
-      if (selectedFile != null) {
-        try {
-          // Perform save operation by writing bujo data to the selected file
-          BujoSerializer serializer = new BujoSerializer();
-          Bujo bujo = new Bujo(this.week.getWeek()); // Replace with your bujo creation logic
-          serializer.write(selectedFile.getAbsolutePath(), bujo);
-        } catch (IOException aaa) {
-        }
-      }
-    });
+    this.view.registerOnSave(e -> handleSave(primaryStage));
 
     this.view.registerOnAdd(e -> {
       this.showAddDropdown();
@@ -100,11 +81,7 @@ public class TopBarController {
       this.side.toggleVis();
     });
 
-    this.view.registerOnNewWeek(e -> {
-      JournalView journalView = new JournalView(new SideBar(), new TopBar(week),
-          new WeekView());
-      Scene scene = new Scene(journalView);
-    });
+    this.view.registerOnNewWeek(e -> handleNewWeek(primaryStage));
 
     this.view.registerOnStartDay(e -> {
       this.showDayDropdown();
@@ -220,5 +197,33 @@ public class TopBarController {
       week.setWeekStartDay(selectedDay);
       popupStage.close();
     });
+  }
+
+  public void handleSave(Stage primaryStage) {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Save");
+    fileChooser.setInitialFileName("savefile.bujo");
+    fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("Bujo Files", "*.bujo"),
+        new FileChooser.ExtensionFilter("All Files", "*.*")
+    );
+
+    File selectedFile = fileChooser.showSaveDialog(primaryStage);
+    if (selectedFile != null) {
+      try {
+        BujoSerializer serializer = new BujoSerializer();
+        Bujo bujo = new Bujo(this.week.getWeek());
+        serializer.write(selectedFile.getAbsolutePath(), bujo);
+      } catch (IOException aaa) {
+        // todo something
+      }
+    }
+  }
+
+  public void handleNewWeek(Stage primaryStage) {
+    JournalView journalView = new JournalView(new SideBar(), new TopBar(week), new WeekView());
+    Scene scene = new Scene(journalView);
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 }
