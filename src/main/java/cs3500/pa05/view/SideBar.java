@@ -8,6 +8,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+
 /**
  * Expandable sidebar on the left of the screen
  */
@@ -17,6 +18,7 @@ public class SideBar extends VBox {
    * The list of tasks on the sidebar
    */
   private final VBox taskList;
+
   /**
    * The statistics for the week
    */
@@ -28,16 +30,27 @@ public class SideBar extends VBox {
   public SideBar() {
     taskList = new VBox();
     stats = new VBox();
-    // why doesnt this work pls help
-    stats.setAlignment(Pos.BOTTOM_LEFT);
+
+    taskList.setPadding(new Insets(15, 15, 15, 15));
+    taskList.setSpacing(10);
+
+    stats.setPadding(new Insets(15, 15, 15, 15));
+    stats.setSpacing(10);
+
+    // Setting font to bold for the stats VBox
+    stats.setStyle("-fx-font-weight: bold;");
+
+    taskList.setAlignment(Pos.TOP_LEFT);
+    stats.setAlignment(Pos.TOP_LEFT);
 
     setSpacing(10);
     setPadding(new Insets(10));
     getChildren().addAll(taskList, stats);
 
+    // Updated color to a shade of blue
     BackgroundFill backgroundFill =
         new BackgroundFill(
-            Color.valueOf("#FAA4BD"),
+            Color.valueOf("#fffff0"), // updated color to baby blue
             new CornerRadii(0),
             new Insets(0)
         );

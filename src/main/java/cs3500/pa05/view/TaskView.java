@@ -14,28 +14,21 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
- * A view for a task
+ * Handles the tasks
  */
 public class TaskView extends JournalEntryView {
 
-  /**
-   * The task that this view is for
-   */
   private final Task entry;
-
-  /**
-   * The view for the day that contains this task
-   */
   private final DayView dayView;
 
   /**
-   * consturctor
-   *
-   * @param entry the entry for this view
-   * @param side the sidebar controller
-   * @param dayView the day view
+   * @param entry name of tasks
+   * @param side side bar stats
+   * @param dayView which day does it show up in?
    */
   public TaskView(Task entry, SideBarController side, DayView dayView) {
     super(entry.getName(), entry.getDescription(), side, entry);
@@ -43,10 +36,10 @@ public class TaskView extends JournalEntryView {
     this.dayView = dayView;
 
     BorderStroke borderStroke = new BorderStroke(
-        Color.BLACK,                       // Border color
-        BorderStrokeStyle.SOLID,           // Border style
-        new CornerRadii(0),                 // Corner radii
-        new BorderWidths(1)                 // Border widths
+        Color.BLACK,
+        BorderStrokeStyle.SOLID,
+        new CornerRadii(5),
+        new BorderWidths(2)
     );
 
     this.setBorder(new Border(borderStroke));
@@ -54,26 +47,23 @@ public class TaskView extends JournalEntryView {
     BackgroundFill backgroundFill =
         new BackgroundFill(
             Color.valueOf("#c7d3fc"),
-            new CornerRadii(0),
+            new CornerRadii(5),
             new Insets(0)
         );
 
-    Background background =
-        new Background(backgroundFill);
-
+    Background background = new Background(backgroundFill);
     this.setBackground(background);
+    this.setSpacing(25); // added spacing between the elements
+    this.setPadding(new Insets(10)); // padding for the VBox
   }
 
-  /**
-   * Creates the name label for a task
-   *
-   * @param box box to add label to
-   * @param name the name of the entry
-   */
   @Override
   protected void createNameLabel(HBox box, String name) {
     CheckBox finished = new CheckBox();
     this.name = new TextField(name);
+
+    this.name.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+
 
     finished.setOnAction(e -> {
       this.entry.setFinished(!this.entry.isFinished());
@@ -83,6 +73,7 @@ public class TaskView extends JournalEntryView {
     finished.setSelected(this.self.isFinished());
 
     HBox tmp = new HBox();
+    tmp.setSpacing(20); // added spacing between elements
     tmp.getChildren().addAll(finished, this.name);
     box.getChildren().add(tmp);
   }

@@ -79,8 +79,8 @@ public class TopBar extends HBox {
     // Set uniform button styles
     for(Button button: new Button[]{sideBarToggle, save, add, newWeek, startDay, open}){
       button.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
-      button.setTextFill(Color.WHITE);
-      button.setBackground(new Background(new BackgroundFill(Color.valueOf("#00b0ff"),
+      button.setTextFill(Color.BLACK);
+      button.setBackground(new Background(new BackgroundFill(Color.valueOf("#fffff0"),
           new CornerRadii(5), new Insets(-5))));
       button.setPrefWidth(100); // increase button width for better UX
     }
