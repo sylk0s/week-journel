@@ -47,6 +47,8 @@ public class KeyPressHandler {
         new KeyCodeCombination(KeyCode.N, KeyCombination.SHORTCUT_DOWN);
     KeyCodeCombination startDayCombination =
         new KeyCodeCombination(KeyCode.D, KeyCombination.SHORTCUT_DOWN);
+    KeyCodeCombination toggleSideCombination =
+        new KeyCodeCombination(KeyCode.V, KeyCombination.SHORTCUT_DOWN);
 
     if (newEventCombination.match(event)) {
       System.out.println("Create New Event command triggered.");
@@ -63,8 +65,10 @@ public class KeyPressHandler {
     } else if (newWeekCombination.match(event)) {
       topBarController.handleNewWeek(primaryStage);
       System.out.println("New Week command triggered.");
-    } else {
+    } else if (startDayCombination.match(event)){
       topBarController.showDayDropdown();
+    } else if (toggleSideCombination.match(event)) {
+      this.topBarController.handleToggleVis();
     }
   }
 }

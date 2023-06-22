@@ -85,7 +85,7 @@ public class TopBarController {
     });
 
     this.view.registerOnToggleBar(e -> {
-      this.side.toggleVis();
+      this.handleToggleVis();
     });
 
     this.view.registerOnNewWeek(e -> handleNewWeek(primaryStage));
@@ -268,5 +268,12 @@ public class TopBarController {
         new Week(5, 5, "New Week")));
     primaryStage.setScene(scene);
     primaryStage.show();
+  }
+
+  /**
+   * Toggle side bar handler
+   */
+  public void handleToggleVis() {
+    this.side.toggleVis();
   }
 }
