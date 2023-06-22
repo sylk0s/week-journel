@@ -73,10 +73,8 @@ public class SideBarController {
    * Toggle visibility of the sidebar
    */
   public void toggleVis() {
-    System.out.println("toggled sidebar");
     this.view.setVisible(this.visible);
     if (this.visible) {
-      // todo this doesnt actually work now
       this.view.setMaxWidth(150);
     } else {
       this.view.setMaxWidth(0);

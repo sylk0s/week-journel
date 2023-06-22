@@ -24,9 +24,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCode;
 
 /**
  * Controls the top bar
@@ -227,7 +224,11 @@ public class TopBarController {
         Bujo bujo = new Bujo(this.week.getWeek());
         serializer.write(selectedFile.getAbsolutePath(), bujo);
       } catch (IOException aaa) {
-        // todo something
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Failed to open");
+        alert.setHeaderText(null);
+        alert.setContentText("Failed to open specified file");
+        alert.showAndWait();
       }
     }
   }

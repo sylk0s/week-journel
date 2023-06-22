@@ -46,7 +46,6 @@ public class BujoSerializer {
    * @throws JsonProcessingException - cannot deserialize
    */
   public Bujo deserialize(String string) throws JsonProcessingException {
-    System.out.println("Deserialize got " + string);
     return this.mapper.readValue(string, Bujo.class);
   }
 
