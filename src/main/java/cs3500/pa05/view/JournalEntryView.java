@@ -18,32 +18,41 @@ public abstract class JournalEntryView extends VBox {
    */
   private final Button remove;
   /**
-   * the hbox that contains the name and buttons
-   */
-  private final HBox topBox;
-  /**
    * The description for this note
    */
   private final TextArea desc;
 
+  /**
+   * The sidebar controller
+   */
   protected final SideBarController side;
+
+  /**
+   * Text field for name
+   */
   protected TextField name;
-  JournalEntry self;
+
+  /**
+   * This entry
+   */
+  protected final JournalEntry self;
 
   /**
    * Constructs a JournalEntryView object
    *
    * @param name - label of the name
    * @param desc - description
+   * @param side - the sidebar controller
+   * @param self - this entry model
    */
   public JournalEntryView(String name, String desc, SideBarController side, JournalEntry self) {
     this.remove = new Button("Delete");
     this.self = self;
     this.side = side;
 
-    this.topBox = new HBox();
+    HBox topBox = new HBox();
     this.createNameLabel(topBox, name);
-    this.topBox.getChildren().add(this.remove);
+    topBox.getChildren().add(this.remove);
     this.name.setOnKeyTyped(k -> {
       this.self.setName(this.name.getText());
       this.side.updateView();
@@ -52,17 +61,10 @@ public abstract class JournalEntryView extends VBox {
     this.desc = new TextArea();
     this.desc.setText(desc);
     this.desc.setWrapText(true);
-    // todo update description
     this.desc.setOnKeyTyped(k -> {
       this.self.setDescription(this.desc.getText());
       this.side.updateView();
     });
-
-//    Button descUpdate = new Button("Update");
-//    descUpdate.setOnAction(e -> {
-//      this.self.setDescription(this.desc.getText());
-//      this.side.updateView();
-//    });
 
     this.setMaxWidth(200);
     this.desc.setWrapText(true);
@@ -80,6 +82,12 @@ public abstract class JournalEntryView extends VBox {
     remove.setOnAction(event -> onDeleteListener.run());
   }
 
+  /**
+   * Creates the name label
+   *
+   * @param box box to add label to
+   * @param name the name of the entry
+   */
   protected void createNameLabel(HBox box, String name) {
     this.name = new TextField(name);
     box.getChildren().add(this.name);

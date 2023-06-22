@@ -219,10 +219,10 @@ public class Week {
    * gets a day
    *
    * @param type the day to get
-   * @return
+   * @return the day
    */
   public Day getDay(DayType type) {
-    Optional<Day> result = this.days.stream().filter(d -> d.name.equals(type)).findFirst();
+    Optional<Day> result = this.days.stream().filter(d -> d.getName().equals(type)).findFirst();
     if (result.isPresent()) {
       return result.get();
     } else {
@@ -247,7 +247,7 @@ public class Week {
    */
   @Override
   public String toString() {
-    StringBuilder sb = new StringBuilder("");
+    StringBuilder sb = new StringBuilder();
     for (Day day : days) {
       sb.append(day.getName()).append("\n");
     }

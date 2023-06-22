@@ -4,7 +4,6 @@ import cs3500.pa05.controller.WeekViewController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,16 +18,46 @@ import javafx.scene.paint.Color;
  * The bar on the top of the page
  */
 public class TopBar extends HBox {
+
+  /**
+   * Button to toggle sidebar
+   */
   private final Button sideBarToggle;
+
+  /**
+   * Button to save
+   */
   private final Button save;
+
+  /**
+   * Button to add a new entry
+   */
   private final Button add;
+
+  /**
+   * Button for a new week
+   */
   private final Button newWeek;
+
+  /**
+   * Button to change the start day
+   */
   private final Button startDay;
+
+  /**
+   * the max number of events
+   */
   private final TextField maxEvents;
+
+  /**
+   * the max number of tasks
+   */
   private final TextField maxTasks;
 
   /**
    * Constructing a new TopBar object
+   *
+   * @param week the week controller
    */
   public TopBar(WeekViewController week) {
     this.sideBarToggle = new Button("Toggle Sidebar");
@@ -56,66 +85,67 @@ public class TopBar extends HBox {
     this.setBackground(background);
   }
 
+  /**
+   * registers this handler for the save button
+   *
+   * @param handler the handler to register
+   */
   public void registerOnSave(EventHandler<ActionEvent> handler) {
-    System.out.println("registering handler for save...");
     this.save.setOnAction(handler);
   }
 
+  /**
+   * registers this handler for the add button
+   *
+   * @param handler the handler to register
+   */
   public void registerOnAdd(EventHandler<ActionEvent> handler) {
-    System.out.println("registering handler for add...");
     this.add.setOnAction(handler);
   }
 
+  /**
+   * registers this handler for the save button
+   *
+   * @param handler the handler to register
+   */
   public void registerOnNewWeek(EventHandler<ActionEvent> handler) {
-    System.out.println("registering handler for new week...");
     this.newWeek.setOnAction(handler);
   }
 
+  /**
+   * registers this handler for the start day button
+   *
+   * @param handler the handler to register
+   */
   public void registerOnStartDay(EventHandler<ActionEvent> handler) {
-    System.out.println("registering handler for day...");
     this.startDay.setOnAction(handler);
   }
 
+  /**
+   * registers this handler for the toggle bar button
+   *
+   * @param handler the handler to register
+   */
   public void registerOnToggleBar(EventHandler<ActionEvent> handler) {
     this.sideBarToggle.setOnAction(handler);
   }
 
+  /**
+   * registers this handler for the max events
+   *
+   * @param handler the handler to register
+   */
   public void registerMaxEvents(EventHandler<KeyEvent> handler) {
     this.maxEvents.setOnKeyTyped(handler);
   }
 
+  /**
+   * registers this handler for the max tasks
+   *
+   * @param handler the handler to register
+   */
   public void registerMaxTasks(EventHandler<KeyEvent> handler) {
     this.maxTasks.setOnKeyTyped(handler);
-  }
-  /**
-   * Getter method for side bar toggle
-   *
-   * @return sideBarToggle
-   */
-  public Button getSideBarToggle() {
-    return sideBarToggle;
-  }
-
-  /**
-   * Getter method for save
-   *
-   * @return save
-   */
-  public Button getSaveButton() {
-    return save;
-  }
-
-  /**
-   * Getter method for add
-   *
-   * @return add
-   */
-  public Button getAddButton() {
-    return add;
-  }
-
-  public Button getNewWeek() {
-    return newWeek;
   }
 
   /**
@@ -134,13 +164,5 @@ public class TopBar extends HBox {
    */
   public TextField getMaxTasksTextField() {
     return maxTasks;
-  }
-
-  public void displayError(String title, String message) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setTitle(title);
-    alert.setHeaderText(null);
-    alert.setContentText(message);
-    alert.showAndWait();
   }
 }

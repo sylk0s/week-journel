@@ -2,7 +2,6 @@ package cs3500.pa05.view;
 
 import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.Event;
-import java.text.ParseException;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -21,11 +20,30 @@ import javafx.scene.paint.Color;
  * A view for some event
  */
 public class EventView extends JournalEntryView {
-  TextField timeH;
-  TextField timeM;
-  TextField durH;
-  TextField durM;
-  Event event;
+  /**
+   * Field for time hours
+   */
+  private final TextField timeH;
+
+  /**
+   * Field for time min
+   */
+  private final TextField timeM;
+
+  /**
+   * Field for duration hours
+   */
+  private final TextField durH;
+
+  /**
+   * Field for duration minutes
+   */
+  private final TextField durM;
+
+  /**
+   * The event for this view
+   */
+  private final Event event;
 
   /**
    * @param event the event that this view is displaying
@@ -89,6 +107,9 @@ public class EventView extends JournalEntryView {
     this.setBackground(background);
   }
 
+  /**
+   * Update the time
+   */
   public void updateTime() {
     String h = this.timeH.getText();
     String m = this.timeM.getText();
@@ -117,6 +138,9 @@ public class EventView extends JournalEntryView {
     }
   }
 
+  /**
+   * Update the length
+   */
   public void updateDur() {
     String h = this.durH.getText();
     String m = this.durM.getText();

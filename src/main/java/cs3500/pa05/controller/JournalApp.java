@@ -6,7 +6,6 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import cs3500.pa05.model.Bujo;
 import cs3500.pa05.model.Week;
 import cs3500.pa05.view.InitialView;
 import cs3500.pa05.view.JournalView;
@@ -21,25 +20,9 @@ import javafx.util.Duration;
 public class JournalApp extends Application {
 
   /**
-   * The controller for the initial view
-   */
-  private InitialController init;
-  /**
-   * The controller for the normal journal view
-   */
-  private JournalViewController journalView;
-  /**
    * The controller for the sidebar
    */
   private SideBarController side;
-  /**
-   * The controller for the topbar
-   */
-  private TopBarController top;
-  /**
-   * The controller for the week
-   */
-  private WeekViewController weekController;
   /**
    * Handler object for keypresses
    */
@@ -81,10 +64,10 @@ public class JournalApp extends Application {
    * @return the initial scene
    */
   private Scene createInitialScene(Stage primaryStage) {
-    InitialView initialView = new InitialView(primaryStage);
+    InitialView initialView = new InitialView();
     // Initialize the serializers
     BujoSerializer serializer = new BujoSerializer();
-    this.init = new InitialController(initialView, serializer, primaryStage, this);
+    new InitialController(initialView, serializer, primaryStage, this);
     Scene initialScene = new Scene(initialView, 800, 600);
     primaryStage.setScene(initialScene);
     primaryStage.show();
@@ -104,20 +87,18 @@ public class JournalApp extends Application {
     // Initialize the views
     SideBar sideBar = new SideBar();
     this.side = new SideBarController(weekModel, sideBar);
-    this.weekController = new WeekViewController(weekModel, primaryStage, this.side);
+    WeekViewController weekController = new WeekViewController(weekModel, primaryStage, this.side);
     TopBar topBar = new TopBar(weekController);
     JournalView journalView = new JournalView(sideBar, topBar, weekController.getWeekView());
 
 
     // Initialize the controllers with the models and views
-    this.journalView = new JournalViewController(journalView);
-    this.top = new TopBarController(weekController, topBar, primaryStage, side);
+    JournalViewController journalView1 = new JournalViewController(journalView);
+    TopBarController top = new TopBarController(weekController, topBar, primaryStage, side);
     this.keyPressHandler = new KeyPressHandler(top);
-    primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-      keyPressHandler.handle(event);
-    });
+    primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> keyPressHandler.handle(event));
     this.run();
-    return this.journalView.getView();
+    return journalView1.getView();
   }
 
   /**

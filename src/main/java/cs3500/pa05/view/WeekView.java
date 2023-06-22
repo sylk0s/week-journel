@@ -11,13 +11,12 @@ public class WeekView extends HBox {
   /**
    * The days in this week
    */
-  List<DayController> days;
+  private List<DayController> days;
 
   /**
    * Constructs a week view with the following days
    */
   public WeekView() {
-
 
   }
 }

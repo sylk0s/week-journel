@@ -24,28 +24,37 @@ import javafx.scene.paint.Color;
  */
 public class DayView extends VBox {
   /**
-   * Box for the top which contains the label and some buttons
-   */
-  private final HBox topBox;
-  /**
-   * The name of this day
-   */
-  private final Label dayName;
-  /**
    * The tasks and events under this day
    */
   private final VBox tasksAndEvents;
+
+  /**
+   * the controller for the sidebar
+   */
   private final SideBarController controller;
-  private DayController parent;
+
+  /**
+   * the controller for this
+   */
+  private final DayController parent;
+
+  /**
+   * the progress bar for this day
+   */
   private final ProgressBar prog;
 
+  /**
+   * Maps all entries to their view
+   */
   private final Map<JournalEntry, JournalEntryView> entryMap = new HashMap<>();
 
   /**
-   * Contructs a DayView object
+   * Costructs a DayView object
    *
    * @param name of the day
    * @param entries - list of all entries
+   * @param controller the sidebar controller
+   * @param parent the controller for this
    */
   public DayView(String name, List<JournalEntry> entries,
                  SideBarController controller, DayController parent) {
@@ -63,10 +72,10 @@ public class DayView extends VBox {
     this.controller = controller;
 
     this.setBackground(background);
-    this.dayName = new Label(name);
+    Label dayName = new Label(name);
 
-    this.topBox = new HBox();
-    this.topBox.getChildren().add(this.dayName);
+    HBox topBox = new HBox();
+    topBox.getChildren().add(dayName);
 
     this.tasksAndEvents = new VBox();
 
@@ -81,6 +90,9 @@ public class DayView extends VBox {
     this.getChildren().addAll(topBox, tasksAndEvents, this.prog);
   }
 
+  /**
+   * Updates the progress bar
+   */
   public void updateProgress() {
     int total = this.parent.getDay().numTasks();
     this.prog.setProgress(
@@ -127,10 +139,11 @@ public class DayView extends VBox {
     this.updateProgress();
   }
 
-  public JournalEntryView getEntryView(JournalEntry entry) {
-    return this.entryMap.get(entry);
-  }
-
+  /**
+   * Displays a warning for counts over the max
+   *
+   * @param type the type of thing over the max
+   */
   public void dispOverError(String type) {
     Alert alert = new Alert(Alert.AlertType.WARNING);
     alert.setTitle("Over " + type + " maximum value!");

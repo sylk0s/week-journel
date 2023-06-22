@@ -8,14 +8,29 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
+/**
+ * Opening splash screen
+ */
 public class Splash extends StackPane {
+
+  /**
+   * The label for the screen
+   */
   private final Label splash;
 
+  /**
+   * constructor
+   *
+   * @param text the text to display
+   */
   public Splash(String text) {
     this.splash = new Label(text);
     initializeSplash();
   }
 
+  /**
+   * initializes the splash
+   */
   private void initializeSplash() {
     // Set splash screen styling
     splash.setFont(Font.font("Times New Roman", 40));

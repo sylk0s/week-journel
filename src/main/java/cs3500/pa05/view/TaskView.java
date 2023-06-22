@@ -15,13 +15,28 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
+/**
+ * A view for a task
+ */
 public class TaskView extends JournalEntryView {
-  Task entry;
+
   /**
-   * A checkbox indicating if a task is finished
+   * The task that this view is for
    */
-  CheckBox finished;
-  DayView dayView;
+  private final Task entry;
+
+  /**
+   * The view for the day that contains this task
+   */
+  private final DayView dayView;
+
+  /**
+   * consturctor
+   *
+   * @param entry the entry for this view
+   * @param side the sidebar controller
+   * @param dayView the day view
+   */
   public TaskView(Task entry, SideBarController side, DayView dayView) {
     super(entry.getName(), entry.getDescription(), side, entry);
     this.entry = entry;
@@ -49,18 +64,24 @@ public class TaskView extends JournalEntryView {
     this.setBackground(background);
   }
 
+  /**
+   * Creates the name label for a task
+   *
+   * @param box box to add label to
+   * @param name the name of the entry
+   */
   @Override
   protected void createNameLabel(HBox box, String name) {
     HBox tmp = new HBox();
-    this.finished = new CheckBox();
+    CheckBox finished = new CheckBox();
     this.name = new TextField(name);
 
-    this.finished.setOnAction(e -> {
+    finished.setOnAction(e -> {
       this.entry.setFinished(!this.entry.isFinished());
       this.side.updateView();
       this.dayView.updateProgress();
     });
-    this.finished.setSelected(this.self.isFinished());
+    finished.setSelected(this.self.isFinished());
     tmp.getChildren().addAll(finished, this.name);
     box.getChildren().add(tmp);
   }

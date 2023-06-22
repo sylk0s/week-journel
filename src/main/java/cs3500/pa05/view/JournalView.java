@@ -1,6 +1,5 @@
 package cs3500.pa05.view;
 
-import cs3500.pa05.controller.KeyPressHandler;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -12,32 +11,14 @@ import javafx.scene.paint.Color;
  * The view for the main screen with the sidebar, top bar, week view
  */
 public class JournalView extends BorderPane {
-  /**
-   * The sidebar object for the view
-   */
-  private final SideBar sideBar;
-  /**
-   * The top bar in the view
-   */
-  private final TopBar topBar;
-  /**
-   * The week view which contains all of the days
-   */
-  //private final WeekView weekView;
-  /**
-   * A handler for keybinds and such
-   */
-  private KeyPressHandler keyPressHandler;
 
   /**
    * Constructs a JournalView object
+   * @param sideBar the sidebar view
+   * @param topBar the topbar view
+   * @param weekView the view for the week
    */
   public JournalView(SideBar sideBar, TopBar topBar, WeekView weekView) {
-    this.sideBar = sideBar;
-    this.topBar = topBar;
-    //List<DayView> days = createWeekDays();
-
-    // temporarily removed to focus on week view
     setLeft(sideBar);
     setTop(topBar);
     setCenter(weekView);
@@ -53,41 +34,5 @@ public class JournalView extends BorderPane {
         new Background(backgroundFill);
 
     this.setBackground(background);
-  }
-
-  /**
-   * Gets the sidebar
-   *
-   * @return sideBar
-   */
-  public SideBar getSideBar() {
-    return sideBar;
-  }
-
-  /**
-   * Gets the top bar
-   *
-   * @return topBar
-   */
-  public TopBar getTopBar() {
-    return topBar;
-  }
-
-  /**
-   * Gets the key press handler
-   *
-   * @return keyPressHandler
-   */
-  public KeyPressHandler getKeyPressHandler() {
-    return keyPressHandler;
-  }
-
-  /**
-   * Sets the key press handler
-   *
-   * @param keyPressHandler - handles keybind
-   */
-  public void setKeyPressHandler(KeyPressHandler keyPressHandler) {
-    this.keyPressHandler = keyPressHandler;
   }
 }
