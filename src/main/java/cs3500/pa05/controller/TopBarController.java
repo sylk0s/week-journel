@@ -69,16 +69,6 @@ public class TopBarController {
     this.app = app;
     this.initHandlers(stage);
 
-    // adding a shortcut for add button
-    // Create the KeyCodeCombination for the shortcut
-    // Add listener to the scene after it has been set.
-    final KeyCombination keyComb = new KeyCodeCombination(KeyCode.A, KeyCombination.SHIFT_DOWN);
-    stage.getScene().getAccelerators().put(keyComb, () -> showAddDropdown());
-
-    stage.getScene().getAccelerators().put(keyComb, () -> {
-      System.out.println("Shortcut pressed");
-      showAddDropdown();
-    });
 
   }
 
