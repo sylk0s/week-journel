@@ -37,7 +37,6 @@ public class TopBarController {
   private Bujo bujo;
   private TopBar view;
   private SideBarController side;
-  private WeekViewController weekViewController;
 
   public TopBarController(WeekViewController week, Bujo bujo, TopBar view,
                           Stage stage, SideBarController side) {
@@ -203,7 +202,7 @@ public class TopBarController {
 
     dayDropdown.setOnAction(event -> {
       DayType selectedDay = dayDropdown.getValue();
-      weekViewController.setStartDay(selectedDay); // Update the start day in WeekViewController
+      week.setWeekStartDay(selectedDay);
       popupStage.close();
     });
   }

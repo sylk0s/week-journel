@@ -58,21 +58,6 @@ public class WeekViewController {
     }
   }
 
-  public void setStartDay(DayType startDay) {
-    this.week.setStartDay(startDay);
-    this.refreshView();
-  }
-
-  private void refreshView() {
-    this.view.getChildren().clear();
-    this.days = this.week.getDays().stream()
-        .map(d -> new DayController(d, this.side, this))
-        .collect(Collectors.toList());
-    for (DayController d : days) {
-      this.addDayToView(d);
-    }
-  }
-
   public void setWeekStartDay(DayType startDay) {
     List<DayType> dayTypes = new ArrayList<>(Arrays.asList(DayType.values()));
     int startIndex = dayTypes.indexOf(startDay);
