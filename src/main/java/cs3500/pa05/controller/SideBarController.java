@@ -3,17 +3,29 @@ package cs3500.pa05.controller;
 import cs3500.pa05.model.Task;
 import cs3500.pa05.model.Week;
 import cs3500.pa05.view.SideBar;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.text.Text;
-
-import java.util.stream.Collectors;
+import javafx.scene.control.ProgressBar;
 
 /**
  * Controls the sidebar
  */
 public class SideBarController {
+
+  /**
+   * The week model
+   */
   private final Week week;
+
+  /**
+   * The view for the sidebar
+   */
   private final SideBar view;
+
+  /**
+   * If the sidebar is visible
+   */
+  private boolean visible;
 
   /**
    * Constructor for SideBarController
@@ -34,14 +46,41 @@ public class SideBarController {
     // Update taskList
     view.getTaskList().getChildren().clear();
     for (Task task : week.getTasks()) {
-      // Just display the task's toString() result, replace this with however you want to display tasks
-      Text taskText = new Text(task.toString());
+      // Just display the task's toString() result,
+      // replace this with however you want to display tasks
+      CheckBox taskText = new CheckBox(task.getName());
+      taskText.setSelected(task.isFinished());
       view.getTaskList().getChildren().add(taskText);
     }
 
     // Update stats
+    double prog = (week.totalTasks() > 0
+        ? ((double) week.totalFinishedTasks()) / week.totalTasks() : 0);
     view.getStats().getChildren().clear();
-    Label statsLabel = new Label("Total Tasks: " + week.totalTasks());
-    view.getStats().getChildren().add(statsLabel);
+    Label statsLabel1 = new Label("Total Tasks: " + week.totalTasks());
+    Label statsLabel2 = new Label("Total Events: " + week.getEvent().size());
+    ProgressBar progress = new ProgressBar();
+    progress.setProgress(prog);
+    view.getStats().getChildren().add(statsLabel1);
+    view.getStats().getChildren().add(statsLabel2);
+    Label statsLabel3 = new Label("Percent finished: "
+        + prog * 100 + "%");
+    view.getStats().getChildren().add(statsLabel3);
+    view.getStats().getChildren().add(progress);
+  }
+
+  /**
+   * Toggle visibility of the sidebar
+   */
+  public void toggleVis() {
+    System.out.println("toggled sidebar");
+    this.view.setVisible(this.visible);
+    if (this.visible) {
+      // todo this doesnt actually work now
+      this.view.setMaxWidth(150);
+    } else {
+      this.view.setMaxWidth(0);
+    }
+    this.visible = !this.visible;
   }
 }

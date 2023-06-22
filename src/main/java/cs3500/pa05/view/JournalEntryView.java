@@ -1,11 +1,11 @@
 package cs3500.pa05.view;
 
+import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.JournalEntry;
-import java.util.List;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -13,26 +13,60 @@ import javafx.scene.layout.VBox;
  * The view for a generic journal entry
  */
 public abstract class JournalEntryView extends VBox {
-  private final Label name;
+  /**
+   * the button to remove this journal entry from it's parent
+   */
   private final Button remove;
-  private final HBox topBox;
+  /**
+   * The description for this note
+   */
   private final TextArea desc;
+
+  /**
+   * The sidebar controller
+   */
+  protected final SideBarController side;
+
+  /**
+   * Text field for name
+   */
+  protected TextField name;
+
+  /**
+   * This entry
+   */
+  protected final JournalEntry self;
 
   /**
    * Constructs a JournalEntryView object
    *
    * @param name - label of the name
    * @param desc - description
+   * @param side - the sidebar controller
+   * @param self - this entry model
    */
-  public JournalEntryView(String name, String desc) {
-    this.name = new Label(name);
-    this.remove = new Button("Delete");
+  public JournalEntryView(String name, String desc, SideBarController side, JournalEntry self) {
+    this.remove = new Button("X");
+    this.self = self;
+    this.side = side;
 
-    this.topBox = new HBox();
-    this.topBox.getChildren().addAll(this.name, this.remove);
+    HBox topBox = new HBox();
+    this.createNameLabel(topBox, name);
+    topBox.getChildren().add(this.remove);
+    this.name.setOnKeyTyped(k -> {
+      this.self.setName(this.name.getText());
+      this.side.updateView();
+    });
 
     this.desc = new TextArea();
     this.desc.setText(desc);
+    this.desc.setWrapText(true);
+    this.desc.setOnKeyTyped(k -> {
+      this.self.setDescription(this.desc.getText());
+      this.side.updateView();
+    });
+
+    this.setMaxWidth(200);
     this.desc.setWrapText(true);
 
     setSpacing(10);
@@ -40,20 +74,22 @@ public abstract class JournalEntryView extends VBox {
     getChildren().addAll(topBox, this.desc);
   }
 
+  /**
+   *
+   * @param onDeleteListener the thing to run when the delete key is pressed
+   */
   public void setOnDeleteListener(Runnable onDeleteListener) {
     remove.setOnAction(event -> onDeleteListener.run());
   }
 
-  public void displayEntries(JournalView jv) {
-    // Clear the previous entries
-    desc.clear();
-
-    List<JournalEntry> entries = jv.displayEntries();
-    // Display the new entries
-    for (JournalEntry entry : entries) {
-      String entryText = entry.getName() + ": " + entry.getDescription() + "\n";
-      desc.appendText(entryText);
-    }
+  /**
+   * Creates the name label
+   *
+   * @param box box to add label to
+   * @param name the name of the entry
+   */
+  protected void createNameLabel(HBox box, String name) {
+    this.name = new TextField(name);
+    box.getChildren().add(this.name);
   }
-
 }

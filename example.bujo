@@ -1,0 +1,16 @@
+// IDK if this will work, it's just an example
+{
+    "week": {
+        "days": [
+            "name":"MONDAY",
+            "items": [
+                { "name": "aaa", "desc": "aaa", "isFinished":false },
+                { "name": "bbb", "desc": "bbb", "time":IDK_HOW_IT_REPRESENTS_TIME, "duration":IDK }
+            ]
+        ],
+        "taskMax":4,
+        "eventMax":2,
+        "name":"example",
+        "note":"aaa"
+    }
+}

@@ -48,6 +48,7 @@ javafx {
 dependencies {
     // Jackson
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 
     // JavaFX
     implementation('org.controlsfx:controlsfx:11.1.2')

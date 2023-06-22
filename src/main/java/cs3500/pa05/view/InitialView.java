@@ -1,72 +1,96 @@
 package cs3500.pa05.view;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.scene.layout.VBox;
 
 /**
  * The initial view which prompts the user for a path
  */
 public class InitialView extends BorderPane {
+
+  /**
+   * The field to enter a file path
+   */
   private final TextField filePathField;
+
+  /**
+   * Button to open file explorer
+   */
   private final Button browseButton;
 
-  public InitialView(Stage primaryStage) {
-    Label filePathLabel = new Label("File Path:");
+  /**
+   * Button to load a file from the text box
+   */
+  private final Button loadButton;
+
+  /**
+   * Button for a new week
+   */
+  private final Button newButton;
+
+  /**
+   * constructor
+   */
+  public InitialView() {
     filePathField = new TextField();
     browseButton = new Button("Browse");
-    browseButton.setOnAction(e -> browseFile(primaryStage, filePathField));
+    loadButton = new Button("Load");
+    newButton = new Button("New");
 
+    Label filePathLabel = new Label("Enter a File Path:");
     setTop(filePathLabel);
     setCenter(filePathField);
-    setRight(browseButton);
+    setRight(new VBox(browseButton, loadButton, newButton));
     setPadding(new Insets(10));
-
-    filePathField.setOnAction(e -> openBujoFile(filePathField.getText()));
   }
 
+  /**
+   * Gets the browse button
+   *
+   * @return the browse button
+   */
   public Button getBrowseButton() {
     return browseButton;
   }
 
+  /**
+   * Gets the load button
+   *
+   * @return the load button
+   */
+  public Button getLoadButton() {
+    return loadButton;
+  }
+
+  /**
+   * Gets the new button
+   *
+   * @return the new button
+   */
+  public Button getNewButton() {
+    return newButton;
+  }
+
+  /**
+   * Gets the file path field
+   *
+   * @return the file path field
+   */
   public TextField getFilePathField() {
     return filePathField;
   }
 
-  private void browseFile(Stage primaryStage, TextField filePathField) {
-    FileChooser fileChooser = new FileChooser();
-    fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("BuJo Files",
-        "*.bujo"));
-    File selectedFile = fileChooser.showOpenDialog(primaryStage);
-    if (selectedFile != null) {
-      filePathField.setText(selectedFile.getAbsolutePath());
-      openBujoFile(selectedFile.getAbsolutePath());
-    }
-  }
-
-  private void openBujoFile(String filePath) {
-    try {
-      String fileContent = new String(Files.readAllBytes(Paths.get(filePath)));
-      displayWeek(fileContent);
-    } catch (IOException e) {
-      displayError("Error opening file", "An error occurred while opening the file.");
-    }
-  }
-
-  public void displayWeek(String fileContent) {
-    System.out.println("File contents:");
-    System.out.println(fileContent);
-  }
-
+  /**
+   * Displays the error
+   *
+   * @param title error title
+   * @param message error message
+   */
   public void displayError(String title, String message) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
     alert.setTitle(title);
