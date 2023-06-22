@@ -7,7 +7,7 @@ import cs3500.pa05.model.Task;
 import cs3500.pa05.view.DayView;
 
 /**
- * A controller for the day object & view
+ * A controller for the day object and view
  */
 public class DayController {
 
