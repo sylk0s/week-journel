@@ -34,3 +34,4 @@ properly saved as the user types.
 ## Section 5: Extra Credit
 - Splash Screen: When running the program, it shows a "My Journal App" screen that fades away. It lasts for less than
 2 seconds, and moves on to the initial view.
+- Tested GUI and deployable application via jar 
