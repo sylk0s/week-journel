@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="pa05-template.main">
+    <output-path>$PROJECT_DIR$/out/artifacts/pa05_template_main</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="cs3500.pa05.controller.JournalApp" />
+        <option name="description" value="aaaaaaaaaaaaaa" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="JournelApp" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="pa05_template_main.jar">
+        <element id="module-output" name="pa05-template.main" />
+      </element>
+    </root>
+  </artifact>
+</component>
