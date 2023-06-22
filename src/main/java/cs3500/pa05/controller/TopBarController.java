@@ -21,7 +21,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.PopupControl;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -35,6 +37,7 @@ public class TopBarController {
   private Bujo bujo;
   private TopBar view;
   private SideBarController side;
+  private WeekViewController weekViewController;
 
   public TopBarController(WeekViewController week, Bujo bujo, TopBar view,
                           Stage stage, SideBarController side) {
@@ -90,10 +93,9 @@ public class TopBarController {
       Scene scene = new Scene(journalView);
     });
 
-    this.view.registerOnStartMonday(e -> {
-      System.out.println("Start Monday button clicked");
-      // Call a method to update the week start day to Monday
-      this.week.setWeekStartDay(DayType.MONDAY);
+    this.view.registerOnStartDay(e -> {
+      System.out.println("Start day button clicked");
+      this.showDayDropdown();
     });
 
     this.view.registerMaxEvents(e -> {
@@ -182,6 +184,27 @@ public class TopBarController {
             new Task("", "", false));
         this.side.updateView();
       }
+    });
+  }
+
+  public void showDayDropdown() {
+    ComboBox<DayType> dayDropdown = new ComboBox<>(FXCollections.observableArrayList(DayType.values()));
+    dayDropdown.setValue(week.getWeek().getStartDay());
+
+    Stage popupStage = new Stage();
+    VBox vbox = new VBox(dayDropdown);
+    vbox.setAlignment(Pos.CENTER);
+    vbox.setPadding(new Insets(10));
+    vbox.setStyle("-fx-background-color: white;");
+    popupStage.initOwner(new Stage());
+    popupStage.initModality(Modality.WINDOW_MODAL);
+    popupStage.setScene(new Scene(vbox));
+    popupStage.show();
+
+    dayDropdown.setOnAction(event -> {
+      DayType selectedDay = dayDropdown.getValue();
+      weekViewController.setStartDay(selectedDay); // Update the start day in WeekViewController
+      popupStage.close();
     });
   }
 }

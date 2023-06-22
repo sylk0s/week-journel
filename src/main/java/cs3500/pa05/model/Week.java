@@ -31,6 +31,7 @@ public class Week {
    * The name of this week
    */
   String name;
+  private DayType startDay;
 
   @JsonCreator
   Week(@JsonProperty("days") List<Day> days,
@@ -186,6 +187,14 @@ public class Week {
     } else {
       throw new IllegalStateException("Could not find day");
     }
+  }
+
+  public DayType getStartDay() {
+    return this.startDay;
+  }
+
+  public void setStartDay(DayType startDay) {
+    this.startDay = startDay;
   }
 
   @Override
