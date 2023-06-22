@@ -45,6 +45,11 @@ public class TopBar extends HBox {
   private final Button startDay;
 
   /**
+   * Button to open a file
+   */
+  private final Button open;
+
+  /**
    * the max number of events
    */
   private final TextField maxEvents;
@@ -63,6 +68,7 @@ public class TopBar extends HBox {
     this.sideBarToggle = new Button("Toggle Sidebar");
     this.save = new Button("Save");
     this.add = new Button("Add");
+    this.open = new Button("Open");
     this.newWeek = new Button("New Week");
     this.startDay = new Button("Start Day");
     this.maxEvents = new TextField(week.getWeek().getEventMax() + "");
@@ -76,7 +82,7 @@ public class TopBar extends HBox {
 
     this.setSpacing(10);
     this.setPadding(new Insets(10));
-    this.getChildren().addAll(this.sideBarToggle, this.save, this.add, this.newWeek,
+    this.getChildren().addAll(this.sideBarToggle, this.save, this.add, this.newWeek, this.open,
         this.startDay, maxEventsLabel, this.maxEvents, maxTasksLabel, this.maxTasks);
 
     BackgroundFill backgroundFill = new BackgroundFill(Color.valueOf("#bde0ff"),
@@ -155,6 +161,15 @@ public class TopBar extends HBox {
    */
   public TextField getMaxEventsTextField() {
     return maxEvents;
+  }
+
+  /**
+   * registers for open button
+   *
+   * @param handler the handler to register
+   */
+  public void registerOpen(EventHandler<ActionEvent> handler) {
+    this.open.setOnAction(handler);
   }
 
   /**
