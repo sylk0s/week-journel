@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import javafx.stage.Stage;
 import java.util.stream.Collectors;
+import javafx.stage.Stage;
 
 /**
  * Controls the week view

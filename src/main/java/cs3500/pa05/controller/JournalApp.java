@@ -1,17 +1,16 @@
 package cs3500.pa05.controller;
 
+import cs3500.pa05.model.Week;
+import cs3500.pa05.view.InitialView;
+import cs3500.pa05.view.JournalView;
+import cs3500.pa05.view.SideBar;
 import cs3500.pa05.view.Splash;
+import cs3500.pa05.view.TopBar;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import cs3500.pa05.model.Week;
-import cs3500.pa05.view.InitialView;
-import cs3500.pa05.view.JournalView;
-import cs3500.pa05.view.SideBar;
-import cs3500.pa05.view.TopBar;
-
 import javafx.util.Duration;
 
 /**

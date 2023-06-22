@@ -3,7 +3,6 @@ package cs3500.pa05.controller;
 import cs3500.pa05.model.Bujo;
 import cs3500.pa05.model.Week;
 import cs3500.pa05.view.InitialView;
-
 import java.io.File;
 import java.io.IOException;
 import javafx.scene.Scene;

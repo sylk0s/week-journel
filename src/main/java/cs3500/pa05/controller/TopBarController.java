@@ -1,17 +1,13 @@
 package cs3500.pa05.controller;
 
+import cs3500.pa05.model.Bujo;
 import cs3500.pa05.model.DayType;
 import cs3500.pa05.model.Event;
 import cs3500.pa05.model.Task;
 import cs3500.pa05.model.Week;
-import cs3500.pa05.view.JournalView;
-import cs3500.pa05.view.SideBar;
-import cs3500.pa05.view.WeekView;
+import cs3500.pa05.view.TopBar;
 import java.io.File;
 import java.io.IOException;
-
-import cs3500.pa05.model.Bujo;
-import cs3500.pa05.view.TopBar;
 import java.time.Duration;
 import java.time.LocalTime;
 import javafx.collections.FXCollections;
@@ -24,7 +20,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PopupControl;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
