@@ -53,26 +53,7 @@ public class TopBarController {
 
     this.view.registerOnSave(e -> {
       System.out.println("save click");
-      FileChooser fileChooser = new FileChooser();
-      fileChooser.setTitle("Save");
-      fileChooser.setInitialFileName("savefile.bujo");
-      fileChooser.getExtensionFilters().addAll(
-          new FileChooser.ExtensionFilter("Bujo Files", "*.bujo"),
-          new FileChooser.ExtensionFilter("All Files", "*.*")
-      );
-
-      File selectedFile = fileChooser.showSaveDialog(primaryStage);
-      if (selectedFile != null) {
-        try {
-          // Perform save operation by writing bujo data to the selected file
-          BujoSerializer serializer = new BujoSerializer();
-          Bujo bujo = new Bujo(this.week.getWeek()); // Replace with your bujo creation logic
-          serializer.write(selectedFile.getAbsolutePath(), bujo);
-          System.out.println("Bujo file saved: " + selectedFile.getAbsolutePath());
-        } catch (IOException aaa) {
-          System.out.println("Error saving bujo file: " + aaa.getMessage());
-        }
-      }
+      this.handleSave(primaryStage);
     });
 
     this.view.registerOnAdd(e -> {
@@ -87,9 +68,7 @@ public class TopBarController {
 
     this.view.registerOnNewWeek(e -> {
       System.out.println("new week button");
-      JournalView journalView = new JournalView(new SideBar(), new TopBar(week),
-          new WeekView());
-      Scene scene = new Scene(journalView);
+      this.handleNewWeek(primaryStage);
     });
 
     this.view.registerOnStartDay(e -> {
@@ -98,44 +77,37 @@ public class TopBarController {
     });
 
     this.view.registerMaxEvents(e -> {
-      try {
-        String text = this.view.getMaxEventsTextField().getText();
-        if (text.equals("")) {
-          this.week.getWeek().setEventMax(0);
-        } else {
-          this.week.getWeek()
-              .setEventMax(Integer.parseInt(text));
-        }
-        // todo update to confirm current amount isn't over max?
-      } catch (NumberFormatException err) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Not a number!");
-        alert.setHeaderText(null);
-        alert.setContentText("Some invalid input found in the event max field");
-        alert.showAndWait();
-      }
+      this.handleMaxEvents();
     });
 
     this.view.registerMaxTasks(e -> {
-      try {
-        String text = this.view.getMaxTasksTextField().getText();
-        if (text.equals("")) {
-          this.week.getWeek().setTaskMax(0);
-        } else {
-          this.week.getWeek()
-              .setTaskMax(Integer.parseInt(text));
-        }
-        // todo update to confirm current amount isn't over max?
-      } catch (NumberFormatException err) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Not a number!");
-        alert.setHeaderText(null);
-        alert.setContentText("Some invalid input found in the task max field");
-        alert.showAndWait();
-      }
+      this.handleMaxTasks();
     });
 
     System.out.println("all registered...");
+  }
+
+  public void handleSave(Stage primaryStage) {
+    System.out.println("save click");
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Save");
+    fileChooser.setInitialFileName("savefile.bujo");
+    fileChooser.getExtensionFilters().addAll(
+        new FileChooser.ExtensionFilter("Bujo Files", "*.bujo"),
+        new FileChooser.ExtensionFilter("All Files", "*.*")
+    );
+
+    File selectedFile = fileChooser.showSaveDialog(primaryStage);
+    if (selectedFile != null) {
+      try {
+        BujoSerializer serializer = new BujoSerializer();
+        Bujo bujo = new Bujo(this.week.getWeek());
+        serializer.write(selectedFile.getAbsolutePath(), bujo);
+        System.out.println("Bujo file saved: " + selectedFile.getAbsolutePath());
+      } catch (IOException aaa) {
+        System.out.println("Error saving bujo file: " + aaa.getMessage());
+      }
+    }
   }
 
   public void showAddDropdown() {
@@ -169,21 +141,25 @@ public class TopBarController {
       String selectedOption = choiceBox.getValue();
       popupStage.close();
 
-      // Handle the selected option
       if (selectedOption.equals("Add a new event")) {
-        // Perform actions for adding a new event
         System.out.println("Adding a new event...");
         this.week.addEntryTo(daySelection.getValue(),
             new Event("", "", LocalTime.now(), Duration.ofHours(1)));
         this.side.updateView();
       } else if (selectedOption.equals("Add a new task")) {
-        // Perform actions for adding a new task
         System.out.println("Adding a new task...");
         this.week.addEntryTo(daySelection.getValue(),
             new Task("", "", false));
         this.side.updateView();
       }
     });
+  }
+
+  public void handleNewWeek(Stage primaryStage) {
+    JournalView journalView = new JournalView(new SideBar(), new TopBar(week), new WeekView());
+    Scene scene = new Scene(journalView);
+    primaryStage.setScene(scene);
+    primaryStage.show();
   }
 
   public void showDayDropdown() {
@@ -205,5 +181,41 @@ public class TopBarController {
       week.setWeekStartDay(selectedDay);
       popupStage.close();
     });
+  }
+
+  public void handleMaxEvents() {
+    try {
+      String text = this.view.getMaxEventsTextField().getText();
+      if (text.equals("")) {
+        this.week.getWeek().setEventMax(0);
+      } else {
+        this.week.getWeek().setEventMax(Integer.parseInt(text));
+      }
+      // todo update to confirm current amount isn't over max?
+    } catch (NumberFormatException err) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Not a number!");
+      alert.setHeaderText(null);
+      alert.setContentText("Some invalid input found in the event max field");
+      alert.showAndWait();
+    }
+  }
+
+  public void handleMaxTasks() {
+    try {
+      String text = this.view.getMaxTasksTextField().getText();
+      if (text.equals("")) {
+        this.week.getWeek().setTaskMax(0);
+      } else {
+        this.week.getWeek().setTaskMax(Integer.parseInt(text));
+      }
+      // todo update to confirm current amount isn't over max?
+    } catch (NumberFormatException err) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Not a number!");
+      alert.setHeaderText(null);
+      alert.setContentText("Some invalid input found in the task max field");
+      alert.showAndWait();
+    }
   }
 }

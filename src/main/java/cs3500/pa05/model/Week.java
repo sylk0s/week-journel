@@ -37,14 +37,16 @@ public class Week {
   Week(@JsonProperty("days") List<Day> days,
        @JsonProperty("eventMax") int eventMax,
        @JsonProperty("taskMax") int taskMax,
-       @JsonProperty("name") String name,
-       @JsonProperty("startDay") DayType startDay
+       @JsonProperty("name") String name
+       //error
+       //@JsonProperty("startDay") DayType startDay
   ) {
     this.days = days;
     this.eventMax = eventMax;
     this.taskMax = taskMax;
     this.name = name;
-    this.startDay = startDay;
+    //error
+    //this.startDay = startDay;
   }
 
   /**
@@ -192,14 +194,16 @@ public class Week {
     }
   }
 
-  @JsonGetter("startDay")
+  //error
+  //@JsonGetter("startDay")
   public DayType getStartDay() {
     return this.startDay;
   }
 
-  public void setStartDay(DayType day) {
-    this.startDay = day;
-  }
+  //error
+  //public void setStartDay(DayType day) {
+  //this.startDay = day;
+  //}
 
   @Override
   public String toString() {
