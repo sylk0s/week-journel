@@ -8,8 +8,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * represents a state of a "week" in the journal
  */
 public class Bujo {
-  Week week;
+  /**
+   * the week in this bujo
+   */
+  private final Week week;
 
+  /**
+   * Constructor
+   *
+   * @param week the week model
+   */
   @JsonCreator
   public Bujo(@JsonProperty("week") Week week) {
     this.week = week;

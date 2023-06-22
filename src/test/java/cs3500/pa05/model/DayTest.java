@@ -82,7 +82,7 @@ public class DayTest {
     day.add(task2);
     day.add(event1);
     day.add(event2);
-    List<JournalEntry> entries = day.getEntries();
+    List<JournalEntry> entries = day.getItems();
 
     assertTrue(entries.contains(task1));
     assertTrue(entries.contains(task2));

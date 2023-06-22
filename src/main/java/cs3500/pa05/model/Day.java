@@ -18,12 +18,12 @@ public class Day {
   /**
    * The name of the day
    */
-  DayType name;
+  private final DayType name;
 
   /**
    * The events and tasks in this day
    */
-  List<JournalEntry> items;
+  private final List<JournalEntry> items;
 
   /**
    * JSON constructor for Days
@@ -171,20 +171,5 @@ public class Day {
    */
   public boolean isOverEventMax(int max) {
     return max < this.getTasks().size();
-  }
-
-  @JsonIgnore
-  public List<JournalEntry> getEntries() {
-
-    List<Event> events = this.getEvents();
-    List<Task> tasks = this.getTasks();
-
-    List<JournalEntry> entries = new ArrayList<>();
-
-    entries.addAll(events);
-    entries.addAll(tasks);
-
-    return entries;
-
   }
 }

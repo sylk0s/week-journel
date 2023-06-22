@@ -1,22 +1,5 @@
 package cs3500.pa05.view;
 
-import cs3500.pa05.model.Theme;
-import cs3500.pa05.model.ThemeModel;
-import javafx.collections.FXCollections;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Control;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
-
 public class ThemeView {
 //  private ThemeModel model;
 //  private ComboBox<Theme> themeComboBox;

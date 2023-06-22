@@ -15,38 +15,48 @@ public class Week {
   /**
    * The days of this week
    */
-  List<Day> days;
+  private final List<Day> days;
 
   /**
    * The maximum number of events that can exist in each day
    */
-  int eventMax;
+  private int eventMax;
 
   /**
    * The maximum number of tasks that can exist in each day
    */
-  int taskMax;
+  private int taskMax;
 
   /**
    * The name of this week
    */
-  String name;
+  private final String name;
+
+  /**
+   * the day this week starts on
+   */
   private DayType startDay;
 
+  /**
+   * constructor
+   *
+   * @param days the days in this week
+   * @param eventMax the max num of events
+   * @param taskMax the max num of tasks
+   * @param name the name of this week
+   */
   @JsonCreator
   Week(@JsonProperty("days") List<Day> days,
        @JsonProperty("eventMax") int eventMax,
        @JsonProperty("taskMax") int taskMax,
-       @JsonProperty("name") String name
-       //error
-       //@JsonProperty("startDay") DayType startDay
+       @JsonProperty("name") String name,
+       @JsonProperty("startDay") DayType startDay
   ) {
     this.days = days;
     this.eventMax = eventMax;
     this.taskMax = taskMax;
     this.name = name;
-    //error
-    //this.startDay = startDay;
+    this.startDay = startDay;
   }
 
   /**
@@ -69,6 +79,7 @@ public class Week {
   }
 
   /**
+   * get the days in this week
    *
    * @return The days in this week
    */
@@ -78,6 +89,7 @@ public class Week {
   }
 
   /**
+   * get the max num of events
    *
    * @return The max number of events that can happen in a day
    */
@@ -87,6 +99,7 @@ public class Week {
   }
 
   /**
+   * get the max num of tasks
    *
    * @return The max number of tasks that can happen in a day
    */
@@ -96,6 +109,7 @@ public class Week {
   }
 
   /**
+   * get the name of this week
    *
    * @return The name of this week
    */
@@ -123,6 +137,7 @@ public class Week {
   }
 
   /**
+   * get the total number of finished tasks
    *
    * @return The total number of tasks that have been finished
    */
@@ -131,6 +146,7 @@ public class Week {
   }
 
   /**
+   * the total num of tasks
    *
    * @return The total number of tasks
    */
@@ -139,6 +155,7 @@ public class Week {
   }
 
   /**
+   * gets all the tasks
    *
    * @return A list of all the tasks in this week
    */
@@ -149,6 +166,7 @@ public class Week {
   }
 
   /**
+   * gets all the events
    *
    * @return A list of all the events in this week
    */
@@ -158,19 +176,30 @@ public class Week {
         .collect(Collectors.toList());
   }
 
-    public void addEntry(JournalEntry entry, DayType dayType) {
-      Optional<Day> dayOptional = this.days.stream()
-          .filter(day -> day.getName().equals(dayType))
-          .findFirst();
+  /**
+   * adds an entry
+   *
+   * @param entry the entry to add
+   * @param dayType the day to add it to
+   */
+  public void addEntry(JournalEntry entry, DayType dayType) {
+    Optional<Day> dayOptional = this.days.stream()
+        .filter(day -> day.getName().equals(dayType))
+        .findFirst();
 
-      if (dayOptional.isPresent()) {
-        Day day = dayOptional.get();
-        day.add(entry);
-      } else {
-        throw new IllegalArgumentException("DayType not found in the week.");
-      }
+    if (dayOptional.isPresent()) {
+      Day day = dayOptional.get();
+      day.add(entry);
+    } else {
+      throw new IllegalArgumentException("DayType not found in the week.");
     }
+  }
 
+  /**
+   * gets the entries
+   *
+   * @return the entries in this week
+   */
   @JsonIgnore
   public List<JournalEntry> getEntries() {
 
@@ -186,6 +215,12 @@ public class Week {
 
   }
 
+  /**
+   * gets a day
+   *
+   * @param type the day to get
+   * @return
+   */
   public Day getDay(DayType type) {
     Optional<Day> result = this.days.stream().filter(d -> d.name.equals(type)).findFirst();
     if (result.isPresent()) {
@@ -195,11 +230,21 @@ public class Week {
     }
   }
 
+  /**
+   * get the start day
+   *
+   * @return the start day
+   */
   @JsonGetter("startDay")
   public DayType getStartDay() {
     return this.startDay;
   }
 
+  /**
+   * Converts to string
+   *
+   * @return string representation of this
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder("");
@@ -209,6 +254,11 @@ public class Week {
     return sb.toString();
   }
 
+  /**
+   * sets the start day
+   *
+   * @param startDay the new start day
+   */
   public void setStartDay(DayType startDay) {
     this.startDay = startDay;
   }

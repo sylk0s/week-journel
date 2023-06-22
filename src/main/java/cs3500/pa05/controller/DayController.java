@@ -53,7 +53,7 @@ public class DayController {
    */
   private DayView fromModel(Day day) {
     String name = day.getName().name();
-    return new DayView(name, day.getEntries(), this.side, this);
+    return new DayView(name, day.getItems(), this.side, this);
   }
 
   /**
