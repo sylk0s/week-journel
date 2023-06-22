@@ -48,7 +48,7 @@ public class DayController {
   /**
    * Creates a view from the model
    *
-   * @param day
+   * @param day the day to turn into a model
    * @return the dayView associated with the model
    */
   private DayView fromModel(Day day) {
@@ -104,12 +104,4 @@ public class DayController {
     return this.day;
   }
 
-  /**
-   * Toggles a task as finished
-   *
-   * @param task the task to toggle
-   */
-  public void toggleTaskFinish(Task task) {
-    task.setFinished(!task.isFinished());
-  }
 }

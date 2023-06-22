@@ -94,8 +94,7 @@ public class WeekViewController {
   public void setWeekStartDay(DayType startDay) {
     List<DayType> dayTypes = new ArrayList<>(Arrays.asList(DayType.values()));
     int startIndex = dayTypes.indexOf(startDay);
-    //error
-    //this.week.setStartDay(startDay);
+    this.week.setStartDay(startDay);
     List<DayController> reorderedDays = new ArrayList<>(days.subList(startIndex, days.size()));
     reorderedDays.addAll(days.subList(0, startIndex));
 

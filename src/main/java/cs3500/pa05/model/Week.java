@@ -195,16 +195,10 @@ public class Week {
     }
   }
 
-  //error
-  //@JsonGetter("startDay")
+  @JsonGetter("startDay")
   public DayType getStartDay() {
     return this.startDay;
   }
-
-  //error
-  //public void setStartDay(DayType day) {
-  //this.startDay = day;
-  //}
 
   @Override
   public String toString() {
@@ -213,5 +207,9 @@ public class Week {
       sb.append(day.getName()).append("\n");
     }
     return sb.toString();
+  }
+
+  public void setStartDay(DayType startDay) {
+    this.startDay = startDay;
   }
 }
