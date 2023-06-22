@@ -50,8 +50,8 @@ Download My Journal App now and revolutionize your journaling experience!
 
 ## User Entering Filepath
 
-![GUI ](InitialView.png)
+![GUI ](initview.png)
 
 ## How a New Bullet Journal Displays
 
-![GUI](JournalView.png)
+![GUI](journalview.png)
