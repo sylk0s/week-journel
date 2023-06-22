@@ -46,24 +46,25 @@ public class SideBarController {
     // Update taskList
     view.getTaskList().getChildren().clear();
     for (Task task : week.getTasks()) {
-      // Just display the task's toString() result, replace this with however you want to display tasks
+      // Just display the task's toString() result,
+      // replace this with however you want to display tasks
       CheckBox taskText = new CheckBox(task.getName());
       taskText.setSelected(task.isFinished());
       view.getTaskList().getChildren().add(taskText);
     }
 
     // Update stats
-    double prog = (week.totalTasks() > 0 ?
-        ((double) week.totalFinishedTasks())/week.totalTasks() : 0);
+    double prog = (week.totalTasks() > 0
+        ? ((double) week.totalFinishedTasks()) / week.totalTasks() : 0);
     view.getStats().getChildren().clear();
     Label statsLabel1 = new Label("Total Tasks: " + week.totalTasks());
     Label statsLabel2 = new Label("Total Events: " + week.getEvent().size());
-    Label statsLabel3 = new Label("Percent finished: "
-        + prog * 100 + "%");
     ProgressBar progress = new ProgressBar();
     progress.setProgress(prog);
     view.getStats().getChildren().add(statsLabel1);
     view.getStats().getChildren().add(statsLabel2);
+    Label statsLabel3 = new Label("Percent finished: "
+        + prog * 100 + "%");
     view.getStats().getChildren().add(statsLabel3);
     view.getStats().getChildren().add(progress);
   }

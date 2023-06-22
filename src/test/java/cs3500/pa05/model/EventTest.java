@@ -2,12 +2,14 @@ package cs3500.pa05.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.Duration;
 import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test for event model
+ */
 public class EventTest {
 
   @Test

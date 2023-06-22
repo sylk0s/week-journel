@@ -37,12 +37,12 @@ public class InitialView extends BorderPane {
    * constructor
    */
   public InitialView() {
-    Label filePathLabel = new Label("Enter a File Path:");
     filePathField = new TextField();
     browseButton = new Button("Browse");
     loadButton = new Button("Load");
     newButton = new Button("New");
 
+    Label filePathLabel = new Label("Enter a File Path:");
     setTop(filePathLabel);
     setCenter(filePathField);
     setRight(new VBox(browseButton, loadButton, newButton));

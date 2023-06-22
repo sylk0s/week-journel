@@ -1,17 +1,13 @@
 package cs3500.pa05.controller;
 
+import cs3500.pa05.model.Bujo;
 import cs3500.pa05.model.DayType;
 import cs3500.pa05.model.Event;
 import cs3500.pa05.model.Task;
 import cs3500.pa05.model.Week;
-import cs3500.pa05.view.JournalView;
-import cs3500.pa05.view.SideBar;
-import cs3500.pa05.view.WeekView;
+import cs3500.pa05.view.TopBar;
 import java.io.File;
 import java.io.IOException;
-
-import cs3500.pa05.model.Bujo;
-import cs3500.pa05.view.TopBar;
 import java.time.Duration;
 import java.time.LocalTime;
 import javafx.collections.FXCollections;
@@ -24,7 +20,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PopupControl;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -60,7 +55,8 @@ public class TopBarController {
    * @param week week controller
    * @param view the view for the top bar
    * @param stage the stage for this app
-   * @param side the controller for the side bar
+   * @param side the controller for the sidebar
+   * @param app the app this belongs to
    */
   public TopBarController(WeekViewController week, TopBar view,
                           Stage stage, SideBarController side, JournalApp app) {
@@ -80,23 +76,15 @@ public class TopBarController {
 
     this.view.registerOnSave(e -> handleSave(primaryStage));
 
-    this.view.registerOnAdd(e -> {
-      this.showAddDropdown();
-    });
+    this.view.registerOnAdd(e -> this.showAddDropdown());
 
-    this.view.registerOnToggleBar(e -> {
-      this.handleToggleVis();
-    });
+    this.view.registerOnToggleBar(e -> this.handleToggleVis());
 
     this.view.registerOnNewWeek(e -> handleNewWeek(primaryStage));
 
-    this.view.registerOpen(e -> {
-      this.handleOpen(primaryStage);
-    });
+    this.view.registerOpen(e -> this.handleOpen(primaryStage));
 
-    this.view.registerOnStartDay(e -> {
-      this.showDayDropdown();
-    });
+    this.view.registerOnStartDay(e -> this.showDayDropdown());
 
     this.view.registerMaxEvents(e -> {
       try {
@@ -190,7 +178,8 @@ public class TopBarController {
    * Shows and handles the day dropdown menu for the topbar
    */
   public void showDayDropdown() {
-    ComboBox<DayType> dayDropdown = new ComboBox<>(FXCollections.observableArrayList(DayType.values()));
+    ComboBox<DayType> dayDropdown =
+        new ComboBox<>(FXCollections.observableArrayList(DayType.values()));
     dayDropdown.setPromptText("Select a day");
     dayDropdown.setValue(week.getWeek().getStartDay());
 

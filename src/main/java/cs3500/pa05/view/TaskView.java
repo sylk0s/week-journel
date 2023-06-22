@@ -72,7 +72,6 @@ public class TaskView extends JournalEntryView {
    */
   @Override
   protected void createNameLabel(HBox box, String name) {
-    HBox tmp = new HBox();
     CheckBox finished = new CheckBox();
     this.name = new TextField(name);
 
@@ -82,6 +81,8 @@ public class TaskView extends JournalEntryView {
       this.dayView.updateProgress();
     });
     finished.setSelected(this.self.isFinished());
+
+    HBox tmp = new HBox();
     tmp.getChildren().addAll(finished, this.name);
     box.getChildren().add(tmp);
   }

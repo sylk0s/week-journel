@@ -53,11 +53,6 @@ public class EventView extends JournalEntryView {
     super(event.getName(), event.getDescription(), side, event);
     this.event = event;
 
-    HBox timeBox = new HBox();
-    Label tLabel = new Label("Time:");
-    Label timeHLabel = new Label("Hour:");
-    Label timeMLabel = new Label("Min:");
-
     this.timeH = new TextField(event.getTime().getHour() + "");
     this.timeH.setPrefSize(35, 10);
     this.timeH.setOnKeyTyped(e -> updateTime());
@@ -66,13 +61,12 @@ public class EventView extends JournalEntryView {
     this.timeM.setPrefSize(35, 10);
     this.timeM.setOnKeyTyped(e -> updateTime());
 
-    timeBox.getChildren().addAll(timeHLabel, timeH, timeMLabel, timeM);
-    this.getChildren().addAll(tLabel, timeBox);
-
-    HBox durBox = new HBox();
-    Label dLabel = new Label("Duration:");
-    Label durHLabel = new Label("Hour:");
-    Label durMLabel = new Label("Min:");
+    Label timeLabel = new Label("Time:");
+    Label timeHlabel = new Label("Hour:");
+    Label timeMlabel = new Label("Min:");
+    HBox timeBox = new HBox();
+    timeBox.getChildren().addAll(timeHlabel, timeH, timeMlabel, timeM);
+    this.getChildren().addAll(timeLabel, timeBox);
 
     this.durH = new TextField(event.getDuration().toHoursPart() + "");
     this.durH.setPrefSize(35, 10);
@@ -82,8 +76,12 @@ public class EventView extends JournalEntryView {
     this.durM.setPrefSize(35, 10);
     this.durM.setOnKeyTyped(e -> updateDur());
 
-    durBox.getChildren().addAll(durHLabel, durH, durMLabel, durM);
-    this.getChildren().addAll(dLabel, durBox);
+    Label durLabel = new Label("Duration:");
+    Label durHlabel = new Label("Hour:");
+    Label durMlabel = new Label("Min:");
+    HBox durBox = new HBox();
+    durBox.getChildren().addAll(durHlabel, durH, durMlabel, durM);
+    this.getChildren().addAll(durLabel, durBox);
 
     BorderStroke borderStroke = new BorderStroke(
         Color.BLACK,                       // Border color

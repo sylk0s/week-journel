@@ -96,7 +96,7 @@ public class DayView extends VBox {
   public void updateProgress() {
     int total = this.parent.getDay().numTasks();
     this.prog.setProgress(
-        total > 0 ? this.parent.getDay().numFinishedTasks()/(float) total
+        total > 0 ? this.parent.getDay().numFinishedTasks() / (float) total
             : 0
     );
   }
