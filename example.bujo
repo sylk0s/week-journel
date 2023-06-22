@@ -4,7 +4,8 @@
             "name":"MONDAY",
             "items": [
                 { "name": "aaa", "desc": "aaa", "isFinished":false },
-                { "name": "bbb", "desc": "bbb", "time":IDK_HOW_IT_REPRESENTS_TIME, "duration":IDK }
+                { "name": "bbb", "desc": "bbb", "time":"time": "10:30:00",
+                                                                   "duration": "PT1H30M" }
             ]
         ],
         "taskMax":4,

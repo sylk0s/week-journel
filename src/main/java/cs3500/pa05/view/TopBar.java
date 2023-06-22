@@ -13,6 +13,8 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 /**
  * The bar on the top of the page
@@ -65,7 +67,7 @@ public class TopBar extends HBox {
    * @param week the week controller
    */
   public TopBar(WeekViewController week) {
-    this.sideBarToggle = new Button("Toggle Sidebar");
+    this.sideBarToggle = new Button("Sidebar Y/N");
     this.save = new Button("Save");
     this.add = new Button("Add");
     this.open = new Button("Open");
@@ -74,15 +76,30 @@ public class TopBar extends HBox {
     this.maxEvents = new TextField(week.getWeek().getEventMax() + "");
     this.maxTasks = new TextField(week.getWeek().getTaskMax() + "");
 
+    // Set uniform button styles
+    for(Button button: new Button[]{sideBarToggle, save, add, newWeek, startDay, open}){
+      button.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
+      button.setTextFill(Color.WHITE);
+      button.setBackground(new Background(new BackgroundFill(Color.valueOf("#00b0ff"),
+          new CornerRadii(5), new Insets(-5))));
+      button.setPrefWidth(100); // increase button width for better UX
+    }
 
-    this.maxEvents.setPrefWidth(40); // Set preferred width for the text field
-    this.maxTasks.setPrefWidth(40); // Set preferred width for the text field
+    // Set uniform TextField styles
+    for(TextField textField: new TextField[]{maxEvents, maxTasks}){
+      textField.setPrefWidth(60); // Set preferred width for the text field
+      textField.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
+    }
 
-    this.setSpacing(10);
-    this.setPadding(new Insets(10));
-
+    // Set label styles
     Label maxEventsLabel = new Label("Max Events:");
     Label maxTasksLabel = new Label("Max Tasks:");
+    for(Label label: new Label[]{maxEventsLabel, maxTasksLabel}){
+      label.setFont(Font.font("Arial", FontWeight.NORMAL, 14));
+    }
+
+    this.setSpacing(20);
+    this.setPadding(new Insets(20));
     this.getChildren().addAll(this.sideBarToggle, this.save, this.add, this.newWeek, this.open,
         this.startDay, maxEventsLabel, this.maxEvents, maxTasksLabel, this.maxTasks);
 
@@ -181,4 +198,6 @@ public class TopBar extends HBox {
   public TextField getMaxTasksTextField() {
     return maxTasks;
   }
+
+
 }

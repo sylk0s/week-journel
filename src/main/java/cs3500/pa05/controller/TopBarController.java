@@ -121,6 +121,8 @@ public class TopBarController {
         alert.showAndWait();
       }
     });
+
+
   }
 
   /**
@@ -263,4 +265,6 @@ public class TopBarController {
   public void handleToggleVis() {
     this.side.toggleVis();
   }
+
+
 }
