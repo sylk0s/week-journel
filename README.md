@@ -38,8 +38,10 @@ We respected the Liskov Substitution Principle by ensuring that the subclasses o
 For instance, the TaskView and EventView classes, which inherit from JournalEntryView, can be used interchangeably in our GUI without breaking the application, indicating a proper hierarchy of classes.
 
 #### Interface Segregation Principle (ISP): 
-The Interface Segregation Principle was applied through our use of interfaces to define behavior. For example, our SideBarController doesn't need to know about all methods of a task or an event; it only interacts with a subset of them. 
-To make this clearer and less error-prone, we defined an Interactable interface with the methods required for interaction, which our TaskView and EventView classes implement. This way, we ensured that classes only have to know about the methods they actually use.
+The Interface Segregation Principle was applied through our use of abstract classes to define behavior. 
+For example, our SideBarController doesn't need to know about all methods of a task or an event; it only interacts with a subset of them. 
+To make this clearer and less error-prone, we defined an abstract class for Journal entries such as Events and tasks which our TaskView and EventView classes extend. 
+This way, we ensured that classes only have to know about the methods they actually use.
 
 #### Dependency Inversion Principle (DIP): 
 The Dependency Inversion Principle was utilized by injecting dependencies into our classes, rather than hard-coding them. 
@@ -51,4 +53,7 @@ This allows for greater flexibility and makes our code more testable, as we can 
 An additional feature that can be easily implemented is authentication. 
 We could add an authentication factor so users can protect their journals. 
 This would be facilitated by adding a login screen after the splash. 
+
+Since JournalEntry is an abstract class, features for our application can be easily extended to include habits for each day. 
+This way, users can add events, tasks, or habits to complete for each day. 
 
