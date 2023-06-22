@@ -30,7 +30,7 @@ public class Week {
   /**
    * The name of this week
    */
-  private final String name;
+  private String name;
 
   /**
    * the day this week starts on
@@ -212,7 +212,6 @@ public class Week {
     entries.addAll(tasks);
 
     return entries;
-
   }
 
   /**
@@ -222,7 +221,7 @@ public class Week {
    * @return
    */
   public Day getDay(DayType type) {
-    Optional<Day> result = this.days.stream().filter(d -> d.name.equals(type)).findFirst();
+    Optional<Day> result = this.days.stream().filter(d -> d.getName().equals(type)).findFirst();
     if (result.isPresent()) {
       return result.get();
     } else {
