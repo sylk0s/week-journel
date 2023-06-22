@@ -82,9 +82,6 @@ public class InitialController {
     String filePath = view.getFilePathField().getText();
     if (!filePath.isEmpty()) {
       try {
-        /**
-         * The bujo file
-         */
         Bujo bujo = serializer.read(filePath);
         // navigate to JournalView or perform other actions
         stage.setScene(new Scene(app.getJournalView(stage, bujo.getWeek()), 800, 800));

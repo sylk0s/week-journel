@@ -3,6 +3,7 @@ package cs3500.pa05.controller;
 import cs3500.pa05.model.DayType;
 import cs3500.pa05.model.Event;
 import cs3500.pa05.model.Task;
+import cs3500.pa05.model.Week;
 import cs3500.pa05.view.JournalView;
 import cs3500.pa05.view.SideBar;
 import cs3500.pa05.view.WeekView;
@@ -49,6 +50,11 @@ public class TopBarController {
   private final SideBarController side;
 
   /**
+   * the journal application
+   */
+  private final JournalApp app;
+
+  /**
    * Constructor
    *
    * @param week week controller
@@ -57,10 +63,11 @@ public class TopBarController {
    * @param side the controller for the side bar
    */
   public TopBarController(WeekViewController week, TopBar view,
-                          Stage stage, SideBarController side) {
+                          Stage stage, SideBarController side, JournalApp app) {
     this.week = week;
     this.view = view;
     this.side = side;
+    this.app = app;
     this.initHandlers(stage);
   }
 
@@ -229,10 +236,26 @@ public class TopBarController {
     }
   }
 
-  public void handleOpen(Stage primaryStage) {
+  /**
+   * handles opening a new file
+   *
+   * @param stage the primary stage
+   */
+  public void handleOpen(Stage stage) {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Open Resource File");
-    File selectedFile = fileChooser.showOpenDialog(view.getScene().getWindow());
+    File selectedFile = fileChooser.showOpenDialog(stage);
+    try {
+      Bujo bujo = new BujoSerializer().read(selectedFile.getAbsolutePath());
+      stage.setScene(new Scene(app.getJournalView(stage, bujo.getWeek()), 800, 800));
+      stage.show();
+    } catch (IOException e) {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("Failed to open");
+      alert.setHeaderText(null);
+      alert.setContentText("Failed to open specified file");
+      alert.showAndWait();
+    }
   }
 
   /**
@@ -241,8 +264,8 @@ public class TopBarController {
    * @param primaryStage the stage for this app
    */
   public void handleNewWeek(Stage primaryStage) {
-    JournalView journalView = new JournalView(new SideBar(), new TopBar(week), new WeekView());
-    Scene scene = new Scene(journalView);
+    Scene scene = new Scene(app.getJournalView(primaryStage,
+        new Week(5, 5, "New Week")));
     primaryStage.setScene(scene);
     primaryStage.show();
   }

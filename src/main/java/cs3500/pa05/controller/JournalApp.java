@@ -94,7 +94,8 @@ public class JournalApp extends Application {
 
     // Initialize the controllers with the models and views
     JournalViewController journalView1 = new JournalViewController(journalView);
-    TopBarController top = new TopBarController(weekController, topBar, primaryStage, side);
+    TopBarController top = new TopBarController(weekController, topBar,
+        primaryStage, side, this);
     this.keyPressHandler = new KeyPressHandler(top);
     primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> keyPressHandler.handle(event));
     this.run();
