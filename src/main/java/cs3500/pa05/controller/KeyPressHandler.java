@@ -65,7 +65,7 @@ public class KeyPressHandler {
     } else if (newWeekCombination.match(event)) {
       topBarController.handleNewWeek(primaryStage);
       System.out.println("New Week command triggered.");
-    } else if (startDayCombination.match(event)){
+    } else if (startDayCombination.match(event)) {
       topBarController.showDayDropdown();
     } else if (toggleSideCombination.match(event)) {
       this.topBarController.handleToggleVis();

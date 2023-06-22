@@ -8,6 +8,9 @@ import java.time.Duration;
 import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test for event model
+ */
 public class EventTest {
 
   @Test

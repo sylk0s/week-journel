@@ -27,11 +27,6 @@ public class WeekViewController {
   private final WeekView view;
 
   /**
-   * The stage for this week
-   */
-  private final Stage stage;  // Added the stage object to be able to display the week
-
-  /**
    * The day controllers in this week
    */
   private final List<DayController> days;
@@ -43,9 +38,12 @@ public class WeekViewController {
    * @param stage the app stage
    * @param side the sidebar controller
    */
-  WeekViewController(Week week, Stage stage, SideBarController side) { // Stage passed to the constructor
+  WeekViewController(Week week, Stage stage, SideBarController side) {
     this.week = week;
-    this.stage = stage;
+    /**
+     * The stage for this week
+     */
+    // Added the stage object to be able to display the week
     this.view = new WeekView();
     this.days = week.getDays().stream()
         .map(d -> new DayController(d, side, this)).collect(Collectors.toList());

@@ -30,7 +30,7 @@ public class Week {
   /**
    * The name of this week
    */
-  private String name;
+  private final String name;
 
   /**
    * the day this week starts on
@@ -73,7 +73,7 @@ public class Week {
     this.startDay = DayType.SUNDAY;
 
     this.days = new ArrayList<>();
-    for (DayType type: DayType.values()) {
+    for (DayType type : DayType.values()) {
       this.days.add(new Day(type));
     }
   }

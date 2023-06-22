@@ -40,7 +40,6 @@ public class JournalApp extends Application {
   public void start(Stage primaryStage) {
     // Create the splash screen
     Splash splashScreen = new Splash("My Journal App");
-    Scene splashScene = new Scene(splashScreen, 800, 600);
 
     // Transition to the initial view after 2 seconds
     FadeTransition fadeOutTransition = new FadeTransition(Duration.seconds(1.5), splashScreen);
@@ -51,6 +50,8 @@ public class JournalApp extends Application {
       primaryStage.show();
     });
     fadeOutTransition.play();
+
+    Scene splashScene = new Scene(splashScreen, 800, 600);
 
     // Set the splash scene initially
     primaryStage.setScene(splashScene);
@@ -89,16 +90,16 @@ public class JournalApp extends Application {
     this.side = new SideBarController(weekModel, sideBar);
     WeekViewController weekController = new WeekViewController(weekModel, primaryStage, this.side);
     TopBar topBar = new TopBar(weekController);
-    JournalView journalView = new JournalView(sideBar, topBar, weekController.getWeekView());
 
 
     // Initialize the controllers with the models and views
-    JournalViewController journalView1 = new JournalViewController(journalView);
     TopBarController top = new TopBarController(weekController, topBar,
         primaryStage, side, this);
     this.keyPressHandler = new KeyPressHandler(top);
     primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> keyPressHandler.handle(event));
     this.run();
+    JournalView journalView = new JournalView(sideBar, topBar, weekController.getWeekView());
+    JournalViewController journalView1 = new JournalViewController(journalView);
     return journalView1.getView();
   }
 

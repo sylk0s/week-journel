@@ -74,14 +74,15 @@ public class TopBar extends HBox {
     this.maxEvents = new TextField(week.getWeek().getEventMax() + "");
     this.maxTasks = new TextField(week.getWeek().getTaskMax() + "");
 
-    Label maxEventsLabel = new Label("Max Events:");
-    Label maxTasksLabel = new Label("Max Tasks:");
 
     this.maxEvents.setPrefWidth(40); // Set preferred width for the text field
     this.maxTasks.setPrefWidth(40); // Set preferred width for the text field
 
     this.setSpacing(10);
     this.setPadding(new Insets(10));
+
+    Label maxEventsLabel = new Label("Max Events:");
+    Label maxTasksLabel = new Label("Max Tasks:");
     this.getChildren().addAll(this.sideBarToggle, this.save, this.add, this.newWeek, this.open,
         this.startDay, maxEventsLabel, this.maxEvents, maxTasksLabel, this.maxTasks);
 

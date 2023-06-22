@@ -60,7 +60,8 @@ public class TopBarController {
    * @param week week controller
    * @param view the view for the top bar
    * @param stage the stage for this app
-   * @param side the controller for the side bar
+   * @param side the controller for the sidebar
+   * @param app the app this belongs to
    */
   public TopBarController(WeekViewController week, TopBar view,
                           Stage stage, SideBarController side, JournalApp app) {
@@ -80,23 +81,15 @@ public class TopBarController {
 
     this.view.registerOnSave(e -> handleSave(primaryStage));
 
-    this.view.registerOnAdd(e -> {
-      this.showAddDropdown();
-    });
+    this.view.registerOnAdd(e -> this.showAddDropdown());
 
-    this.view.registerOnToggleBar(e -> {
-      this.handleToggleVis();
-    });
+    this.view.registerOnToggleBar(e -> this.handleToggleVis());
 
     this.view.registerOnNewWeek(e -> handleNewWeek(primaryStage));
 
-    this.view.registerOpen(e -> {
-      this.handleOpen(primaryStage);
-    });
+    this.view.registerOpen(e -> this.handleOpen(primaryStage));
 
-    this.view.registerOnStartDay(e -> {
-      this.showDayDropdown();
-    });
+    this.view.registerOnStartDay(e -> this.showDayDropdown());
 
     this.view.registerMaxEvents(e -> {
       try {
@@ -190,7 +183,8 @@ public class TopBarController {
    * Shows and handles the day dropdown menu for the topbar
    */
   public void showDayDropdown() {
-    ComboBox<DayType> dayDropdown = new ComboBox<>(FXCollections.observableArrayList(DayType.values()));
+    ComboBox<DayType> dayDropdown =
+        new ComboBox<>(FXCollections.observableArrayList(DayType.values()));
     dayDropdown.setPromptText("Select a day");
     dayDropdown.setValue(week.getWeek().getStartDay());
 

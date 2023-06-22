@@ -61,13 +61,13 @@ public class DayView extends VBox {
     this.parent = parent;
     BackgroundFill backgroundFill =
         new BackgroundFill(
-                Color.valueOf("#f5fffa"),
-                new CornerRadii(0),
-                new Insets(0)
-                );
+            Color.valueOf("#f5fffa"),
+            new CornerRadii(0),
+            new Insets(0)
+        );
 
     Background background =
-            new Background(backgroundFill);
+        new Background(backgroundFill);
 
     this.controller = controller;
 
@@ -96,7 +96,7 @@ public class DayView extends VBox {
   public void updateProgress() {
     int total = this.parent.getDay().numTasks();
     this.prog.setProgress(
-        total > 0 ? this.parent.getDay().numFinishedTasks()/(float) total
+        total > 0 ? this.parent.getDay().numFinishedTasks() / (float) total
             : 0
     );
   }
@@ -149,7 +149,7 @@ public class DayView extends VBox {
     alert.setTitle("Over " + type + " maximum value!");
     alert.setHeaderText(null);
     alert.setContentText(type + " will be added, to make this error go away next time,"
-            + " set a higher " + type + " max or remove " + type);
+        + " set a higher " + type + " max or remove " + type);
     alert.showAndWait();
   }
 }

@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests for week model
+ */
 public class WeekTest {
 
   @Test
@@ -28,12 +31,12 @@ public class WeekTest {
 
   @Test
   public void testTotalFinishedTasks() {
-    List<Day> days = new ArrayList<>();
     Day day1 = new Day(DayType.MONDAY);
     day1.add(new Task("Task 1", "test1", true));
     Day day2 = new Day(DayType.TUESDAY);
     day2.add(new Task("Task 2", "test2", true));
     day2.add(new Task("Task 3", "test3", false));
+    List<Day> days = new ArrayList<>();
     days.add(day1);
     days.add(day2);
     int eventMax = 5;
@@ -50,12 +53,12 @@ public class WeekTest {
 
   @Test
   public void testGetEntries() {
-    List<Day> days = new ArrayList<>();
     Day day1 = new Day(DayType.MONDAY);
     day1.add(new Task("Task 1", "test1", true));
     Day day2 = new Day(DayType.TUESDAY);
     day2.add(new Task("Task 2", "test2", true));
     day2.add(new Task("Task 3", "test3", false));
+    List<Day> days = new ArrayList<>();
     days.add(day1);
     days.add(day2);
     int eventMax = 5;

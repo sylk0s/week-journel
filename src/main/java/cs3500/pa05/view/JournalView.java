@@ -14,6 +14,7 @@ public class JournalView extends BorderPane {
 
   /**
    * Constructs a JournalView object
+   *
    * @param sideBar the sidebar view
    * @param topBar the topbar view
    * @param weekView the view for the week
