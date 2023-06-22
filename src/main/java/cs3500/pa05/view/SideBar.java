@@ -4,6 +4,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -50,7 +54,7 @@ public class SideBar extends VBox {
     // Updated color to a shade of blue
     BackgroundFill backgroundFill =
         new BackgroundFill(
-            Color.valueOf("#fffff0"), // updated color to baby blue
+            Color.valueOf("#fffaf0"), // updated color to baby blue
             new CornerRadii(0),
             new Insets(0)
         );
@@ -58,7 +62,10 @@ public class SideBar extends VBox {
     Background background =
         new Background(backgroundFill);
 
+
     this.setBackground(background);
+    this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
+        CornerRadii.EMPTY, BorderWidths.DEFAULT)));
   }
 
   /**

@@ -12,8 +12,13 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -61,7 +66,7 @@ public class DayView extends VBox {
     this.parent = parent;
     BackgroundFill backgroundFill =
         new BackgroundFill(
-            Color.valueOf("#f5fffa"),
+            Color.valueOf("#f0f8ff"),
             new CornerRadii(0),
             new Insets(0)
         );
@@ -72,10 +77,18 @@ public class DayView extends VBox {
     this.controller = controller;
 
     this.setBackground(background);
+    // The border for the scene
+    this.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID,
+        CornerRadii.EMPTY, BorderWidths.DEFAULT)));
+
     Label dayName = new Label(name);
 
     HBox topBox = new HBox();
     topBox.getChildren().add(dayName);
+
+    // Add a line (Separator) under each day
+    Separator separator = new Separator();
+
 
     this.tasksAndEvents = new VBox();
 
@@ -87,7 +100,7 @@ public class DayView extends VBox {
 
     this.setSpacing(10);
     this.setPadding(new Insets(10));
-    this.getChildren().addAll(topBox, tasksAndEvents, this.prog);
+    this.getChildren().addAll(topBox, separator, tasksAndEvents, this.prog);
   }
 
   /**

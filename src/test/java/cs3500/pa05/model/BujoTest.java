@@ -3,8 +3,6 @@ package cs3500.pa05.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import cs3500.pa05.controller.BujoSerializer;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -40,20 +38,6 @@ public class BujoTest {
 
     // Create Bujo instance
     Bujo bujo = new Bujo(expectedWeek);
-
-    // Serialize the Bujo object to JSON string
-    BujoSerializer serializer = new BujoSerializer();
-    String jsonString = serializer.serialize(bujo);
-
-    // Write the JSON string to a file
-    String filePath = "sample.bujo";
-    try {
-      serializer.write(filePath, bujo);
-      System.out.println("Sample Bujo file created: " + filePath);
-    } catch (IOException e) {
-      System.out.println("Error writing Bujo file: " + e.getMessage());
-    }
-
 
     // Call getWeek method
     Week actualWeek = bujo.getWeek();
