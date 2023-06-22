@@ -19,9 +19,6 @@ Our platform is tailored to help you plan your days efficiently and effectively.
 
 ![GUI](journalview.png)
 
-### Creating an Event
-
-![GUI](Create Event.png)
 
 ### Use of SOLID
 
