@@ -1,11 +1,13 @@
 package cs3500.pa05.view;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -42,11 +44,24 @@ public class InitialView extends BorderPane {
     loadButton = new Button("Load");
     newButton = new Button("New");
 
-    Label filePathLabel = new Label("Enter a File Path:");
-    setTop(filePathLabel);
-    setCenter(filePathField);
-    setRight(new VBox(browseButton, loadButton, newButton));
+    Label filePathLabel = new Label("Enter a File Path");
+    filePathLabel.setStyle("-fx-font-size: 18px; -fx-font-weight: bold;");
+
+    VBox spacing = new VBox(150);
+    setTop(spacing);
+    VBox topContainer = new VBox(15, filePathLabel, filePathField);
+    topContainer.setAlignment(Pos.CENTER_LEFT);
+    setCenter(topContainer);
+
+    HBox buttonContainer = new HBox(15); // Adjust the spacing as needed
+    buttonContainer.getChildren().addAll(browseButton, loadButton, newButton);
+    buttonContainer.setAlignment(Pos.CENTER);
+    setBottom(buttonContainer);
+
     setPadding(new Insets(10));
+
+    // Set VBox height to occupy remaining space in the center
+    VBox.setVgrow(topContainer, javafx.scene.layout.Priority.ALWAYS);
   }
 
   /**
@@ -88,7 +103,7 @@ public class InitialView extends BorderPane {
   /**
    * Displays the error
    *
-   * @param title error title
+   * @param title   error title
    * @param message error message
    */
   public void displayError(String title, String message) {
