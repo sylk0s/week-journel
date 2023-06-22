@@ -1,0 +1,30 @@
+{
+  "week" : {
+    "days" : [ {
+      "items" : [ ],
+      "name" : "MONDAY"
+    }, {
+      "items" : [ ],
+      "name" : "TUESDAY"
+    }, {
+      "items" : [ ],
+      "name" : "WEDNESDAY"
+    }, {
+      "items" : [ ],
+      "name" : "THURSDAY"
+    }, {
+      "items" : [ ],
+      "name" : "FRIDAY"
+    }, {
+      "items" : [ ],
+      "name" : "SATURDAY"
+    }, {
+      "items" : [ ],
+      "name" : "SUNDAY"
+    } ],
+    "eventMax" : 5,
+    "taskMax" : 10,
+    "name" : "Test Week",
+    "startDay" : "MONDAY"
+  }
+}

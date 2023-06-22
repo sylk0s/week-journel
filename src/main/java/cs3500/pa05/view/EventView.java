@@ -3,9 +3,9 @@ package cs3500.pa05.view;
 import cs3500.pa05.controller.SideBarController;
 import cs3500.pa05.model.Event;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
@@ -13,7 +13,7 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -21,24 +21,24 @@ import javafx.scene.paint.Color;
  */
 public class EventView extends JournalEntryView {
   /**
-   * Field for time hours
+   * Spinner for time hours
    */
-  private final TextField timeH;
+  private final Spinner<Integer> timeH;
 
   /**
-   * Field for time min
+   * Spinner for time min
    */
-  private final TextField timeM;
+  private final Spinner<Integer> timeM;
 
   /**
-   * Field for duration hours
+   * Spinner for duration hours
    */
-  private final TextField durH;
+  private final Spinner<Integer> durH;
 
   /**
-   * Field for duration minutes
+   * Spinner for duration minutes
    */
-  private final TextField durM;
+  private final Spinner<Integer> durM;
 
   /**
    * The event for this view
@@ -53,41 +53,37 @@ public class EventView extends JournalEntryView {
     super(event.getName(), event.getDescription(), side, event);
     this.event = event;
 
-    this.timeH = new TextField(event.getTime().getHour() + "");
-    this.timeH.setPrefSize(35, 10);
-    this.timeH.setOnKeyTyped(e -> updateTime());
-
-    this.timeM = new TextField(event.getTime().getMinute() + "");
-    this.timeM.setPrefSize(35, 10);
-    this.timeM.setOnKeyTyped(e -> updateTime());
 
     Label timeLabel = new Label("Time:");
     Label timeHlabel = new Label("Hour:");
     Label timeMlabel = new Label("Min:");
-    HBox timeBox = new HBox();
-    timeBox.getChildren().addAll(timeHlabel, timeH, timeMlabel, timeM);
-    this.getChildren().addAll(timeLabel, timeBox);
+    this.timeH = createSpinner(0, 23, event.getTime().getHour());
+    this.timeH.valueProperty().addListener((obs, oldValue, newValue) -> updateTime());
+    this.timeM = createSpinner(0, 59, event.getTime().getMinute());
+    this.timeM.valueProperty().addListener((obs, oldValue, newValue) -> updateTime());
 
-    this.durH = new TextField(event.getDuration().toHoursPart() + "");
-    this.durH.setPrefSize(35, 10);
-    this.durH.setOnKeyTyped(e -> updateDur());
+    VBox timeBox = new VBox();
+    timeBox.getChildren().addAll(timeLabel, timeHlabel, timeH, timeMlabel, timeM);
+    this.getChildren().add(timeBox);
 
-    this.durM = new TextField(event.getDuration().toMinutesPart() + "");
-    this.durM.setPrefSize(35, 10);
-    this.durM.setOnKeyTyped(e -> updateDur());
-
+// Duration
     Label durLabel = new Label("Duration:");
     Label durHlabel = new Label("Hour:");
     Label durMlabel = new Label("Min:");
-    HBox durBox = new HBox();
-    durBox.getChildren().addAll(durHlabel, durH, durMlabel, durM);
-    this.getChildren().addAll(durLabel, durBox);
+    this.durH = createSpinner(0, 23, (int) event.getDuration().toHoursPart());
+    this.durH.valueProperty().addListener((obs, oldValue, newValue) -> updateDur());
+    this.durM = createSpinner(0, 59, event.getDuration().toMinutesPart());
+    this.durM.valueProperty().addListener((obs, oldValue, newValue) -> updateDur());
+
+    VBox durBox = new VBox();
+    durBox.getChildren().addAll(durLabel, durHlabel, durH, durMlabel, durM);
+    this.getChildren().add(durBox);
 
     BorderStroke borderStroke = new BorderStroke(
         Color.BLACK,                       // Border color
         BorderStrokeStyle.SOLID,           // Border style
-        new CornerRadii(0),                 // Corner radii
-        new BorderWidths(1)                 // Border widths
+        new CornerRadii(3),
+        new BorderWidths(2)              // Border widths
     );
 
     this.setBorder(new Border(borderStroke));
@@ -103,67 +99,30 @@ public class EventView extends JournalEntryView {
         new Background(backgroundFill);
 
     this.setBackground(background);
+
+  }
+
+  private Spinner<Integer> createSpinner(int min, int max, int initialValue) {
+    Spinner<Integer> spinner = new Spinner<>();
+    spinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(min, max, initialValue));
+    return spinner;
   }
 
   /**
    * Update the time
    */
   public void updateTime() {
-    String h = this.timeH.getText();
-    String m = this.timeM.getText();
-    try {
-      int hour;
-      int min;
-
-      if (h.equals("")) {
-        hour = 0;
-      } else {
-        hour = Integer.parseInt(h);
-      }
-
-      if (m.equals("")) {
-        min = 0;
-      } else {
-        min = Integer.parseInt(m);
-      }
-      this.event.setTime(hour, min);
-    } catch (NumberFormatException err) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Not a number!");
-      alert.setHeaderText(null);
-      alert.setContentText("Some invalid input found in the time field");
-      alert.showAndWait();
-    }
+    int hour = this.timeH.getValue();
+    int min = this.timeM.getValue();
+    this.event.setTime(hour, min);
   }
 
   /**
    * Update the length
    */
   public void updateDur() {
-    String h = this.durH.getText();
-    String m = this.durM.getText();
-    try {
-      int hour;
-      int min;
-
-      if (h.equals("")) {
-        hour = 0;
-      } else {
-        hour = Integer.parseInt(h);
-      }
-
-      if (m.equals("")) {
-        min = 0;
-      } else {
-        min = Integer.parseInt(m);
-      }
-      this.event.setDur(hour, min);
-    } catch (NumberFormatException err) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Not a number!");
-      alert.setHeaderText(null);
-      alert.setContentText("Some invalid input found in the duration field");
-      alert.showAndWait();
-    }
+    int hour = this.durH.getValue();
+    int min = this.durM.getValue();
+    this.event.setDur(hour, min);
   }
 }

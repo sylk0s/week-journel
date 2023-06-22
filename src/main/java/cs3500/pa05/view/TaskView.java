@@ -47,7 +47,7 @@ public class TaskView extends JournalEntryView {
     BackgroundFill backgroundFill =
         new BackgroundFill(
             Color.valueOf("#c7d3fc"),
-            new CornerRadii(5),
+            new CornerRadii(3),
             new Insets(0)
         );
 
@@ -55,6 +55,8 @@ public class TaskView extends JournalEntryView {
     this.setBackground(background);
     this.setSpacing(25); // added spacing between the elements
     this.setPadding(new Insets(10)); // padding for the VBox
+
+
   }
 
   @Override
