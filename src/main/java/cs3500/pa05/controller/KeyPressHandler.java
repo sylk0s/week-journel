@@ -1,6 +1,5 @@
 package cs3500.pa05.controller;
 
-import cs3500.pa05.view.WeekView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -11,14 +10,30 @@ import javafx.stage.Stage;
  * Handles keybind in the program
  */
 public class KeyPressHandler {
+  /**
+   * The controller for the top bar
+   */
   private final TopBarController topBarController;
+  /**
+   * The primary stage for this app
+   */
   private final Stage primaryStage;
 
+  /**
+   * Constructor
+   *
+   * @param topBarController the controller for the top bar
+   */
   public KeyPressHandler(TopBarController topBarController) {
     this.topBarController = topBarController;
     this.primaryStage = new Stage();
   }
 
+  /**
+   * Handles a key event
+   *
+   * @param event the key event
+   */
   public void handle(KeyEvent event) {
     KeyCodeCombination newEventCombination =
         new KeyCodeCombination(KeyCode.E, KeyCombination.SHORTCUT_DOWN);

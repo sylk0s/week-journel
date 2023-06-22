@@ -11,10 +11,21 @@ import javafx.scene.control.ProgressBar;
  * Controls the sidebar
  */
 public class SideBarController {
+
+  /**
+   * The week model
+   */
   private final Week week;
+
+  /**
+   * The view for the sidebar
+   */
   private final SideBar view;
 
-  private boolean visable;
+  /**
+   * If the sidebar is visible
+   */
+  private boolean visible;
 
   /**
    * Constructor for SideBarController
@@ -57,15 +68,18 @@ public class SideBarController {
     view.getStats().getChildren().add(progress);
   }
 
+  /**
+   * Toggle visibility of the sidebar
+   */
   public void toggleVis() {
     System.out.println("toggled sidebar");
-    this.view.setVisible(this.visable);
-    if (this.visable) {
+    this.view.setVisible(this.visible);
+    if (this.visible) {
       // todo this doesnt actually work now
       this.view.setMaxWidth(150);
     } else {
       this.view.setMaxWidth(0);
     }
-    this.visable = !this.visable;
+    this.visible = !this.visible;
   }
 }

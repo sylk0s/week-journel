@@ -33,26 +33,45 @@ import javafx.stage.Stage;
  * Controls the top bar
  */
 public class TopBarController {
-  private WeekViewController week;
-  private Bujo bujo;
-  private TopBar view;
-  private SideBarController side;
+  /**
+   * The controller for the week view
+   */
+  private final WeekViewController week;
 
-  public TopBarController(WeekViewController week, Bujo bujo, TopBar view,
+  /**
+   * The view for the top bar
+   */
+  private final TopBar view;
+
+  /**
+   * The controller for the sidebar
+   */
+  private final SideBarController side;
+
+  /**
+   * Constructor
+   *
+   * @param week week controller
+   * @param view the view for the top bar
+   * @param stage the stage for this app
+   * @param side the controller for the side bar
+   */
+  public TopBarController(WeekViewController week, TopBar view,
                           Stage stage, SideBarController side) {
-    System.out.println("constructing controller...");
     this.week = week;
-    this.bujo = bujo;
     this.view = view;
     this.side = side;
     this.initHandlers(stage);
   }
 
+  /**
+   * Initialized the handlers for the top bar
+   *
+   * @param primaryStage the primary stage for this app
+   */
   public void initHandlers(Stage primaryStage) {
-    System.out.println("initializing handlers...");
 
     this.view.registerOnSave(e -> {
-      System.out.println("save click");
       FileChooser fileChooser = new FileChooser();
       fileChooser.setTitle("Save");
       fileChooser.setInitialFileName("savefile.bujo");
@@ -68,32 +87,26 @@ public class TopBarController {
           BujoSerializer serializer = new BujoSerializer();
           Bujo bujo = new Bujo(this.week.getWeek()); // Replace with your bujo creation logic
           serializer.write(selectedFile.getAbsolutePath(), bujo);
-          System.out.println("Bujo file saved: " + selectedFile.getAbsolutePath());
         } catch (IOException aaa) {
-          System.out.println("Error saving bujo file: " + aaa.getMessage());
         }
       }
     });
 
     this.view.registerOnAdd(e -> {
-      System.out.println("add button");
       this.showAddDropdown();
     });
 
     this.view.registerOnToggleBar(e -> {
-      System.out.println("toggled bar");
       this.side.toggleVis();
     });
 
     this.view.registerOnNewWeek(e -> {
-      System.out.println("new week button");
       JournalView journalView = new JournalView(new SideBar(), new TopBar(week),
           new WeekView());
       Scene scene = new Scene(journalView);
     });
 
     this.view.registerOnStartDay(e -> {
-      System.out.println("Start day button clicked");
       this.showDayDropdown();
     });
 
@@ -134,10 +147,11 @@ public class TopBarController {
         alert.showAndWait();
       }
     });
-
-    System.out.println("all registered...");
   }
 
+  /**
+   * Shows and handles the add dropdown menu for the top bar
+   */
   public void showAddDropdown() {
     ObservableList<String>
         options = FXCollections.observableArrayList("Add a new event", "Add a new task");
@@ -172,13 +186,11 @@ public class TopBarController {
       // Handle the selected option
       if (selectedOption.equals("Add a new event")) {
         // Perform actions for adding a new event
-        System.out.println("Adding a new event...");
         this.week.addEntryTo(daySelection.getValue(),
             new Event("", "", LocalTime.now(), Duration.ofHours(1)));
         this.side.updateView();
       } else if (selectedOption.equals("Add a new task")) {
         // Perform actions for adding a new task
-        System.out.println("Adding a new task...");
         this.week.addEntryTo(daySelection.getValue(),
             new Task("", "", false));
         this.side.updateView();
@@ -186,6 +198,9 @@ public class TopBarController {
     });
   }
 
+  /**
+   * Shows and handles the day dropdown menu for the topbar
+   */
   public void showDayDropdown() {
     ComboBox<DayType> dayDropdown = new ComboBox<>(FXCollections.observableArrayList(DayType.values()));
     dayDropdown.setPromptText("Select a day");

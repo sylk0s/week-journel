@@ -13,11 +13,18 @@ import java.nio.file.Files;
  */
 public class BujoSerializer {
 
+  /**
+   * Object that maps the json to string and reverse
+   */
   ObjectMapper mapper = new ObjectMapper();
 
+  /**
+   * constructor
+   */
   public BujoSerializer() {
     mapper.findAndRegisterModules();
   }
+
   /**
    * Turns the BUJO object into a JSON string
    *

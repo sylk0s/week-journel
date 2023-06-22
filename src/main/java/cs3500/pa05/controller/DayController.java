@@ -6,13 +6,38 @@ import cs3500.pa05.model.JournalEntry;
 import cs3500.pa05.model.Task;
 import cs3500.pa05.view.DayView;
 
+/**
+ * A controller for the day object & view
+ */
 public class DayController {
 
+  /**
+   * This day's view
+   */
   DayView view;
+
+  /**
+   * The day;s model
+   */
   Day day;
+
+  /**
+   * The controller for the sidebar
+   */
   SideBarController side;
+
+  /**
+   * The controller for the week view
+   */
   WeekViewController week;
 
+  /**
+   * consturctor
+   *
+   * @param day the day model
+   * @param side the sidebar controller
+   * @param week the week controller
+   */
   public DayController(Day day, SideBarController side, WeekViewController week) {
     this.day = day;
     this.side = side;
@@ -24,7 +49,7 @@ public class DayController {
    * Creates a view from the model
    *
    * @param day
-   * @return
+   * @return the dayView associated with the model
    */
   private DayView fromModel(Day day) {
     String name = day.getName().name();
@@ -34,7 +59,7 @@ public class DayController {
   /**
    * Adds an entry
    *
-   * @param entry
+   * @param entry the journal entry to add
    */
   public void addEntry(JournalEntry entry) {
     if (entry instanceof Task
@@ -50,20 +75,40 @@ public class DayController {
     this.side.updateView();
   }
 
+  /**
+   * Remove a specific entry
+   *
+   * @param entry the entry to remove
+   */
   public void removeEntry(JournalEntry entry) {
     this.view.removeEntry(entry);
     this.day.remove(entry);
     this.side.updateView();
   }
 
+  /**
+   * Gets the view object
+   *
+   * @return the view object
+   */
   public DayView getView() {
     return this.view;
   }
+
+  /**
+   * Get the day model
+   *
+   * @return the day model
+   */
   public Day getDay() {
     return this.day;
   }
 
-  // todo marks task as finished, does any other stuff as needed?
+  /**
+   * Toggles a task as finished
+   *
+   * @param task the task to toggle
+   */
   public void toggleTaskFinish(Task task) {
     task.setFinished(!task.isFinished());
   }

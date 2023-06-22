@@ -58,6 +58,7 @@ public class Week {
     this.eventMax = eventMax;
     this.taskMax = taskMax;
     this.name = name;
+    this.startDay = DayType.SUNDAY;
 
     this.days = new ArrayList<>();
     for (DayType type: DayType.values()) {

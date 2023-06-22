@@ -15,16 +15,44 @@ import cs3500.pa05.view.TopBar;
 
 import javafx.util.Duration;
 
-// Calls all controllers and runs the application
+/**
+ * The main application class
+ */
 public class JournalApp extends Application {
 
+  /**
+   * The controller for the initial view
+   */
   private InitialController init;
+  /**
+   * The controller for the normal journal view
+   */
   private JournalViewController journalView;
+  /**
+   * The controller for the sidebar
+   */
   private SideBarController side;
+  /**
+   * The controller for the topbar
+   */
   private TopBarController top;
+  /**
+   * The controller for the week
+   */
   private WeekViewController week;
+  /**
+   * Handler object for keypresses
+   */
   private KeyPressHandler keyPressHandler;
 
+  /**
+   * Starts the application
+   *
+   * @param primaryStage the primary stage for this application, onto which
+   * the application scene can be set.
+   * Applications may create other stages, if needed, but they will not be
+   * primary stages.
+   */
   @Override
   public void start(Stage primaryStage) {
     // Create the splash screen
@@ -46,6 +74,12 @@ public class JournalApp extends Application {
     primaryStage.show();
   }
 
+  /**
+   * Creates the initial scene
+   *
+   * @param primaryStage the scene for the app
+   * @return the initial scene
+   */
   private Scene createInitialScene(Stage primaryStage) {
     InitialView initialView = new InitialView(primaryStage);
     // Initialize the serializers
@@ -57,9 +91,15 @@ public class JournalApp extends Application {
     return initialScene;
   }
 
+  /**
+   * Creates the journal view
+   *
+   * @param primaryStage the stage for the app
+   * @param weekModel the model for the week
+   * @return the journal view
+   */
   public JournalView getJournalView(Stage primaryStage, Week weekModel) {
     // Initialize the models
-    Bujo bujo = new Bujo(weekModel);
 
     // Initialize the views
     SideBar sideBar = new SideBar();
@@ -71,7 +111,7 @@ public class JournalApp extends Application {
 
     // Initialize the controllers with the models and views
     this.journalView = new JournalViewController(journalView, weekModel);
-    this.top = new TopBarController(weekController, bujo, topBar, primaryStage, side);
+    this.top = new TopBarController(weekController, topBar, primaryStage, side);
     this.keyPressHandler = new KeyPressHandler(top);
     primaryStage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
       keyPressHandler.handle(event);
@@ -80,9 +120,11 @@ public class JournalApp extends Application {
     return this.journalView.getView();
   }
 
+  /**
+   * Runs the various components of the app
+   */
   public void run() {
     // Run each of the controllers
-    this.journalView.run();
     this.side.updateView();
   }
 }
