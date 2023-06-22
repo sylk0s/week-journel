@@ -19,7 +19,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    Week week = new Week(days, eventMax, taskMax, name);
+    Week week = new Week(days, eventMax, taskMax, name, DayType.MONDAY);
 
     List<Day> actualDays = week.getDays();
 
@@ -39,7 +39,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    Week week = new Week(days, eventMax, taskMax, name);
+    Week week = new Week(days, eventMax, taskMax, name, DayType.MONDAY);
 
     int totalFinishedTasks = week.totalFinishedTasks();
     int totalTasks = week.totalTasks();
@@ -61,7 +61,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    Week week = new Week(days, eventMax, taskMax, name);
+    Week week = new Week(days, eventMax, taskMax, name, DayType.MONDAY);
 
     List<JournalEntry> entries = week.getEntries();
 
@@ -81,7 +81,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    Week week = new Week(days, eventMax, taskMax, name);
+    Week week = new Week(days, eventMax, taskMax, name, DayType.MONDAY);
 
     String weekString = week.toString();
     String expectedString = "MONDAY\nTUESDAY\n";
@@ -99,7 +99,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    Week week = new Week(days, eventMax, taskMax, name);
+    Week week = new Week(days, eventMax, taskMax, name, DayType.MONDAY);
 
     Day resultDay = week.getDay(DayType.TUESDAY);
 
@@ -112,7 +112,7 @@ public class WeekTest {
     int taskMax = 3;
     String name = "Test Week";
     List<Day> days = new ArrayList<>();
-    Week week = new Week(days, eventMax, taskMax, name);
+    Week week = new Week(days, eventMax, taskMax, name, DayType.MONDAY);
     DayType nonExistentDay = null;
 
     try {
@@ -133,7 +133,7 @@ public class WeekTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    Week week = new Week(days, eventMax, taskMax, name);
+    Week week = new Week(days, eventMax, taskMax, name, DayType.MONDAY);
 
     Task task = new Task("Test Task", "test1", true);
     JournalEntry entry = task;

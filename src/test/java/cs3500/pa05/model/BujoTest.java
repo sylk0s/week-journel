@@ -20,7 +20,7 @@ public class BujoTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    Week expectedWeek = new Week(days, eventMax, taskMax, name);
+    Week expectedWeek = new Week(days, eventMax, taskMax, name, DayType.MONDAY);
 
     // Create Bujo instance
     Bujo bujo = new Bujo(expectedWeek);
@@ -43,7 +43,7 @@ public class BujoTest {
     int eventMax = 5;
     int taskMax = 10;
     String name = "Test Week";
-    Week expectedWeek = new Week(days, eventMax, taskMax, name);
+    Week expectedWeek = new Week(days, eventMax, taskMax, name, DayType.MONDAY);
 
     // Create Bujo instance
     Bujo bujo = new Bujo(expectedWeek);

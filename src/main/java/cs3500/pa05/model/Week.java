@@ -30,7 +30,7 @@ public class Week {
   /**
    * The name of this week
    */
-  private final String name;
+  private String name;
 
   /**
    * the day this week starts on
@@ -212,7 +212,6 @@ public class Week {
     entries.addAll(tasks);
 
     return entries;
-
   }
 
   /**

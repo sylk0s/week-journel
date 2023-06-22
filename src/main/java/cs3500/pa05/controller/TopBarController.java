@@ -83,6 +83,10 @@ public class TopBarController {
 
     this.view.registerOnNewWeek(e -> handleNewWeek(primaryStage));
 
+    this.view.registerOpen(e -> {
+      this.handleOpen(primaryStage);
+    });
+
     this.view.registerOnStartDay(e -> {
       this.showDayDropdown();
     });
@@ -223,6 +227,12 @@ public class TopBarController {
         // todo something
       }
     }
+  }
+
+  public void handleOpen(Stage primaryStage) {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Open Resource File");
+    File selectedFile = fileChooser.showOpenDialog(view.getScene().getWindow());
   }
 
   /**
