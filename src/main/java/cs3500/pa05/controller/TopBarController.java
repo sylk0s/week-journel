@@ -90,6 +90,12 @@ public class TopBarController {
       Scene scene = new Scene(journalView);
     });
 
+    this.view.registerOnStartMonday(e -> {
+      System.out.println("Start Monday button clicked");
+      // Call a method to update the week start day to Monday
+      this.week.setWeekStartDay(DayType.MONDAY);
+    });
+
     this.view.registerMaxEvents(e -> {
       try {
         String text = this.view.getMaxEventsTextField().getText();

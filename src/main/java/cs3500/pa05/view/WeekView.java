@@ -18,5 +18,6 @@ public class WeekView extends HBox {
    */
   public WeekView() {
 
+
   }
 }

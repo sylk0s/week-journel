@@ -4,6 +4,8 @@ import cs3500.pa05.model.DayType;
 import cs3500.pa05.model.JournalEntry;
 import cs3500.pa05.model.Week;
 import cs3500.pa05.view.WeekView;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import javafx.scene.Scene;
@@ -53,6 +55,19 @@ public class WeekViewController {
       return result.get();
     } else {
       throw new IllegalStateException("Could not find day");
+    }
+  }
+
+  public void setWeekStartDay(DayType startDay) {
+    List<DayType> dayTypes = new ArrayList<>(Arrays.asList(DayType.values()));
+    int startIndex = dayTypes.indexOf(startDay);
+
+    List<DayController> reorderedDays = new ArrayList<>(days.subList(startIndex, days.size()));
+    reorderedDays.addAll(days.subList(0, startIndex));
+
+    this.view.getChildren().clear();
+    for (DayController d : reorderedDays) {
+      this.addDayToView(d);
     }
   }
 

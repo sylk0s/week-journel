@@ -23,6 +23,7 @@ public class TopBar extends HBox {
   private final Button save;
   private final Button add;
   private final Button newWeek;
+  private final Button startMonday;
   private final TextField maxEvents;
   private final TextField maxTasks;
 
@@ -34,6 +35,7 @@ public class TopBar extends HBox {
     this.save = new Button("Save");
     this.add = new Button("Add");
     this.newWeek = new Button("New Week");
+    this.startMonday = new Button("Start Monday");
     this.maxEvents = new TextField(week.getWeek().getEventMax() + "");
     this.maxTasks = new TextField(week.getWeek().getTaskMax() + "");
 
@@ -46,7 +48,7 @@ public class TopBar extends HBox {
     this.setSpacing(10);
     this.setPadding(new Insets(10));
     this.getChildren().addAll(this.sideBarToggle, this.save, this.add, this.newWeek,
-        maxEventsLabel, this.maxEvents, maxTasksLabel, this.maxTasks);
+        this.startMonday, maxEventsLabel, this.maxEvents, maxTasksLabel, this.maxTasks);
 
     BackgroundFill backgroundFill = new BackgroundFill(Color.valueOf("#bde0ff"),
         new CornerRadii(0), new Insets(0));
@@ -65,8 +67,13 @@ public class TopBar extends HBox {
   }
 
   public void registerOnNewWeek(EventHandler<ActionEvent> handler) {
-    System.out.println("registering handler for add...");
+    System.out.println("registering handler for new week...");
     this.newWeek.setOnAction(handler);
+  }
+
+  public void registerOnStartMonday(EventHandler<ActionEvent> handler) {
+    System.out.println("registering handler for monday...");
+    this.startMonday.setOnAction(handler);
   }
 
   public void registerOnToggleBar(EventHandler<ActionEvent> handler) {
