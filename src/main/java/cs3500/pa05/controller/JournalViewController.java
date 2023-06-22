@@ -24,7 +24,7 @@ public class JournalViewController {
   }
 
   /**
-   * Gets the view for the journel
+   * Gets the view for the journal
    */
   public JournalView getView() {
     return this.view;
