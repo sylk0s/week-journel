@@ -18,7 +18,6 @@ public class JournalViewController {
    * The constructor
    *
    * @param view the journal view
-   * @param week the week model
    */
   public JournalViewController(JournalView view) {
     this.view = view;
