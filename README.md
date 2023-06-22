@@ -50,3 +50,8 @@ For example, the EventView and TaskView classes depend on an instance of the Eve
 Instead of creating these instances inside the view classes, they are passed into the constructor. 
 This allows for greater flexibility and makes our code more testable, as we can pass different instances or even mock objects for testing.
 
+## Additional features 
+An additional feature that can be easily implemented is authentication. 
+We could add an authentication factor so users can protect their journals. 
+This would be facilitated by adding a login screen after the splash. 
+
