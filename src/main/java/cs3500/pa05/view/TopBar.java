@@ -16,6 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+
+
 /**
  * The bar on the top of the page
  */
@@ -107,6 +109,9 @@ public class TopBar extends HBox {
         new CornerRadii(0), new Insets(0));
     Background background = new Background(backgroundFill);
     this.setBackground(background);
+
+
+
   }
 
   /**

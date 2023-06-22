@@ -24,6 +24,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCode;
 
 /**
  * Controls the top bar
@@ -65,6 +68,18 @@ public class TopBarController {
     this.side = side;
     this.app = app;
     this.initHandlers(stage);
+
+    // adding a shortcut for add button
+    // Create the KeyCodeCombination for the shortcut
+    // Add listener to the scene after it has been set.
+    final KeyCombination keyComb = new KeyCodeCombination(KeyCode.A, KeyCombination.SHIFT_DOWN);
+    stage.getScene().getAccelerators().put(keyComb, () -> showAddDropdown());
+
+    stage.getScene().getAccelerators().put(keyComb, () -> {
+      System.out.println("Shortcut pressed");
+      showAddDropdown();
+    });
+
   }
 
   /**
@@ -121,6 +136,8 @@ public class TopBarController {
         alert.showAndWait();
       }
     });
+
+
 
 
   }
