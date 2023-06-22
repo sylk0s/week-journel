@@ -193,10 +193,6 @@ public class Week {
     return this.startDay;
   }
 
-  public void setStartDay(DayType startDay) {
-    this.startDay = startDay;
-  }
-
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder("");

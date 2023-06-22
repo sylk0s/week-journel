@@ -188,13 +188,13 @@ public class TopBarController {
 
   public void showDayDropdown() {
     ComboBox<DayType> dayDropdown = new ComboBox<>(FXCollections.observableArrayList(DayType.values()));
+    dayDropdown.setPromptText("Select a day");
     dayDropdown.setValue(week.getWeek().getStartDay());
 
     Stage popupStage = new Stage();
     VBox vbox = new VBox(dayDropdown);
     vbox.setAlignment(Pos.CENTER);
     vbox.setPadding(new Insets(10));
-    vbox.setStyle("-fx-background-color: white;");
     popupStage.initOwner(new Stage());
     popupStage.initModality(Modality.WINDOW_MODAL);
     popupStage.setScene(new Scene(vbox));
