@@ -38,12 +38,12 @@ public class KeyPressHandler {
       System.out.println("Create New Task command triggered.");
       topBarController.showAddDropdown();
     } else if (saveCombination.match(event)) {
-      topBarController.initHandlers(primaryStage);
+      topBarController.handleSave(primaryStage);
       System.out.println("Save command triggered.");
     } else if (openCombination.match(event)) {
       System.out.println("Open command triggered.");
-      // Call the corresponding method or perform the necessary action
     } else if (newWeekCombination.match(event)) {
+      topBarController.handleNewWeek(primaryStage);
       System.out.println("New Week command triggered.");
 
     }
